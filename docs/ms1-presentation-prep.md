@@ -4,6 +4,8 @@
 > 1. A precise draw.io cleanup spec for the C4 Container diagram (`docs/diagrams/neobank-digital-leap-c4.drawio`).
 > 2. A slide outline with sources, timings, and speaker notes.
 
+**Status:** Part 1 (C4 cleanup) has been **applied to the .drawio** in the same commit that added this doc. The .drawio now contains only the bottom C4 diagram (top LLM diagram removed) with all 7 fixes and 22 added edges. Use the spec below as a reference for what was done and as a basis for further iteration.
+
 ## Part 1 — C4 diagram cleanup spec
 
 ### Why this is needed
