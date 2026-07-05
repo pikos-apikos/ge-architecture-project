@@ -38,26 +38,31 @@ Submission timeline (deck page 17): **MS1 by Week 7**, **MS2 by Week 13**, **Fin
 | `docs/08-open-issues.md` | HLD §7 — open questions. Seeded from MS1 §11. |
 | `docs/c4-model.md` | C4 model layer description. |
 | `docs/glossary.md` | Common project terminology. |
+| `docs/ms1-presentation-prep.md` | MS1 talk prep: draw.io cleanup spec + slide outline + speaker notes. |
 | `docs/requirements/requirements-draft.md` | Functional and non-functional requirements (`FN-NNN`, `NFR-<CAT>-NNN`). |
-| `docs/diagrams/*.mmd` | Mermaid diagram sources. |
+| `docs/diagrams/01..05-*.mmd` | Mermaid sources for the high-level solution and use-case flows. |
+| `docs/diagrams/06-network-topology.mmd` | Network topology scaffold (MS2 teacher-mandated). |
+| `docs/diagrams/07-c4-container.mmd` | Mermaid C4Container mirror of the MS1 C4 view. |
+| `docs/diagrams/neobank-digital-leap-c4.drawio` | MS1 C4 Container view (drawio source, for the presentation). |
 | `docs/decisions/*.md` | Architecture Decision Records. |
 | `../Software Architecture - Lesson 1B - Architecture_HLD_Template.docx.md` | Course HLD template (Lesson 1B). Authoritative section order. |
 | `../Software Architecture - Lesson 1B Deck - Final Project - NeoBank.pdf` | Course brief (Lesson 1B). Original requirements and submission rules. |
 
 ## Next Work
 
-1. Review and refine the MS1 high-level solution diagram.
-2. Convert Mermaid diagrams into Word-ready rendered images and embed in the final HLD Word file.
-3. Start MS2 security boundary diagram.
-4. **Start MS2 network topology diagram.** Scaffolded at `docs/diagrams/06-network-topology.mmd`. Required by Jukka Rohila (class guidance). Must include: cloud VPC public/private subnets, on-prem DMZ / regulated / mainframe zones, WAF and NGFW placements, cloud-to-on-prem link (VPN or Direct Connect — decision deferred), CIDR blocks, ports/protocols, and HA/DR topology per zone. Must show the CBS Transaction Gateway as the only path to the mainframe.
-5. Start MS2 data flow diagram.
-6. Start MS2 performance and scaling diagram.
-7. Fill in the scaffolded HLD sections: `04-sizing.md` (HW/SW sizing + cost), `05-time-estimation.md` (workdays), `06-limitations.md`, `08-open-issues.md`. `07-risks-and-mitigations.md` is partly seeded from MS1 §10 and needs MS2 expansion.
-8. Define message schemas and API contracts (HLD §3.4) and upgradability patterns (HLD §3.5).
-9. Select the on-prem ODS vendor from the Oracle / SQL Server / Db2 shortlist (ADR-002).
-10. Resolve open issues OI-001..OI-011.
-11. Consolidate duplicate content: assumptions, risks, and open questions currently live in both MS1 §9/§10/§11 and `03..08` files — pick one location and deprecate the other.
-12. Assemble the final Word HLD from the Markdown sources per the template's section order.
+1. **MS1 presentation (Week 7).** Cleanup spec and slide outline are in `docs/ms1-presentation-prep.md`. Apply the draw.io edits, render diagrams, and present.
+2. Review and refine the MS1 high-level solution diagram.
+3. Convert Mermaid diagrams into Word-ready rendered images and embed in the final HLD Word file.
+4. Start MS2 security boundary diagram.
+5. **Start MS2 network topology diagram.** Scaffolded at `docs/diagrams/06-network-topology.mmd`. Required by Jukka Rohila (class guidance). Must include: cloud VPC public/private subnets, on-prem DMZ / regulated / mainframe zones, WAF and NGFW placements, cloud-to-on-prem link (VPN or Direct Connect — decision deferred), CIDR blocks, ports/protocols, and HA/DR topology per zone. Must show the CBS Transaction Gateway as the only path to the mainframe.
+6. Start MS2 data flow diagram.
+7. Start MS2 performance and scaling diagram.
+8. Fill in the scaffolded HLD sections: `04-sizing.md` (HW/SW sizing + cost), `05-time-estimation.md` (workdays), `06-limitations.md`, `08-open-issues.md`. `07-risks-and-mitigations.md` is partly seeded from MS1 §10 and needs MS2 expansion.
+9. Define message schemas and API contracts (HLD §3.4) and upgradability patterns (HLD §3.5).
+10. Select the on-prem ODS vendor from the Oracle / SQL Server / Db2 shortlist (ADR-002).
+11. Resolve open issues OI-001..OI-011.
+12. Consolidate duplicate content: assumptions, risks, and open questions currently live in both MS1 §9/§10/§11 and `03..08` files — pick one location and deprecate the other.
+13. Assemble the final Word HLD from the Markdown sources per the template's section order.
 
 ## Notes
 

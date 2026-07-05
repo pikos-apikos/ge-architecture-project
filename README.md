@@ -32,8 +32,15 @@ The proposed architecture uses a **hybrid on-premises and regional cloud model**
 │   ├── 00-hld-introduction.md
 │   ├── 01-ms1-preliminary-solution.md
 │   ├── 02-ods-database-recommendation.md
+│   ├── 03-assumptions.md
+│   ├── 04-sizing.md
+│   ├── 05-time-estimation.md
+│   ├── 06-limitations.md
+│   ├── 07-risks-and-mitigations.md
+│   ├── 08-open-issues.md
 │   ├── c4-model.md
 │   ├── glossary.md
+│   ├── ms1-presentation-prep.md
 │   ├── requirements/
 │   │   └── requirements-draft.md
 │   ├── diagrams/
@@ -41,7 +48,10 @@ The proposed architecture uses a **hybrid on-premises and regional cloud model**
 │   │   ├── 02-account-information-flow.mmd
 │   │   ├── 03-bank-transfer-flow.mmd
 │   │   ├── 04-data-ingestion-read-model-flow.mmd
-│   │   └── 05-ai-financial-advisor-flow.mmd
+│   │   ├── 05-ai-financial-advisor-flow.mmd
+│   │   ├── 06-network-topology.mmd
+│   │   ├── 07-c4-container.mmd
+│   │   └── neobank-digital-leap-c4.drawio
 │   └── decisions/
 │       ├── ADR-001-hybrid-strangler-cqrs.md
 │       └── ADR-002-ods-enterprise-rdbms.md
