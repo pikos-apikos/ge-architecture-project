@@ -50,6 +50,7 @@
 | NFR-PC-030 | The system shall provide low-latency responses for read-heavy digital use cases through read models and caching. |
 | NFR-PC-040 | The system shall protect the CBS from direct high-volume digital read traffic. |
 | NFR-PC-050 | The system shall monitor event ingestion lag and read model freshness. |
+| NFR-PC-060 | The system shall display account information that may be up to 24 hours stale for incoming transactions from other banks or payments not made through the app, with visible freshness metadata. |
 
 ### Security
 
@@ -61,6 +62,14 @@
 | NFR-SEC-040 | The system shall enforce customer consent boundaries for Open Banking access. |
 | NFR-SEC-050 | The system shall restrict AI advisor access to minimized, authorized, regionally compliant customer data. |
 | NFR-SEC-060 | The system shall encrypt sensitive data in transit and at rest. |
+
+### Backward Compatibility
+
+| ID | Requirement |
+|---|---|
+| NFR-BC-010 | The system shall evolve public, internal, and event-bus message schemas in a backward-compatible manner (additive only within a major version). |
+| NFR-BC-020 | The system shall support multiple supported API versions concurrently during deprecation windows. |
+| NFR-BC-030 | The system shall avoid breaking CBS transaction contracts; any change to the CBS Transaction Gateway contract shall be versioned and coordinated with the mainframe team. |
 
 ### GDPR and Compliance
 

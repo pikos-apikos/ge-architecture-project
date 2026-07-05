@@ -32,6 +32,7 @@ The proposed architecture uses a **hybrid on-premises and regional cloud model**
 │   ├── 00-hld-introduction.md
 │   ├── 01-ms1-preliminary-solution.md
 │   ├── 02-ods-database-recommendation.md
+│   ├── c4-model.md
 │   ├── glossary.md
 │   ├── requirements/
 │   │   └── requirements-draft.md
@@ -39,7 +40,8 @@ The proposed architecture uses a **hybrid on-premises and regional cloud model**
 │   │   ├── 01-high-level-solution.mmd
 │   │   ├── 02-account-information-flow.mmd
 │   │   ├── 03-bank-transfer-flow.mmd
-│   │   └── 04-data-ingestion-read-model-flow.mmd
+│   │   ├── 04-data-ingestion-read-model-flow.mmd
+│   │   └── 05-ai-financial-advisor-flow.mmd
 │   └── decisions/
 │       ├── ADR-001-hybrid-strangler-cqrs.md
 │       └── ADR-002-ods-enterprise-rdbms.md

@@ -6,6 +6,8 @@
 
 This repository currently focuses on MS1 and early HLD structure. No implementation code is required for the course submission.
 
+Submission timeline (deck page 17): **MS1 by Week 7**, **MS2 by Week 13**, **Final HLD by end of course**. Submission email subject: `Preliminary/Final Submission – SA Course [MM]-[YYYY] - [your full name]`.
+
 ## Current Decisions
 
 | ID | Decision | Status |
@@ -23,24 +25,41 @@ This repository currently focuses on MS1 and early HLD structure. No implementat
 | File | Purpose |
 |---|---|
 | `README.md` | Repository overview and architecture direction. |
-| `docs/00-hld-introduction.md` | HLD abstract and document introduction. |
+| `project-status.md` | This file. Current decisions and milestone queue. |
+| `AGENTS.md` | Onboarding for future OpenCode / agent sessions — repo rules, invariants, conventions. |
+| `docs/00-hld-introduction.md` | HLD master, aligned to the Lesson 1B template section order. |
 | `docs/01-ms1-preliminary-solution.md` | MS1 preliminary architecture narrative. |
 | `docs/02-ods-database-recommendation.md` | ODS technology recommendation for on-premises bank context. |
-| `docs/requirements/requirements-draft.md` | Initial functional and non-functional requirements. |
+| `docs/03-assumptions.md` | Project working file (HLD §2; template folds assumptions into Requirements). Seeded from MS1 §9. |
+| `docs/04-sizing.md` | HLD §3.6 — on-prem hardware/software sizing + operational cost. |
+| `docs/05-time-estimation.md` | HLD §4 — per-subsystem workdays. |
+| `docs/06-limitations.md` | HLD §5 — out-of-scope and architectural limitations. |
+| `docs/07-risks-and-mitigations.md` | HLD §6 — risk register. Seeded from MS1 §10. |
+| `docs/08-open-issues.md` | HLD §7 — open questions. Seeded from MS1 §11. |
+| `docs/c4-model.md` | C4 model layer description. |
 | `docs/glossary.md` | Common project terminology. |
+| `docs/requirements/requirements-draft.md` | Functional and non-functional requirements (`FN-NNN`, `NFR-<CAT>-NNN`). |
 | `docs/diagrams/*.mmd` | Mermaid diagram sources. |
 | `docs/decisions/*.md` | Architecture Decision Records. |
+| `../Software Architecture - Lesson 1B - Architecture_HLD_Template.docx.md` | Course HLD template (Lesson 1B). Authoritative section order. |
+| `../Software Architecture - Lesson 1B Deck - Final Project - NeoBank.pdf` | Course brief (Lesson 1B). Original requirements and submission rules. |
 
 ## Next Work
 
 1. Review and refine the MS1 high-level solution diagram.
-2. Convert Mermaid diagrams into Word-ready rendered diagrams when needed.
+2. Convert Mermaid diagrams into Word-ready rendered images and embed in the final HLD Word file.
 3. Start MS2 security boundary diagram.
 4. Start MS2 data flow diagram.
 5. Start MS2 performance and scaling diagram.
-6. Expand HLD assumptions, limitations, risks, and open issues.
-7. Convert selected Markdown files into the final Word HLD structure.
+6. Fill in the scaffolded HLD sections: `04-sizing.md` (HW/SW sizing + cost), `05-time-estimation.md` (workdays), `06-limitations.md`, `08-open-issues.md`. `07-risks-and-mitigations.md` is partly seeded from MS1 §10 and needs MS2 expansion.
+7. Define message schemas and API contracts (HLD §3.4) and upgradability patterns (HLD §3.5).
+8. Select the on-prem ODS vendor from the Oracle / SQL Server / Db2 shortlist (ADR-002).
+9. Resolve open issues OI-001..OI-011.
+10. Consolidate duplicate content: assumptions, risks, and open questions currently live in both MS1 §9/§10/§11 and `03..08` files — pick one location and deprecate the other.
+11. Assemble the final Word HLD from the Markdown sources per the template's section order.
 
 ## Notes
 
-The repository is intentionally Markdown-first. The final course submission can be assembled into a Word document after the architecture narrative and diagrams stabilize.
+The repository is intentionally Markdown-first. The final course submission is a **single Word file with diagrams embedded** (deck page 16) — Markdown here is authoring convenience. The Lesson 1B deck and HLD template (`../`) are authoritative: if any document in `docs/` contradicts the deck, the deck wins.
+
+`AGENTS.md` is the onboarding file for future OpenCode / agent sessions working in this repo.
