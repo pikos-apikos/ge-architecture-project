@@ -48,10 +48,11 @@ Existing NFR categories in this project: **AR** (Availability and Recovery), **D
 
 The MS1 high-level solution is the source of truth for component layout. Render the Mermaid source for the final Word submission; do not edit rendered images.
 
-- Mermaid source: [`docs/diagrams/01-high-level-solution.mmd`](diagrams/01-high-level-solution.mmd)
+- High-level solution: [`docs/diagrams/01-high-level-solution.mmd`](diagrams/01-high-level-solution.mmd)
+- Network topology (MS2): [`docs/diagrams/06-network-topology.mmd`](diagrams/06-network-topology.mmd) — zones, subnets, cloud-to-on-prem link, NGFW placements, and the CBS Transaction Gateway as the only path to the mainframe. Teacher-mandated (Jukka Rohila, class guidance).
 - C4 views: [`docs/c4-model.md`](c4-model.md)
 
-**Fixed ingress rule** (from the diagram and `01-ms1-preliminary-solution.md` §4): `Mobile App / Web App / Open Banking TPPs → WAF / DDoS Protection → API Gateway`. Channels must not bypass the WAF and must not point directly to the API Gateway.
+**Fixed ingress rule** (from the diagram and `01-ms1-preliminary-solution.md` §4): `Mobile App / Web App / Open Banking TPPs → WAF / DDoS Protection → API Gateway`. Channels must not bypass the WAF and must not point directly to the API Gateway. The network topology diagram makes this rule explicit at the network layer.
 
 ### 3.2 Design Rules and Principles
 

@@ -54,17 +54,20 @@ docs/c4-model.md
 docs/glossary.md                    # authoritative terminology
 docs/requirements/requirements-draft.md   # FN-* and NFR-<CAT>-* IDs
 docs/diagrams/*.mmd                 # Mermaid sources — edit these, not images
+                                    # 01 high-level, 02-05 use-case flows,
+                                    # 06 network topology (MS2 scaffold)
 docs/decisions/ADR-*.md             # ADRs
 ```
 
 ## Conventions
 - **Diagrams**: edit `.mmd` sources only. Render to PNG/SVG with the Mermaid CLI when a Word-ready image is needed for the final submission. The deck shows both top-down and left-to-right C4-style layouts — pick per diagram; high-level is left-to-right, flows can be top-down.
+- **Network topology diagram** (`docs/diagrams/06-network-topology.mmd`) is an **MS2 teacher-mandated deliverable** (Jukka Rohila, class guidance), not an optional nice-to-have. It must show zones (cloud public/private subnets, on-prem DMZ, regulated Digital Core, mainframe), WAF and NGFW placements, the cloud-to-on-prem link (VPN or Direct Connect — decision deferred), and the CBS Transaction Gateway as the only path to the mainframe. The diagram is currently a scaffold; CIDR blocks, ports/protocols, and HA/DR topology are MS2 work.
 - **ADRs**: existing structure is Status, Context, Decision, Consequences, Design Rules. New ones go in `docs/decisions/ADR-NNN-kebab-title.md` with the next free number.
 - **Requirements IDs are stable**: `FN-NNN` (functional), `NFR-<CAT>-NNN` (categories from the HLD template: **AR** Availability/Recovery, **PC** Performance/Capacity, **SEC** Security, **BC** Backward Compatibility, **GDPR**, **OBS** Observability, **DEP** Deployment/Upgradability). The repo currently uses AR, DI Data Integrity, PC, SEC, BC, GDPR, OBS, DEP — keep `DI` as a project-specific category. When adding, pick the next free number in that category. Template also allows DF-NNN (Data Flow) and UF-NNN (User Flow) sub-id schemes.
 - **Requirement wording**: use "the system shall …" (per template). Each requirement must be testable. After the first revision is published, never renumber existing IDs — insert between intervals (e.g. add FN-015 between FN-010 and FN-020).
 - **HLD section order** (from the Lesson 1B template, when assembling the final Word HLD): **1 General (Introduction + Glossary) → 2 Requirements (FN + NFR) → 3 HLD (High Level System Diagram → Design Rules and Principles → High Level System Flows → Message Schemas → Upgradability → Sizing) → 4 Time Estimation → 5 Limitations → 6 Risks and Mitigations → 7 Open Issues.** The template does NOT have a standalone top-level "Assumptions" section — assumptions belong inside §2 Requirements — but `docs/03-assumptions.md` exists as a project working file for the MVP and is consolidated into §2 at final-assembly time. `docs/00-hld-introduction.md` is now aligned to this order.
 - **Glossary**: define new acronyms in `docs/glossary.md` on first use; do not redefine them inline in body text.
-- **Milestones**: MS1 in progress, MS2 (security / data / performance diagrams) not started, Final HLD not started. See `project-status.md` → "Next Work" for the current queue.
+- **Milestones**: MS1 in progress, MS2 (security / data / **network topology** / performance diagrams) not started, Final HLD not started. See `project-status.md` → "Next Work" for the current queue.
 
 ## Common agent mistakes to avoid
 - Scaffolding code, adding a test runner, or writing a CI workflow.
@@ -79,3 +82,4 @@ docs/decisions/ADR-*.md             # ADRs
 - Omitting hardware/software specs for the on-prem digital platform, or skipping the operational cost calculation.
 - Renumbering existing FN-/NFR- IDs instead of inserting between intervals, or using "must" / "should" instead of "shall" in requirement wording.
 - Treating `docs/00-hld-introduction.md` as the final Word HLD submission — it is the Markdown stand-in aligned to the template's section order, but the final deliverable is still a single Word file with embedded diagrams (see "Course / submission constraints" above).
+- Treating the network topology diagram as optional. It is **teacher-mandated** for the MS2 submission. Do not finalize the MS2 / Final HLD without it.

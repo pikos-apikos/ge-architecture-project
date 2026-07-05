@@ -1,0 +1,95 @@
+flowchart LR
+    %% NeoBank Digital Leap — Network Topology
+    %% Scaffold for MS2. Fill in: CIDR blocks, ports/protocols, HA/DR
+    %% topology, NGFW rule sets, and the chosen cloud-to-on-prem link
+    %% (VPN / Direct Connect / both). Source of truth is the teacher's
+    %% class guidance — keep this diagram aligned with the security
+    %% boundary diagram (MS2) and the high-level solution in
+    %% 01-high-level-solution.mmd.
+
+    subgraph Internet[Public Internet]
+        Clients[Mobile / Web / TPP Clients]
+    end
+
+    subgraph CloudVPC[Regional Cloud VPC]
+        direction LR
+        subgraph CloudPublic[Public Subnets]
+            WAF[WAF / DDoS]
+        end
+        subgraph CloudPrivate[Private Subnets]
+            APIGW[API Gateway]
+            IAM[Customer IAM]
+            BFF[BFF / Digital API]
+            AI[AI Financial Advisor]
+        end
+        subgraph CloudLink[Cloud-to-On-Prem Link]
+            VPNTunnel[VPN / Direct Connect\n_TODO: pick one or both_]
+        end
+    end
+
+    subgraph OnPrem[On-Premises Network]
+        direction LR
+        subgraph OnPremDMZ[On-Prem DMZ]
+            NGFW[NGFW\n_TODO: model inspection, default-deny_]
+            EdgeProxy[Reverse Proxy / Event Bridge Ingress]
+        end
+        subgraph OnPremReg[Regulated Zone — Digital Core]
+            Core[Core Services\nAccount / Transfer / Consent / Report]
+            FraudRT[Real-Time Fraud Engine]
+            EventBus[Durable Event Bus]
+            ODS[ODS / Read Models\nEnterprise RDBMS]
+            Audit[Audit / Compliance Store]
+            OnPremObs[On-Prem Observability]
+        end
+        subgraph OnPremMainframe[Mainframe Zone]
+            CBSGateway[CBS Transaction Gateway\n_Only path to CBS_]
+            CBS[COBOL CBS on z/OS]
+            DB2[(DB2 Transactions)]
+            ADABAS[(ADABAS Customers)]
+        end
+    end
+
+    %% --- Public ingress (WAF -> API Gateway is non-negotiable) ---
+    Clients --> WAF
+    WAF --> APIGW
+    APIGW --> IAM
+    APIGW --> BFF
+    BFF --> AI
+
+    %% --- Cloud egress to on-prem (must traverse the link + NGFW) ---
+    APIGW --> VPNTunnel
+    BFF --> VPNTunnel
+    VPNTunnel --> NGFW
+    NGFW --> EdgeProxy
+
+    %% --- DMZ to regulated zone (additional segmentation) ---
+    EdgeProxy --> Core
+    EdgeProxy --> FraudRT
+    EdgeProxy --> EventBus
+    EdgeProxy --> ODS
+
+    %% --- Regulated zone internal wiring ---
+    Core --> ODS
+    Core --> Audit
+    Core --> OnPremObs
+    FraudRT --> Core
+    EventBus --> ODS
+    EventBus --> Audit
+
+    %% --- Money-moving path: the only route to the mainframe ---
+    Core --> CBSGateway
+    CBSGateway --> CBS
+    CBS --> DB2
+    CBS --> ADABAS
+    CBSGateway --> Audit
+
+    %% --- MS2 checklist (do not render — for the author) ---
+    %% [ ] CIDR blocks per subnet (e.g. cloud public 10.0.0.0/24, private 10.0.10.0/24, ...)
+    %% [ ] Port / protocol per edge (e.g. 443/HTTPS for client -> WAF, 8443/mTLS for BFF -> Core, ...)
+    %% [ ] NGFW rule set summary: allowlist of source -> destination -> port
+    %% [ ] HA / DR topology per zone (active-active vs active-passive, RTO/RPO)
+    %% [ ] VPN vs Direct Connect decision (latency, throughput, cost, regulatory)
+    %% [ ] DNS, certificate, and secrets management placement
+    %% [ ] Egress controls (AI advisor must not call CBS/DB2/ADABAS — see FN-120)
+    %% [ ] Observability traffic: where metrics/logs/traces cross zones
+    %% [ ] Align with the security boundary diagram (MS2) and the high-level solution

@@ -49,14 +49,15 @@ Submission timeline (deck page 17): **MS1 by Week 7**, **MS2 by Week 13**, **Fin
 1. Review and refine the MS1 high-level solution diagram.
 2. Convert Mermaid diagrams into Word-ready rendered images and embed in the final HLD Word file.
 3. Start MS2 security boundary diagram.
-4. Start MS2 data flow diagram.
-5. Start MS2 performance and scaling diagram.
-6. Fill in the scaffolded HLD sections: `04-sizing.md` (HW/SW sizing + cost), `05-time-estimation.md` (workdays), `06-limitations.md`, `08-open-issues.md`. `07-risks-and-mitigations.md` is partly seeded from MS1 §10 and needs MS2 expansion.
-7. Define message schemas and API contracts (HLD §3.4) and upgradability patterns (HLD §3.5).
-8. Select the on-prem ODS vendor from the Oracle / SQL Server / Db2 shortlist (ADR-002).
-9. Resolve open issues OI-001..OI-011.
-10. Consolidate duplicate content: assumptions, risks, and open questions currently live in both MS1 §9/§10/§11 and `03..08` files — pick one location and deprecate the other.
-11. Assemble the final Word HLD from the Markdown sources per the template's section order.
+4. **Start MS2 network topology diagram.** Scaffolded at `docs/diagrams/06-network-topology.mmd`. Required by Jukka Rohila (class guidance). Must include: cloud VPC public/private subnets, on-prem DMZ / regulated / mainframe zones, WAF and NGFW placements, cloud-to-on-prem link (VPN or Direct Connect — decision deferred), CIDR blocks, ports/protocols, and HA/DR topology per zone. Must show the CBS Transaction Gateway as the only path to the mainframe.
+5. Start MS2 data flow diagram.
+6. Start MS2 performance and scaling diagram.
+7. Fill in the scaffolded HLD sections: `04-sizing.md` (HW/SW sizing + cost), `05-time-estimation.md` (workdays), `06-limitations.md`, `08-open-issues.md`. `07-risks-and-mitigations.md` is partly seeded from MS1 §10 and needs MS2 expansion.
+8. Define message schemas and API contracts (HLD §3.4) and upgradability patterns (HLD §3.5).
+9. Select the on-prem ODS vendor from the Oracle / SQL Server / Db2 shortlist (ADR-002).
+10. Resolve open issues OI-001..OI-011.
+11. Consolidate duplicate content: assumptions, risks, and open questions currently live in both MS1 §9/§10/§11 and `03..08` files — pick one location and deprecate the other.
+12. Assemble the final Word HLD from the Markdown sources per the template's section order.
 
 ## Notes
 
