@@ -17,7 +17,7 @@ C4Container
             Container(apigw, "API Gateway", "AWS API Gateway", "Public entry point, routing, throttling")
             Container(iam, "Customer IAM", "AWS Cognito", "OAuth2 / OIDC / MFA")
             Container(bff, "BFF / Digital API", "Quarkus", "Client-oriented API layer")
-            Container(aiAdvisor, "AI Financial Advisor", "Quarkus", "Cloud-only advice on authorized data")
+            Container(aiAdvisor, "AI Financial Advisor", "Quarkus", "Cloud-only advice orchestration; no direct CBS/ODS access")
             Container(cloudObs, "Cloud Observability", "AWS CloudWatch + X-Ray", "Metrics, logs, traces")
         }
 
@@ -28,6 +28,7 @@ C4Container
             Container(transferSvc, "Transfer Service", "Quarkus", "Orchestrates transfers through CBS")
             Container(fraudRT, "Real-Time Fraud Engine", "Quarkus", "Synchronous fraud check on transfers")
             Container(fraudOffline, "Offline Fraud Analytics", "Quarkus", "Batch risk scoring, model tuning")
+            Container(advisorContext, "Advisor Context API", "Quarkus", "Authorizes and minimizes customer context for AI advice")
             Container(cbsGw, "CBS Transaction Gateway", "Quarkus", "Only path to CBS; idempotency, audit")
             Container(db2Adapter, "DB2 Adapter", "Quarkus", "Publishes DB2 changes to event bus")
             Container(adabasAdapter, "ADABAS Adapter", "Quarkus", "Publishes ADABAS changes to event bus")
@@ -47,19 +48,23 @@ C4Container
     %% --- Public ingress (WAF -> API Gateway is non-negotiable) ---
     Rel(mobileUser, waf, "Uses mobile app", "HTTPS")
     Rel(webUser, waf, "Uses web app", "HTTPS")
-    Rel(tpps, waf, "Consumes Open Banking APIs", "HTTPS")
-    Rel(tpps, consentSvc, "Manages consent", "HTTPS")
+    Rel(tpps, waf, "Consumes Open Banking APIs / consent flows", "HTTPS")
     Rel(waf, apigw, "Forwards", "HTTPS")
     Rel(apigw, iam, "Authenticates", "OAuth2 / OIDC")
     Rel(apigw, bff, "Routes", "HTTPS")
 
     %% --- Cloud internal ---
-    Rel(bff, aiAdvisor, "Calls", "HTTPS")
+    Rel(bff, aiAdvisor, "Requests advice", "HTTPS")
     Rel(bff, accountSvc, "Calls", "mTLS")
-    Rel(bff, consentSvc, "Calls", "mTLS")
+    Rel(bff, consentSvc, "Manages consent / Open Banking access", "mTLS")
     Rel(bff, reportSvc, "Calls", "mTLS")
     Rel(bff, transferSvc, "Calls", "mTLS")
     Rel(bff, cloudObs, "Emits telemetry", "OTel")
+
+    %% --- AI data-minimization boundary ---
+    Rel(aiAdvisor, advisorContext, "Requests minimized context", "mTLS")
+    Rel(advisorContext, consentSvc, "Checks authorization scope", "mTLS")
+    Rel(advisorContext, ods, "Reads authorized projections", "SQL")
 
     %% --- Transfer command path (only path to the mainframe) ---
     Rel(transferSvc, fraudRT, "Validates", "mTLS")
@@ -84,7 +89,6 @@ C4Container
     Rel(accountSvc, ods, "Reads", "SQL")
     Rel(reportSvc, ods, "Reads", "SQL")
     Rel(consentSvc, ods, "Reads", "SQL")
-    Rel(aiAdvisor, ods, "Reads (minimized data)", "SQL")
     Rel(fraudOffline, ods, "Reads", "SQL")
     Rel(fraudOffline, fraudRT, "Publishes rules", "internal")
 
@@ -98,11 +102,12 @@ C4Container
     Rel(transferSvc, onPremObs, "Emits", "OTel")
     Rel(cbsGw, onPremObs, "Emits", "OTel")
     Rel(fraudRT, onPremObs, "Emits", "OTel")
+    Rel(advisorContext, onPremObs, "Emits", "OTel")
     Rel(onPremObs, cloudObs, "Ships", "mTLS")
 
     %% --- Architectural invariants (visual emphasis) ---
-    UpdateRelStyle(aiAdvisor, ods, $textColor="#c00", $offsetY="-30")
-    UpdateRelStyle(tpps, consentSvc, $textColor="#c00", $offsetY="-30")
+    UpdateRelStyle(aiAdvisor, advisorContext, $textColor="#c00", $offsetY="-30")
     UpdateElementStyle(cbsGw, $bgColor="#fdd", $borderColor="#c00")
     UpdateElementStyle(cbs, $bgColor="#fdd", $borderColor="#c00")
     UpdateElementStyle(aiAdvisor, $bgColor="#ffd", $borderColor="#c80")
+    UpdateElementStyle(advisorContext, $bgColor="#ffd", $borderColor="#c80")
