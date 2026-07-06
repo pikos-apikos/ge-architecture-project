@@ -24,12 +24,13 @@ Documentation-only Software Architecture course final project: **NeoBank Digital
 - **Team profile** (deck page 15): ~60 developers, mostly **Java + AWS** background, 5 COBOL. Bias new digital services toward the Java/AWS ecosystem; CBS stays COBOL/z/OS.
 
 ## Architectural invariants — do not violate
-These are accepted decisions (`project-status.md` D-001..D-007, ADR-001, ADR-002). Any edit must preserve them:
+These are accepted decisions (`project-status.md` D-001..D-008, ADR-001, ADR-002). Any edit must preserve them:
 
 - **CBS (COBOL on z/OS) is the sole system of record** for balances and money movement. All transfers go: Transfer Service → CBS Transaction Gateway → CBS. No digital channel may call CBS, DB2, or ADABAS directly (ADR-001 design rule).
 - **Hybrid Strangler Fig + CQRS**: read-heavy digital experiences read from replicated projections / ODS. **ODS is never a second system of record** (ADR-001).
 - **Public ingress order is WAF → API Gateway → IAM / BFF.** The high-level diagram in `docs/diagrams/01-high-level-solution.mmd` explicitly fixes this — do not redraw channels pointing straight at the API Gateway.
-- **AI Financial Advisor runs in the regional cloud** and may **not** access CBS, DB2, or ADABAS directly (FN-120). It receives only minimized, authorized data.
+- **Open Banking TPPs must not bypass WAF / API Gateway / BFF.** Do not draw a direct TPP → Consent Service edge; consent flows still enter through the public ingress chain.
+- **AI Financial Advisor runs in the regional cloud** and may **not** access CBS, DB2, ADABAS, or the ODS directly (FN-120). It receives only minimized, authorized data through the Advisor Context API / data-minimization boundary.
 - **On-prem Enterprise RDBMS ODS** is the baseline — shortlist is **Oracle / SQL Server / Db2**. Vendor selection is deferred to MS2. Do not propose Aurora or PostgreSQL as the default on-prem ODS; ADR-002 explicitly rejects that for a conservative mainframe-based retail bank context.
 - **Offline Fraud Analytics is asynchronous / batch** risk scoring, not a synchronous transfer-path service.
 - **All money-moving commands are idempotent and auditable**, with correlation IDs spanning API Gateway → BFF → services → event bus → CBS gateway → audit log (NFR-OBS-040).
@@ -76,8 +77,9 @@ docs/decisions/ADR-*.md             # ADRs
 - Scaffolding code, adding a test runner, or writing a CI workflow.
 - Suggesting Aurora or PostgreSQL as the on-prem ODS.
 - Drawing public channels that skip WAF or hit the API Gateway directly.
+- Drawing Open Banking TPPs directly to the Consent Service.
 - Letting the ODS be treated as authoritative for balances.
-- Letting the AI Financial Advisor talk to CBS / DB2 / ADABAS.
+- Letting the AI Financial Advisor talk to CBS / DB2 / ADABAS or read the ODS directly.
 - Putting offline fraud analytics on the synchronous transfer path.
 - Mixing languages or writing in Greek — the project is English-only by working rule.
 - Editing the rendered diagram images instead of the `.mmd` source.
