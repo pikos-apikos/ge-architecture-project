@@ -1,393 +1,178 @@
 <mxfile host="app.diagrams.net">
-  <diagram name="Page-1" id="QGWOxZhw61ksVTV0vQQd">
-    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+  <diagram name="C4 Container" id="neobank-c4-container-ms1">
+    <mxGraphModel dx="2800" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3200" pageHeight="1800" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <object placeholders="1" c4Name="Digital Channels" c4Type="SystemScopeBoundary" c4Application="Callers over Internet" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;&lt;div style=&quot;text-align: left&quot;&gt;%c4Name%&lt;/div&gt;&lt;/b&gt;&lt;/font&gt;&lt;div style=&quot;text-align: left&quot;&gt;[%c4Application%]&lt;/div&gt;" id="WFdSSb0orDeSZbyKRULI-67">
-          <mxCell parent="1" style="rounded=1;fontSize=11;whiteSpace=wrap;html=1;dashed=1;arcSize=20;fillColor=none;strokeColor=#666666;fontColor=#333333;labelBackgroundColor=none;align=left;verticalAlign=bottom;labelBorderColor=none;spacingTop=0;spacing=10;dashPattern=8 4;metaEdit=1;rotatable=0;perimeter=rectanglePerimeter;noLabel=0;labelPadding=0;allowArrows=0;connectable=0;expand=0;recursiveResize=0;editable=1;pointerEvents=0;absoluteArcSize=1;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
-            <mxGeometry height="840" width="400" x="240" y="1560" as="geometry" />
-          </mxCell>
-        </object>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-68" parent="1" style="shape=table;startSize=30;container=1;collapsible=0;childLayout=tableLayout;fontSize=16;align=left;verticalAlign=top;fillColor=none;strokeColor=none;fontColor=#4D4D4D;fontStyle=1;spacingLeft=6;spacing=0;resizable=0;" value="Legend" vertex="1">
-          <mxGeometry height="210" width="180" x="20" y="1670" as="geometry" />
+
+        <!-- Title -->
+        <mxCell id="title" value="NeoBank Digital Leap — C4 Container View (MS1)" style="text;html=1;strokeColor=none;fillColor=none;fontSize=28;fontStyle=1;fontColor=#333333;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="30" width="900" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-69" parent="WFdSSb0orDeSZbyKRULI-68" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" value="" vertex="1">
-          <mxGeometry height="30" width="180" y="30" as="geometry" />
+        <mxCell id="subtitle" value="Public ingress: Mobile / Web / TPPs → WAF / DDoS → API Gateway → BFF. CBS remains the authoritative transaction system." style="text;html=1;strokeColor=none;fillColor=none;fontSize=14;fontColor=#666666;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="80" width="1200" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-70" parent="WFdSSb0orDeSZbyKRULI-69" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=#1E4074;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=12;align=left;fontColor=#FFFFFF;gradientColor=none;spacingLeft=10;spacingRight=4;" value="Person" vertex="1">
-          <mxGeometry height="30" width="180" as="geometry">
-            <mxRectangle height="30" width="180" as="alternateBounds" />
-          </mxGeometry>
+
+        <!-- External actors -->
+        <mxCell id="mobile" value="Mobile Banking Customer&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Mobile app user&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="260" width="210" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-71" parent="WFdSSb0orDeSZbyKRULI-68" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" value="" vertex="1">
-          <mxGeometry height="30" width="180" y="60" as="geometry" />
+        <mxCell id="web" value="Web Banking Customer&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Browser user&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="380" width="210" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-72" parent="WFdSSb0orDeSZbyKRULI-71" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=#3162AF;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=12;align=left;fontColor=#FFFFFF;gradientColor=none;spacingLeft=10;spacingRight=4;" value="Software System" vertex="1">
-          <mxGeometry height="30" width="180" as="geometry">
-            <mxRectangle height="30" width="180" as="alternateBounds" />
-          </mxGeometry>
+        <mxCell id="tpp" value="Open Banking TPPs&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;External providers&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="500" width="210" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-73" parent="WFdSSb0orDeSZbyKRULI-68" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" value="" vertex="1">
-          <mxGeometry height="30" width="180" y="90" as="geometry" />
+
+        <!-- Boundaries -->
+        <mxCell id="cloudBoundary" value="Regional Cloud Environment&#xa;[Digital Edge]" style="swimlane;html=1;whiteSpace=wrap;startSize=36;rounded=1;fontStyle=1;fontSize=15;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="350" y="150" width="620" height="610" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-74" parent="WFdSSb0orDeSZbyKRULI-73" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=#52a2d8;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=12;align=left;fontColor=#FFFFFF;gradientColor=none;spacingLeft=10;spacingRight=4;" value="Container" vertex="1">
-          <mxGeometry height="30" width="180" as="geometry">
-            <mxRectangle height="30" width="180" as="alternateBounds" />
-          </mxGeometry>
+        <mxCell id="onPremBoundary" value="New On-Premises Digital Core&#xa;[Regulated / CBS-adjacent workloads]" style="swimlane;html=1;whiteSpace=wrap;startSize=36;rounded=1;fontStyle=1;fontSize=15;fillColor=#ffe6cc;strokeColor=#d79b00;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="150" width="1250" height="1030" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-75" parent="WFdSSb0orDeSZbyKRULI-68" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" value="" vertex="1">
-          <mxGeometry height="30" width="180" y="120" as="geometry" />
+        <mxCell id="legacyBoundary" value="Existing Legacy Core&#xa;[System of Record]" style="swimlane;html=1;whiteSpace=wrap;startSize=36;rounded=1;fontStyle=1;fontSize=15;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="2370" y="150" width="520" height="560" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-76" parent="WFdSSb0orDeSZbyKRULI-75" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=#7dbef2;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=12;align=left;fontColor=#FFFFFF;gradientColor=none;spacingLeft=10;spacingRight=4;" value="Component" vertex="1">
-          <mxGeometry height="30" width="180" as="geometry">
-            <mxRectangle height="30" width="180" as="alternateBounds" />
-          </mxGeometry>
+        <mxCell id="drNote" value="DR / HA markers to be completed in MS2&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;99.999% target, RTO/RPO per component&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;fontSize=13;dashed=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="2370" y="760" width="520" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-77" parent="WFdSSb0orDeSZbyKRULI-68" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" value="" vertex="1">
-          <mxGeometry height="30" width="180" y="150" as="geometry" />
+
+        <!-- Cloud containers -->
+        <mxCell id="waf" value="WAF / DDoS Protection&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Public traffic protection&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="410" y="250" width="220" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-78" parent="WFdSSb0orDeSZbyKRULI-77" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=#6b6477;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=12;align=left;fontColor=#FFFFFF;gradientColor=none;spacingLeft=10;spacingRight=4;" value="External Person" vertex="1">
-          <mxGeometry height="30" width="180" as="geometry">
-            <mxRectangle height="30" width="180" as="alternateBounds" />
-          </mxGeometry>
+        <mxCell id="apigw" value="API Gateway&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Routing / throttling&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="690" y="250" width="220" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-79" parent="WFdSSb0orDeSZbyKRULI-68" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" value="" vertex="1">
-          <mxGeometry height="30" width="180" y="180" as="geometry" />
+        <mxCell id="iam" value="Customer IAM&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;OAuth2 / OIDC / MFA&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="690" y="380" width="220" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-80" parent="WFdSSb0orDeSZbyKRULI-79" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=#8b8496;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=12;align=left;fontColor=#FFFFFF;gradientColor=none;spacingLeft=10;spacingRight=4;" value="External Software System" vertex="1">
-          <mxGeometry height="30" width="180" as="geometry">
-            <mxRectangle height="30" width="180" as="alternateBounds" />
-          </mxGeometry>
+        <mxCell id="bff" value="BFF / Digital API&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Client-oriented API layer&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="410" y="500" width="220" height="85" as="geometry" />
         </mxCell>
-        <object placeholders="1" c4Name="Open Banking TPPs" c4Type="Software System" c4Description="Third-party providers consuming Open Banking APIs" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="WFdSSb0orDeSZbyKRULI-81">
-          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#8C8496;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#736782;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
-            <mxGeometry x="20" y="2080" width="240" height="120" as="geometry"/>
-          </mxCell>
-        </object>
-        <object placeholders="1" c4Name="Web Banking" c4Type="Web Site" c4Description="Browser-based digital banking channel" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="WFdSSb0orDeSZbyKRULI-82">
-          <mxCell parent="1" style="html=1;fontSize=11;dashed=0;whiteSpace=wrap;fillColor=#6C6477;strokeColor=#4D4D4D;fontColor=#ffffff;shape=mxgraph.c4.person2;align=center;metaEdit=1;points=[[0.5,0,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0]];resizable=0;" vertex="1">
-            <mxGeometry x="20" y="1845" width="200" height="180" as="geometry"/>
-          </mxCell>
-        </object>
-        <object placeholders="1" c4Name="Mobile Banking" c4Type="App" c4Description="Customer-facing digital banking channel on Mobile or Tablet" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="WFdSSb0orDeSZbyKRULI-83">
-          <mxCell parent="1" style="html=1;fontSize=11;dashed=0;whiteSpace=wrap;fillColor=#6C6477;strokeColor=#4D4D4D;fontColor=#ffffff;shape=mxgraph.c4.person2;align=center;metaEdit=1;points=[[0.5,0,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0]];resizable=0;" vertex="1">
-            <mxGeometry x="20" y="1600" width="200" height="180" as="geometry"/>
-          </mxCell>
-        </object>
-        <object placeholders="1" c4Name="Regional Cloud Environment" c4Type="SystemScopeBoundary" c4Application="Cloud Digital Edge" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;&lt;div style=&quot;text-align: left&quot;&gt;%c4Name%&lt;/div&gt;&lt;/b&gt;&lt;/font&gt;&lt;div style=&quot;text-align: left&quot;&gt;[%c4Application%]&lt;/div&gt;" id="WFdSSb0orDeSZbyKRULI-84">
-          <mxCell parent="1" style="rounded=1;fontSize=11;whiteSpace=wrap;html=1;dashed=1;arcSize=20;fillColor=none;strokeColor=#666666;fontColor=#333333;labelBackgroundColor=none;align=left;verticalAlign=bottom;labelBorderColor=none;spacingTop=0;spacing=10;dashPattern=8 4;metaEdit=1;rotatable=0;perimeter=rectanglePerimeter;noLabel=0;labelPadding=0;allowArrows=0;connectable=0;expand=0;recursiveResize=0;editable=1;pointerEvents=0;absoluteArcSize=1;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
-            <mxGeometry height="880" width="440" x="680" y="1560" as="geometry" />
-          </mxCell>
-        </object>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-103" edge="1" parent="1" source="WFdSSb0orDeSZbyKRULI-85" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="WFdSSb0orDeSZbyKRULI-96">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="ai" value="AI Financial Advisor&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Cloud-only; no direct ODS/CBS access&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="690" y="500" width="220" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-85" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.api_gateway;" value="" vertex="1">
-          <mxGeometry height="78" width="78" x="940" y="1640" as="geometry" />
+        <mxCell id="cloudObs" value="Cloud Observability&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Metrics / logs / traces&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="550" y="640" width="220" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-102" edge="1" parent="1" source="WFdSSb0orDeSZbyKRULI-86" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="WFdSSb0orDeSZbyKRULI-85">
-          <mxGeometry relative="1" as="geometry" />
+
+        <!-- On-prem containers -->
+        <mxCell id="account" value="Account Information Service&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Reads balances / account info&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1090" y="250" width="230" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-86" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.waf;" value="" vertex="1">
-          <mxGeometry height="78" width="78" x="740" y="1640" as="geometry" />
+        <mxCell id="consent" value="Open Banking Consent Service&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Consent and access boundaries&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1360" y="250" width="230" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-87" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;rounded=0;labelBackgroundColor=none;" value="&lt;div style=&quot;font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;WAF / DDoS Protection&lt;/div&gt;" vertex="1">
-          <mxGeometry height="30" width="153" x="740" y="1600" as="geometry" />
+        <mxCell id="report" value="Income / Expense Report Service&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Monthly report&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1630" y="250" width="230" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-88" edge="1" parent="1" source="WFdSSb0orDeSZbyKRULI-83" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;entryPerimeter=0;" target="WFdSSb0orDeSZbyKRULI-86">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="580" y="1710" />
-              <mxPoint x="580" y="1660" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="transfer" value="Transfer Service&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Orchestrates transfers&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1090" y="410" width="230" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-89" edge="1" parent="1" source="WFdSSb0orDeSZbyKRULI-82" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="WFdSSb0orDeSZbyKRULI-86">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="600" y="1935" />
-              <mxPoint x="600" y="1679" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="fraudRT" value="Real-Time Fraud Engine&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Synchronous transfer check&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1360" y="410" width="230" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-90" edge="1" parent="1" source="WFdSSb0orDeSZbyKRULI-81" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;entryPerimeter=0;" target="WFdSSb0orDeSZbyKRULI-86">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="620" y="2140" />
-              <mxPoint x="620" y="1698" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="fraudOffline" value="Offline Fraud Analytics&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Batch risk scoring / rules&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1630" y="410" width="230" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-91" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;rounded=0;labelBackgroundColor=none;" value="&lt;div style=&quot;font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;API Gateway&lt;br/&gt;Public entry point&lt;br/&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="50" width="153" x="940" y="1590" as="geometry" />
+        <mxCell id="advisorContext" value="Advisor Context API&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Authorize and minimize AI context&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1900" y="250" width="230" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-93" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;rounded=0;labelBackgroundColor=none;" value="&lt;div style=&quot;font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px; white-space: pre;&quot;&gt;IAM&lt;br&gt;Customer Auth&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt; &lt;br&gt;OAuth2/OIDC&lt;br&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="50" width="150" x="818" y="1814" as="geometry" />
+        <mxCell id="cbsGw" value="CBS Transaction Gateway&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Only path to CBS; idempotency / audit&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#333333;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1900" y="410" width="230" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-96" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.authenticated_user;" value="" vertex="1">
-          <mxGeometry height="78" width="78" x="940" y="1800" as="geometry" />
+        <mxCell id="db2Adapter" value="DB2 Adapter&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;CDC publisher&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1090" y="590" width="230" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-99" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#C925D1;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.xray;" value="" vertex="1">
-          <mxGeometry height="78" width="78" x="1018" y="2300" as="geometry" />
+        <mxCell id="adabasAdapter" value="ADABAS Adapter&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;CDC publisher&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1360" y="590" width="230" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="WFdSSb0orDeSZbyKRULI-100" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Cloud Observability" vertex="1">
-          <mxGeometry height="30" width="110" x="1000" y="2260" as="geometry" />
+        <mxCell id="eventBus" value="Durable Event Bus&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Kafka / projections / audit / analytics&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1630" y="590" width="230" height="85" as="geometry" />
         </mxCell>
-        
-        <mxCell id="WFdSSb0orDeSZbyKRULI-107" edge="1" parent="1" source="WFdSSb0orDeSZbyKRULI-104" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="WFdSSb0orDeSZbyKRULI-106">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="ods" value="Read Models / ODS&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Enterprise RDBMS: Db2 / Oracle / SQL Server&lt;/font&gt;" style="shape=cylinder3d;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1900" y="590" width="230" height="100" as="geometry" />
         </mxCell>
-        <object placeholders="1" c4Name="Digital API / BFF Layer" c4Type="Container" c4Technology="Quarkus" c4Description="Client-oriented APIs for mobile/web. Aggregates data from on-premises services and cloud services" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="WFdSSb0orDeSZbyKRULI-104">
-          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;labelBackgroundColor=none;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
-            <mxGeometry height="120" width="240" x="760" y="1930" as="geometry" />
-          </mxCell>
-        </object>
-        <object placeholders="1" c4Name="AI Financial Advisor" c4Type="Container" c4Technology="Quarkus" c4Description="Cloud-only service that provides financial advice based on authorized customer data" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="WFdSSb0orDeSZbyKRULI-106">
-          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;labelBackgroundColor=none;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
-            <mxGeometry height="120" width="240" x="760" y="2100" as="geometry" />
-          </mxCell>
-        </object>
-        <object placeholders="1" c4Name="New On-Premises Environment" c4Type="SystemScopeBoundary" c4Application="New On-Premises Digital Core" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;&lt;div style=&quot;text-align: left&quot;&gt;%c4Name%&lt;/div&gt;&lt;/b&gt;&lt;/font&gt;&lt;div style=&quot;text-align: left&quot;&gt;[%c4Application%]&lt;/div&gt;" id="WFdSSb0orDeSZbyKRULI-108">
-          <mxCell parent="1" style="rounded=1;fontSize=11;whiteSpace=wrap;html=1;dashed=1;arcSize=20;fillColor=none;strokeColor=#666666;fontColor=#333333;labelBackgroundColor=none;align=left;verticalAlign=bottom;labelBorderColor=none;spacingTop=0;spacing=10;dashPattern=8 4;metaEdit=1;rotatable=0;perimeter=rectanglePerimeter;noLabel=0;labelPadding=0;allowArrows=0;connectable=0;expand=0;recursiveResize=0;editable=1;pointerEvents=0;absoluteArcSize=1;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
-            <mxGeometry height="880" width="2149" x="1202" y="1560" as="geometry" />
-          </mxCell>
-        </object>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-1" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#C925D1;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.xray;" value="" vertex="1">
-          <mxGeometry height="78" width="78" x="1249" y="2280" as="geometry" />
+        <mxCell id="audit" value="Audit / Compliance Store&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Append-only evidence&lt;/font&gt;" style="shape=cylinder3d;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1630" y="780" width="230" height="100" as="geometry" />
         </mxCell>
-        <object placeholders="1" c4Name="Existing On-Premises Environment" c4Type="SystemScopeBoundary" c4Application="Existing Legacy Core" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;&lt;div style=&quot;text-align: left&quot;&gt;%c4Name%&lt;/div&gt;&lt;/b&gt;&lt;/font&gt;&lt;div style=&quot;text-align: left&quot;&gt;[%c4Application%]&lt;/div&gt;" id="n0soMGVSXSvGg1exUm9i-2">
-          <mxCell parent="1" style="rounded=1;fontSize=11;whiteSpace=wrap;html=1;dashed=1;arcSize=20;fillColor=none;strokeColor=#666666;fontColor=#333333;labelBackgroundColor=none;align=left;verticalAlign=bottom;labelBorderColor=none;spacingTop=0;spacing=10;dashPattern=8 4;metaEdit=1;rotatable=0;perimeter=rectanglePerimeter;noLabel=0;labelPadding=0;allowArrows=0;connectable=0;expand=0;recursiveResize=0;editable=1;pointerEvents=0;absoluteArcSize=1;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
-            <mxGeometry height="820" width="719" x="1689" y="2560" as="geometry" />
-          </mxCell>
-        </object>
-        <object placeholders="1" c4Name="Transactions DB" c4Type="Container" c4Technology="IBM DB2" c4Description="System of record for transactions and ledger-related data" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%:&amp;nbsp;%c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="n0soMGVSXSvGg1exUm9i-5">
-          <mxCell parent="1" style="shape=cylinder3;size=15;whiteSpace=wrap;html=1;boundedLbl=1;rounded=0;labelBackgroundColor=none;fillColor=#23A2D9;fontSize=12;fontColor=#ffffff;align=center;strokeColor=#0E7DAD;metaEdit=1;points=[[0.5,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.5,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];resizable=0;" vertex="1">
-            <mxGeometry height="120" width="240" x="1980.5" y="2810" as="geometry" />
-          </mxCell>
-        </object>
-        <object placeholders="1" c4Name="Customers DB" c4Type="Container" c4Technology="ADABAS" c4Description="System of record for customer information" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%:&amp;nbsp;%c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="n0soMGVSXSvGg1exUm9i-6">
-          <mxCell parent="1" style="shape=cylinder3;size=15;whiteSpace=wrap;html=1;boundedLbl=1;rounded=0;labelBackgroundColor=none;fillColor=#23A2D9;fontSize=12;fontColor=#ffffff;align=center;strokeColor=#0E7DAD;metaEdit=1;points=[[0.5,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.5,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];resizable=0;" vertex="1">
-            <mxGeometry height="120" width="240" x="1980.5" y="2990" as="geometry" />
-          </mxCell>
-        </object>
-        <object placeholders="1" c4Name="CBS" c4Type="Container" c4Technology="COBOL CBS on z/OS / IBM iSeries" c4Description="Authoritative execution of financial transactions" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="n0soMGVSXSvGg1exUm9i-7">
-          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;labelBackgroundColor=none;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
-            <mxGeometry height="120" width="240" x="1980.5" y="2550" as="geometry" />
-          </mxCell>
-        </object>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-8" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="n0soMGVSXSvGg1exUm9i-5">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="onPremObs" value="On-Prem Observability&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Prometheus / Loki / Tempo&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1900" y="790" width="230" height="85" as="geometry" />
         </mxCell>
-        <object placeholders="1" c4Name="Account Information Service" c4Type="Container" c4Technology="Quarkus" c4Description="Serves account and balance information from read models" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="n0soMGVSXSvGg1exUm9i-9">
-          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;labelBackgroundColor=none;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
-            <mxGeometry height="120" width="240" x="1259" y="1660" as="geometry" />
-          </mxCell>
-        </object>
-        <mxCell id="8B6pKR78DkiFmbDDRRvb-12" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="n0soMGVSXSvGg1exUm9i-11">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="1570" y="2210" />
-              <mxPoint x="1570" y="2210" />
-            </Array>
-          </mxGeometry>
+
+        <!-- Legacy core -->
+        <mxCell id="cbs" value="CBS&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;COBOL on z/OS / IBM iSeries&lt;br&gt;Transaction source of truth&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#333333;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="2510" y="260" width="230" height="95" as="geometry" />
         </mxCell>
-        <object placeholders="1" c4Name="Transfer Service" c4Type="Container" c4Technology="Quarkus" c4Description="Orchestrates bank transfers and ensures every transaction is executed through CBS" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="n0soMGVSXSvGg1exUm9i-10">
-          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;labelBackgroundColor=none;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
-            <mxGeometry height="120" width="240" x="1259" y="2120" as="geometry" />
-          </mxCell>
-        </object>
-        <object placeholders="1" c4Name="Real-Time Fraud Engine" c4Type="Container" c4Technology="Quarkus" c4Description="Evaluates transfers before execution. Cancels suspicious transactions and informs the customer" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="n0soMGVSXSvGg1exUm9i-11">
-          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;labelBackgroundColor=none;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
-            <mxGeometry height="120" width="240" x="1698.5" y="2120" as="geometry" />
-          </mxCell>
-        </object>
-        <object placeholders="1" c4Name="Offline Fraud Analytics" c4Type="Container" c4Technology="Quarkus" c4Description="Performs deeper fraud analysis using larger historical datasets and longer processing windows" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="n0soMGVSXSvGg1exUm9i-12">
-          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;labelBackgroundColor=none;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
-            <mxGeometry height="120" width="240" x="1800" y="1715" as="geometry" />
-          </mxCell>
-        </object>
-        <object placeholders="1" c4Name="Income / Expense Report Service" c4Type="Container" c4Technology="Quarkus" c4Description="Generates monthly income/expense reports from categorized transaction data" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="n0soMGVSXSvGg1exUm9i-13">
-          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;labelBackgroundColor=none;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
-            <mxGeometry height="120" width="240" x="1259" y="1970" as="geometry" />
-          </mxCell>
-        </object>
-        <object placeholders="1" c4Name="Open Banking Consent Service" c4Type="Container" c4Technology="Quarkus" c4Description="Manages customer consent and access boundaries for third-party providers" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="n0soMGVSXSvGg1exUm9i-14">
-          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;labelBackgroundColor=none;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
-            <mxGeometry height="120" width="240" x="1259" y="1810" as="geometry" />
-          </mxCell>
-        </object>
-        <object placeholders="1" c4Name="CBS Transaction Gateway (HA pair) ‖" c4Type="Container" c4Technology="Quarkus" c4Description="Single controlled interface for executing CBS transactions. &#xa;Handles idempotency, validation, throttling, and audit." label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="n0soMGVSXSvGg1exUm9i-15">
-          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;labelBackgroundColor=none;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
-            <mxGeometry height="120" width="240" x="1698.5" y="1960" as="geometry" />
-          </mxCell>
-        </object>
-        <object placeholders="1" c4Name="DB2 Adapter" c4Type="Container" c4Technology="Quarkus" c4Description="Ingests transactional data from DB2 into the event bus/read models" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="n0soMGVSXSvGg1exUm9i-16">
-          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;labelBackgroundColor=none;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
-            <mxGeometry height="120" width="240" x="2259" y="1980" as="geometry" />
-          </mxCell>
-        </object>
-        <object placeholders="1" c4Name="ADABAS Adapter" c4Type="Container" c4Technology="Quarkus" c4Description="Ingests customer data from ADABAS into the event bus/read models" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="n0soMGVSXSvGg1exUm9i-17">
-          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;labelBackgroundColor=none;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
-            <mxGeometry height="120" width="240" x="2259" y="2140" as="geometry" />
-          </mxCell>
-        </object>
-        <object placeholders="1" c4Name="Durable Event Bus / Streaming ‖" c4Type="Container" c4Technology="Apache Kafka" c4Description="Reliable event backbone for data propagation, read model updates, audit, and analytics" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%:&amp;nbsp;%c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="n0soMGVSXSvGg1exUm9i-18">
-          <mxCell parent="1" style="shape=cylinder3;size=15;direction=south;whiteSpace=wrap;html=1;boundedLbl=1;rounded=0;labelBackgroundColor=none;fillColor=#23A2D9;fontSize=12;fontColor=#ffffff;align=center;strokeColor=#0E7DAD;metaEdit=1;points=[[0.5,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.5,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];resizable=0;" vertex="1">
-            <mxGeometry height="120" width="240" x="2259" y="1785" as="geometry" />
-          </mxCell>
-        </object>
-        <object placeholders="1" c4Name="Read Models / Operational Data Stores" c4Type="SystemScopeBoundary" c4Application="Query-optimized data stores for digital services" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;&lt;div style=&quot;text-align: left&quot;&gt;%c4Name%&lt;/div&gt;&lt;/b&gt;&lt;/font&gt;&lt;div style=&quot;text-align: left&quot;&gt;[%c4Application%]&lt;/div&gt;" id="n0soMGVSXSvGg1exUm9i-19">
-          <mxCell parent="1" style="rounded=1;fontSize=11;whiteSpace=wrap;html=1;dashed=1;arcSize=20;fillColor=none;strokeColor=#666666;fontColor=#333333;labelBackgroundColor=none;align=left;verticalAlign=bottom;labelBorderColor=none;spacingTop=0;spacing=10;dashPattern=8 4;metaEdit=1;rotatable=0;perimeter=rectanglePerimeter;noLabel=0;labelPadding=0;allowArrows=0;connectable=0;expand=0;recursiveResize=0;editable=1;pointerEvents=0;absoluteArcSize=1;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
-            <mxGeometry height="360" width="679" x="2659" y="1620" as="geometry" />
-          </mxCell>
-        </object>
-        <object placeholders="1" c4Name="Data Stores (HA pair) ‖" c4Type="Container" c4Technology="IBM Db2 LUW, Iceburg" c4Description="Query-optimized" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%:&amp;nbsp;%c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="n0soMGVSXSvGg1exUm9i-20">
-          <mxCell parent="1" style="shape=cylinder3;size=15;whiteSpace=wrap;html=1;boundedLbl=1;rounded=0;labelBackgroundColor=none;fillColor=#23A2D9;fontSize=12;fontColor=#ffffff;align=center;strokeColor=#0E7DAD;metaEdit=1;points=[[0.5,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.5,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];resizable=0;" vertex="1">
-            <mxGeometry height="120" width="240" x="2878.5" y="1705" as="geometry" />
-          </mxCell>
-        </object>
-        
-        <mxCell id="8B6pKR78DkiFmbDDRRvb-2" edge="1" parent="1" source="WFdSSb0orDeSZbyKRULI-85" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;entryPerimeter=0;" target="WFdSSb0orDeSZbyKRULI-104">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="1070" y="1679" />
-              <mxPoint x="1070" y="1960" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="db2" value="DB2 Transactions&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Transaction records&lt;/font&gt;" style="shape=cylinder3d;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="2450" y="470" width="190" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="8B6pKR78DkiFmbDDRRvb-3" edge="1" parent="1" source="WFdSSb0orDeSZbyKRULI-99" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;entryPerimeter=0;" target="WFdSSb0orDeSZbyKRULI-104">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="700" y="2309" />
-              <mxPoint x="700" y="2020" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="adabas" value="ADABAS Customers&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Customer records&lt;/font&gt;" style="shape=cylinder3d;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="2670" y="470" width="190" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="8B6pKR78DkiFmbDDRRvb-6" edge="1" parent="1" source="WFdSSb0orDeSZbyKRULI-99" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" target="WFdSSb0orDeSZbyKRULI-106">
-          <mxGeometry relative="1" as="geometry" />
+
+        <!-- Legend / rule callouts -->
+        <mxCell id="rule1" value="Rule 1: Public channels must not bypass WAF." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;fontSize=13;align=left;verticalAlign=middle;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="680" width="300" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="8B6pKR78DkiFmbDDRRvb-7" edge="1" parent="1" source="WFdSSb0orDeSZbyKRULI-104" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="n0soMGVSXSvGg1exUm9i-10">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="rule2" value="Rule 2: CBS Transaction Gateway is the only path to CBS." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#333333;fontSize=13;align=left;verticalAlign=middle;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="740" width="300" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="8B6pKR78DkiFmbDDRRvb-8" edge="1" parent="1" source="WFdSSb0orDeSZbyKRULI-104" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="n0soMGVSXSvGg1exUm9i-14">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="rule3" value="Rule 3: AI Advisor uses Advisor Context API; no direct ODS / CBS access." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;fontSize=13;align=left;verticalAlign=middle;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="800" width="300" height="65" as="geometry" />
         </mxCell>
-        <mxCell id="8B6pKR78DkiFmbDDRRvb-9" edge="1" parent="1" source="WFdSSb0orDeSZbyKRULI-104" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="n0soMGVSXSvGg1exUm9i-13">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="8B6pKR78DkiFmbDDRRvb-10" edge="1" parent="1" source="WFdSSb0orDeSZbyKRULI-104" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="n0soMGVSXSvGg1exUm9i-9">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="8B6pKR78DkiFmbDDRRvb-11" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;exitPerimeter=0;" target="n0soMGVSXSvGg1exUm9i-10">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="1600" y="2150" />
-              <mxPoint x="1600" y="2150" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="8B6pKR78DkiFmbDDRRvb-13" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="n0soMGVSXSvGg1exUm9i-15">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <object placeholders="1" c4Name="Audit / Compliance Store" c4Type="Container" c4Technology="Append-only log" c4Description="Immutable audit trail for transactions, fraud decisions, and consent changes" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="n0soMGVSXSvGg1exUm9i-23">
-          <mxCell parent="1" style="shape=cylinder3;size=15;whiteSpace=wrap;html=1;boundedLbl=1;rounded=0;labelBackgroundColor=none;fillColor=#23A2D9;fontSize=12;fontColor=#ffffff;align=center;strokeColor=#0E7DAD;metaEdit=1;points=[[0.5,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.5,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];resizable=0;" vertex="1">
-            <mxGeometry x="2600" y="1700" width="240" height="120" as="geometry"/>
-          </mxCell>
-        </object>
-        <object placeholders="1" c4Name="On-Prem Observability" c4Type="Container" c4Technology="Prometheus + Loki + Tempo" c4Description="On-prem metrics, logs, and traces; ships to cloud observability over mTLS" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="n0soMGVSXSvGg1exUm9i-24">
-          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;labelBackgroundColor=none;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
-            <mxGeometry x="2600" y="1860" width="240" height="120" as="geometry"/>
-          </mxCell>
-        </object>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-25" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-5" target="n0soMGVSXSvGg1exUm9i-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="CDC"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-26" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-6" target="n0soMGVSXSvGg1exUm9i-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="CDC"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-27" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-16" target="n0soMGVSXSvGg1exUm9i-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="publishes"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-28" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-17" target="n0soMGVSXSvGg1exUm9i-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="publishes"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-29" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-18" target="n0soMGVSXSvGg1exUm9i-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="projects"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-41" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-18" target="n0soMGVSXSvGg1exUm9i-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="feeds"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-42" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-18" target="n0soMGVSXSvGg1exUm9i-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="writes"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-30" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-9" target="n0soMGVSXSvGg1exUm9i-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="reads"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-31" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-13" target="n0soMGVSXSvGg1exUm9i-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="reads"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-32" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-14" target="n0soMGVSXSvGg1exUm9i-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="reads"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-33" edge="1" parent="1" source="WFdSSb0orDeSZbyKRULI-106" target="n0soMGVSXSvGg1exUm9i-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="reads (minimized)"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-34" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-12" target="n0soMGVSXSvGg1exUm9i-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="reads"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-35" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-12" target="n0soMGVSXSvGg1exUm9i-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="publishes rules"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-36" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-15" target="n0soMGVSXSvGg1exUm9i-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="writes"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-37" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-10" target="n0soMGVSXSvGg1exUm9i-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="writes"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-38" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-11" target="n0soMGVSXSvGg1exUm9i-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="writes"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-43" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-9" target="n0soMGVSXSvGg1exUm9i-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="emits"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-44" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-10" target="n0soMGVSXSvGg1exUm9i-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="emits"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-45" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-11" target="n0soMGVSXSvGg1exUm9i-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="emits"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-46" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-15" target="n0soMGVSXSvGg1exUm9i-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="emits"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-39" edge="1" parent="1" source="n0soMGVSXSvGg1exUm9i-24" target="WFdSSb0orDeSZbyKRULI-99" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="ships"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="n0soMGVSXSvGg1exUm9i-40" edge="1" parent="1" source="WFdSSb0orDeSZbyKRULI-81" target="n0soMGVSXSvGg1exUm9i-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="requests consent"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Edges: public ingress -->
+        <mxCell id="e-mobile-waf" value="HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#666666;fontSize=11;" edge="1" parent="1" source="mobile" target="waf"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-web-waf" value="HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#666666;fontSize=11;" edge="1" parent="1" source="web" target="waf"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-tpp-waf" value="Open Banking HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#666666;fontSize=11;" edge="1" parent="1" source="tpp" target="waf"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-waf-apigw" value="forwards" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#b85450;fontSize=11;fontStyle=1;" edge="1" parent="1" source="waf" target="apigw"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-apigw-iam" value="OAuth2 / OIDC" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#666666;fontSize=11;" edge="1" parent="1" source="apigw" target="iam"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-apigw-bff" value="routes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#666666;fontSize=11;" edge="1" parent="1" source="apigw" target="bff"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Edges: cloud to on-prem services -->
+        <mxCell id="e-bff-ai" value="requests advice" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d6b656;fontSize=11;" edge="1" parent="1" source="bff" target="ai"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-bff-account" value="mTLS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#82b366;fontSize=11;" edge="1" parent="1" source="bff" target="account"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-bff-consent" value="mTLS / consent" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#82b366;fontSize=11;" edge="1" parent="1" source="bff" target="consent"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-bff-report" value="mTLS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#82b366;fontSize=11;" edge="1" parent="1" source="bff" target="report"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-bff-transfer" value="mTLS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d79b00;fontSize=11;" edge="1" parent="1" source="bff" target="transfer"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Edges: AI context boundary -->
+        <mxCell id="e-ai-context" value="minimized context only" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d6b656;fontSize=11;fontStyle=1;" edge="1" parent="1" source="ai" target="advisorContext"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-context-consent" value="checks scope" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d6b656;fontSize=11;" edge="1" parent="1" source="advisorContext" target="consent"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-context-ods" value="authorized SQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d6b656;fontSize=11;" edge="1" parent="1" source="advisorContext" target="ods"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Edges: transfer command path -->
+        <mxCell id="e-transfer-fraudrt" value="fraud check" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#b85450;fontSize=11;" edge="1" parent="1" source="transfer" target="fraudRT"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-fraudrt-transfer" value="approve / reject" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;dashed=1;strokeColor=#b85450;fontSize=11;" edge="1" parent="1" source="fraudRT" target="transfer"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-transfer-cbsgw" value="execute transaction" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#b85450;fontSize=11;fontStyle=1;" edge="1" parent="1" source="transfer" target="cbsGw"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-cbsgw-cbs" value="mainframe protocol" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#b85450;fontSize=11;fontStyle=1;" edge="1" parent="1" source="cbsGw" target="cbs"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-cbs-db2" value="reads / writes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#b85450;fontSize=11;" edge="1" parent="1" source="cbs" target="db2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-cbs-adabas" value="reads / writes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#b85450;fontSize=11;" edge="1" parent="1" source="cbs" target="adabas"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Edges: CDC and projections -->
+        <mxCell id="e-db2-db2adapter" value="CDC" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#6c8ebf;fontSize=11;" edge="1" parent="1" source="db2" target="db2Adapter"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-adabas-adapter" value="CDC" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#6c8ebf;fontSize=11;" edge="1" parent="1" source="adabas" target="adabasAdapter"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-db2adapter-eventbus" value="publishes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d79b00;fontSize=11;" edge="1" parent="1" source="db2Adapter" target="eventBus"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-adabasadapter-eventbus" value="publishes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d79b00;fontSize=11;" edge="1" parent="1" source="adabasAdapter" target="eventBus"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-eventbus-ods" value="projects" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d79b00;fontSize=11;" edge="1" parent="1" source="eventBus" target="ods"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-eventbus-offline" value="feeds" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d79b00;fontSize=11;" edge="1" parent="1" source="eventBus" target="fraudOffline"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-eventbus-audit" value="writes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d79b00;fontSize=11;" edge="1" parent="1" source="eventBus" target="audit"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Edges: read paths -->
+        <mxCell id="e-account-ods" value="SQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#6c8ebf;fontSize=11;" edge="1" parent="1" source="account" target="ods"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-consent-ods" value="SQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#6c8ebf;fontSize=11;" edge="1" parent="1" source="consent" target="ods"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-report-ods" value="SQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#6c8ebf;fontSize=11;" edge="1" parent="1" source="report" target="ods"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-offline-ods" value="SQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#6c8ebf;fontSize=11;" edge="1" parent="1" source="fraudOffline" target="ods"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-offline-rules" value="publishes rules" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;dashed=1;strokeColor=#b85450;fontSize=11;" edge="1" parent="1" source="fraudOffline" target="fraudRT"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Edges: audit / observability -->
+        <mxCell id="e-transfer-audit" value="audit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#9673a6;fontSize=11;" edge="1" parent="1" source="transfer" target="audit"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-cbsgw-audit" value="audit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#9673a6;fontSize=11;" edge="1" parent="1" source="cbsGw" target="audit"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-fraudrt-audit" value="audit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#9673a6;fontSize=11;" edge="1" parent="1" source="fraudRT" target="audit"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e-onpremobs-cloudobs" value="ships telemetry" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#9673a6;fontSize=11;" edge="1" parent="1" source="onPremObs" target="cloudObs"><mxGeometry relative="1" as="geometry" /></mxCell>
       </root>
     </mxGraphModel>
   </diagram>
