@@ -31,10 +31,10 @@ flowchart LR
         direction LR
         subgraph OnPremDMZ[On-Prem DMZ]
             NGFW[NGFW\n_TODO: model inspection, default-deny_]
-            EdgeProxy[Reverse Proxy / Event Bridge Ingress]
+            EdgeProxy[Reverse Proxy / Controlled API Ingress]
         end
         subgraph OnPremReg[Regulated Zone — Digital Core]
-            Core[Core Services\nAccount / Transfer / Consent / Report]
+            Core[Core Services\nAccount / Transfer / Consent / Report / Advisor Context]
             FraudRT[Real-Time Fraud Engine]
             EventBus[Durable Event Bus]
             ODS[ODS / Read Models\nEnterprise RDBMS]
@@ -59,19 +59,19 @@ flowchart LR
     %% --- Cloud egress to on-prem (must traverse the link + NGFW) ---
     APIGW --> VPNTunnel
     BFF --> VPNTunnel
+    AI --> VPNTunnel
     VPNTunnel --> NGFW
     NGFW --> EdgeProxy
 
-    %% --- DMZ to regulated zone (additional segmentation) ---
+    %% --- DMZ to regulated zone (no direct DMZ access to ODS/EventBus) ---
     EdgeProxy --> Core
-    EdgeProxy --> FraudRT
-    EdgeProxy --> EventBus
-    EdgeProxy --> ODS
 
     %% --- Regulated zone internal wiring ---
     Core --> ODS
+    Core --> EventBus
     Core --> Audit
     Core --> OnPremObs
+    Core --> FraudRT
     FraudRT --> Core
     EventBus --> ODS
     EventBus --> Audit
@@ -90,6 +90,6 @@ flowchart LR
     %% [ ] HA / DR topology per zone (active-active vs active-passive, RTO/RPO)
     %% [ ] VPN vs Direct Connect decision (latency, throughput, cost, regulatory)
     %% [ ] DNS, certificate, and secrets management placement
-    %% [ ] Egress controls (AI advisor must not call CBS/DB2/ADABAS — see FN-120)
+    %% [ ] Egress controls (AI advisor must not call CBS/DB2/ADABAS and must use Advisor Context API)
     %% [ ] Observability traffic: where metrics/logs/traces cross zones
     %% [ ] Align with the security boundary diagram (MS2) and the high-level solution
