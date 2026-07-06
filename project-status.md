@@ -19,6 +19,7 @@ Submission timeline (deck page 17): **MS1 by Week 7**, **MS2 by Week 13**, **Fin
 | D-005 | Keep AI Financial Advisor in cloud-only scope but restrict it to minimized, authorized data. | Accepted |
 | D-006 | Route all public client traffic through WAF/DDoS protection before API Gateway. | Accepted |
 | D-007 | Treat Offline Fraud Analytics as asynchronous analytics/batch risk scoring, not as a synchronous transfer-path service. | Accepted |
+| D-008 | Place an Advisor Context API / data-minimization boundary between the cloud AI Financial Advisor and the on-prem ODS. The AI service must not read the ODS directly. | Accepted |
 
 ## Current Files
 
@@ -50,19 +51,20 @@ Submission timeline (deck page 17): **MS1 by Week 7**, **MS2 by Week 13**, **Fin
 
 ## Next Work
 
-1. **MS1 presentation (Week 7).** Cleanup spec and slide outline are in `docs/ms1-presentation-prep.md`. Apply the draw.io edits, render diagrams, and present.
+1. **MS1 presentation (Week 7).** Cleanup spec and slide outline are in `docs/ms1-presentation-prep.md`. Apply / verify the draw.io edits, render diagrams, and present.
 2. Review and refine the MS1 high-level solution diagram.
-3. Convert Mermaid diagrams into Word-ready rendered images and embed in the final HLD Word file.
-4. Start MS2 security boundary diagram.
-5. **Start MS2 network topology diagram.** Scaffolded at `docs/diagrams/06-network-topology.mmd`. Required by Jukka Rohila (class guidance). Must include: cloud VPC public/private subnets, on-prem DMZ / regulated / mainframe zones, WAF and NGFW placements, cloud-to-on-prem link (VPN or Direct Connect — decision deferred), CIDR blocks, ports/protocols, and HA/DR topology per zone. Must show the CBS Transaction Gateway as the only path to the mainframe.
-6. Start MS2 data flow diagram.
-7. Start MS2 performance and scaling diagram.
-8. Fill in the scaffolded HLD sections: `04-sizing.md` (HW/SW sizing + cost), `05-time-estimation.md` (workdays), `06-limitations.md`, `08-open-issues.md`. `07-risks-and-mitigations.md` is partly seeded from MS1 §10 and needs MS2 expansion.
-9. Define message schemas and API contracts (HLD §3.4) and upgradability patterns (HLD §3.5).
-10. Select the on-prem ODS vendor from the Oracle / SQL Server / Db2 shortlist (ADR-002).
-11. Resolve open issues OI-001..OI-011.
-12. Consolidate duplicate content: assumptions, risks, and open questions currently live in both MS1 §9/§10/§11 and `03..08` files — pick one location and deprecate the other.
-13. Assemble the final Word HLD from the Markdown sources per the template's section order.
+3. Align `docs/diagrams/neobank-digital-leap-c4.drawio` with the hardened Mermaid source in `docs/diagrams/07-c4-container.mmd` before exporting Word-ready images.
+4. Convert Mermaid diagrams into Word-ready rendered images and embed in the final HLD Word file.
+5. Start MS2 security boundary diagram.
+6. **Start MS2 network topology diagram.** Scaffolded at `docs/diagrams/06-network-topology.mmd`. Required by Jukka Rohila (class guidance). Must include: cloud VPC public/private subnets, on-prem DMZ / regulated / mainframe zones, WAF and NGFW placements, cloud-to-on-prem link (VPN or Direct Connect — decision deferred), CIDR blocks, ports/protocols, and HA/DR topology per zone. Must show the CBS Transaction Gateway as the only path to the mainframe.
+7. Start MS2 data flow diagram.
+8. Start MS2 performance and scaling diagram.
+9. Fill in the scaffolded HLD sections: `04-sizing.md` (HW/SW sizing + cost), `05-time-estimation.md` (workdays), `06-limitations.md`, `08-open-issues.md`. `07-risks-and-mitigations.md` is partly seeded from MS1 §10 and needs MS2 expansion.
+10. Define message schemas and API contracts (HLD §3.4) and upgradability patterns (HLD §3.5).
+11. Select the on-prem ODS vendor from the Oracle / SQL Server / Db2 shortlist (ADR-002).
+12. Resolve open issues OI-001..OI-011.
+13. Consolidate duplicate content: assumptions, risks, and open questions currently live in both MS1 §9/§10/§11 and `03..08` files — pick one location and deprecate the other.
+14. Assemble the final Word HLD from the Markdown sources per the template's section order.
 
 ## Notes
 
