@@ -1,178 +1,319 @@
 <mxfile host="app.diagrams.net">
   <diagram name="C4 Container" id="neobank-c4-container-ms1">
-    <mxGraphModel dx="2800" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3200" pageHeight="1800" math="0" shadow="0">
+    <mxGraphModel dx="1916" dy="951" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3200" pageHeight="1800" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-
-        <!-- Title -->
-        <mxCell id="title" value="NeoBank Digital Leap — C4 Container View (MS1)" style="text;html=1;strokeColor=none;fillColor=none;fontSize=28;fontStyle=1;fontColor=#333333;align=left;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="40" y="30" width="900" height="50" as="geometry" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=28;fontStyle=1;fontColor=#333333;align=left;verticalAlign=middle;" value="NeoBank Digital Leap — C4 Container View (MS1)" vertex="1">
+          <mxGeometry height="50" width="900" x="40" y="30" as="geometry" />
         </mxCell>
-        <mxCell id="subtitle" value="Public ingress: Mobile / Web / TPPs → WAF / DDoS → API Gateway → BFF. CBS remains the authoritative transaction system." style="text;html=1;strokeColor=none;fillColor=none;fontSize=14;fontColor=#666666;align=left;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="40" y="80" width="1200" height="30" as="geometry" />
+        <mxCell id="subtitle" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=14;fontColor=#666666;align=left;verticalAlign=middle;" value="Public ingress: Mobile / Web / TPPs → WAF / DDoS → API Gateway → BFF. CBS remains the authoritative transaction system." vertex="1">
+          <mxGeometry height="30" width="1200" x="40" y="80" as="geometry" />
         </mxCell>
-
-        <!-- External actors -->
-        <mxCell id="mobile" value="Mobile Banking Customer&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Mobile app user&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="260" width="210" height="90" as="geometry" />
+        <mxCell id="mobile" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" value="Mobile Banking Customer&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Mobile app user&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="210" x="40" y="245" as="geometry" />
         </mxCell>
-        <mxCell id="web" value="Web Banking Customer&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Browser user&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="380" width="210" height="90" as="geometry" />
+        <mxCell id="web" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" value="Web Banking Customer&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Browser user&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="210" x="40" y="380" as="geometry" />
         </mxCell>
-        <mxCell id="tpp" value="Open Banking TPPs&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;External providers&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="500" width="210" height="90" as="geometry" />
+        <mxCell id="tpp" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" value="Open Banking TPPs&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;External providers&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="210" x="40" y="500" as="geometry" />
         </mxCell>
-
-        <!-- Boundaries -->
-        <mxCell id="cloudBoundary" value="Regional Cloud Environment&#xa;[Digital Edge]" style="swimlane;html=1;whiteSpace=wrap;startSize=36;rounded=1;fontStyle=1;fontSize=15;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;" vertex="1" parent="1">
-          <mxGeometry x="350" y="150" width="620" height="610" as="geometry" />
+        <mxCell id="cloudBoundary" parent="1" style="swimlane;html=1;whiteSpace=wrap;startSize=36;rounded=1;fontStyle=1;fontSize=15;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;" value="Regional Cloud Environment&#xa;[Digital Edge]" vertex="1">
+          <mxGeometry height="1030" width="620" x="350" y="150" as="geometry" />
         </mxCell>
-        <mxCell id="onPremBoundary" value="New On-Premises Digital Core&#xa;[Regulated / CBS-adjacent workloads]" style="swimlane;html=1;whiteSpace=wrap;startSize=36;rounded=1;fontStyle=1;fontSize=15;fillColor=#ffe6cc;strokeColor=#d79b00;fontColor=#333333;" vertex="1" parent="1">
-          <mxGeometry x="1040" y="150" width="1250" height="1030" as="geometry" />
+        <mxCell id="waf" parent="cloudBoundary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" value="WAF / DDoS Protection&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Public traffic protection&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="220" x="50" y="100" as="geometry" />
         </mxCell>
-        <mxCell id="legacyBoundary" value="Existing Legacy Core&#xa;[System of Record]" style="swimlane;html=1;whiteSpace=wrap;startSize=36;rounded=1;fontStyle=1;fontSize=15;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#333333;" vertex="1" parent="1">
-          <mxGeometry x="2370" y="150" width="520" height="560" as="geometry" />
+        <mxCell id="cloudObs" parent="cloudBoundary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" value="Cloud Observability&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Metrics / logs / traces&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="220" x="60" y="646.5" as="geometry" />
         </mxCell>
-        <mxCell id="drNote" value="DR / HA markers to be completed in MS2&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;99.999% target, RTO/RPO per component&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;fontSize=13;dashed=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="2370" y="760" width="520" height="90" as="geometry" />
+        <mxCell id="ai" parent="cloudBoundary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" value="AI Financial Advisor&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Cloud-only; no direct ODS/CBS access&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="220" x="60" y="529" as="geometry" />
         </mxCell>
-
-        <!-- Cloud containers -->
-        <mxCell id="waf" value="WAF / DDoS Protection&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Public traffic protection&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="410" y="250" width="220" height="85" as="geometry" />
+        <mxCell id="onPremBoundary" parent="1" style="swimlane;html=1;whiteSpace=wrap;startSize=36;rounded=1;fontStyle=1;fontSize=15;fillColor=#ffe6cc;strokeColor=#d79b00;fontColor=#333333;" value="New On-Premises Digital Core&#xa;[Regulated / CBS-adjacent workloads]" vertex="1">
+          <mxGeometry height="1030" width="1250" x="1040" y="150" as="geometry" />
         </mxCell>
-        <mxCell id="apigw" value="API Gateway&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Routing / throttling&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="690" y="250" width="220" height="85" as="geometry" />
+        <mxCell id="onPremObs" parent="onPremBoundary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" value="On-Prem Observability&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Prometheus / Loki / Tempo&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="230" x="40" y="646.5" as="geometry" />
         </mxCell>
-        <mxCell id="iam" value="Customer IAM&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;OAuth2 / OIDC / MFA&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="690" y="380" width="220" height="85" as="geometry" />
+        <mxCell id="ods" parent="onPremBoundary" style="shape=cylinder3d;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;" value="Read Models / ODS&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Enterprise RDBMS: Db2 / Oracle / SQL Server&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="230" x="960" y="432.5" as="geometry" />
         </mxCell>
-        <mxCell id="bff" value="BFF / Digital API&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Client-oriented API layer&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="410" y="500" width="220" height="85" as="geometry" />
+        <mxCell id="account" parent="onPremBoundary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" value="Account Information Service&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Reads balances / account info&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="230" x="40" y="401" as="geometry" />
         </mxCell>
-        <mxCell id="ai" value="AI Financial Advisor&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Cloud-only; no direct ODS/CBS access&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="690" y="500" width="220" height="85" as="geometry" />
+        <mxCell id="e-account-ods" edge="1" parent="onPremBoundary" source="account" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#6c8ebf;fontSize=11;" target="ods" value="SQL">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="cloudObs" value="Cloud Observability&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Metrics / logs / traces&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="550" y="640" width="220" height="85" as="geometry" />
+        <mxCell id="transfer" parent="onPremBoundary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" value="Transfer Service&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Orchestrates transfers&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="230" x="40" y="60" as="geometry" />
         </mxCell>
-
-        <!-- On-prem containers -->
-        <mxCell id="account" value="Account Information Service&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Reads balances / account info&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="1090" y="250" width="230" height="85" as="geometry" />
+        <mxCell id="report" parent="onPremBoundary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" value="Income / Expense Report Service&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Monthly report&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="230" x="43" y="178" as="geometry" />
         </mxCell>
-        <mxCell id="consent" value="Open Banking Consent Service&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Consent and access boundaries&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="1360" y="250" width="230" height="85" as="geometry" />
+        <mxCell id="e-report-ods" edge="1" parent="onPremBoundary" source="report" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#6c8ebf;fontSize=11;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="ods" value="SQL">
+          <mxGeometry relative="1" x="-0.0163" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="report" value="Income / Expense Report Service&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Monthly report&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="1630" y="250" width="230" height="85" as="geometry" />
+        <mxCell id="consent" parent="onPremBoundary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" value="Open Banking Consent Service&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Consent and access boundaries&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="230" x="40" y="289" as="geometry" />
         </mxCell>
-        <mxCell id="transfer" value="Transfer Service&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Orchestrates transfers&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="1090" y="410" width="230" height="85" as="geometry" />
+        <mxCell id="e-consent-ods" edge="1" parent="onPremBoundary" source="consent" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#6c8ebf;fontSize=11;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" target="ods" value="SQL">
+          <mxGeometry relative="1" x="0.2492" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="fraudRT" value="Real-Time Fraud Engine&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Synchronous transfer check&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="1360" y="410" width="230" height="85" as="geometry" />
+        <mxCell id="db2Adapter" parent="onPremBoundary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" value="DB2 Adapter&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;CDC publisher&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="230" x="960" y="637.5" as="geometry" />
         </mxCell>
-        <mxCell id="fraudOffline" value="Offline Fraud Analytics&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Batch risk scoring / rules&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="1630" y="410" width="230" height="85" as="geometry" />
+        <mxCell id="advisorContext" parent="onPremBoundary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" value="Advisor Context API&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Authorize and minimize AI context&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="230" x="43" y="529" as="geometry" />
         </mxCell>
-        <mxCell id="advisorContext" value="Advisor Context API&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Authorize and minimize AI context&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="1900" y="250" width="230" height="85" as="geometry" />
+        <mxCell id="e-context-consent" edge="1" parent="onPremBoundary" source="advisorContext" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d6b656;fontSize=11;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" target="consent" value="checks scope">
+          <mxGeometry relative="1" x="-0.5679" y="10" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="cbsGw" value="CBS Transaction Gateway&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Only path to CBS; idempotency / audit&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#333333;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="1900" y="410" width="230" height="85" as="geometry" />
+        <mxCell id="e-context-ods" edge="1" parent="onPremBoundary" source="advisorContext" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d6b656;fontSize=11;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" target="ods" value="authorized SQL">
+          <mxGeometry relative="1" x="-0.6248" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="db2Adapter" value="DB2 Adapter&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;CDC publisher&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="1090" y="590" width="230" height="85" as="geometry" />
+        <mxCell id="audit" parent="onPremBoundary" style="shape=cylinder3d;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;" value="Audit / Compliance Store&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Append-only evidence&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="230" x="430" y="646.5" as="geometry" />
         </mxCell>
-        <mxCell id="adabasAdapter" value="ADABAS Adapter&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;CDC publisher&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="1360" y="590" width="230" height="85" as="geometry" />
+        <mxCell id="e-transfer-audit" edge="1" parent="onPremBoundary" source="transfer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#9673a6;fontSize=11;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="audit" value="audit">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="eventBus" value="Durable Event Bus&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Kafka / projections / audit / analytics&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="1630" y="590" width="230" height="85" as="geometry" />
+        <mxCell id="adabasAdapter" parent="onPremBoundary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" value="ADABAS Adapter&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;CDC publisher&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="230" x="960" y="780" as="geometry" />
         </mxCell>
-        <mxCell id="ods" value="Read Models / ODS&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Enterprise RDBMS: Db2 / Oracle / SQL Server&lt;/font&gt;" style="shape=cylinder3d;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="1900" y="590" width="230" height="100" as="geometry" />
+        <mxCell id="fraudRT" parent="onPremBoundary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" value="Real-Time Fraud Engine&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Synchronous transfer check&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="230" x="430" y="60" as="geometry" />
         </mxCell>
-        <mxCell id="audit" value="Audit / Compliance Store&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Append-only evidence&lt;/font&gt;" style="shape=cylinder3d;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="1630" y="780" width="230" height="100" as="geometry" />
+        <mxCell id="e-fraudrt-transfer" edge="1" parent="onPremBoundary" source="fraudRT" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;dashed=1;strokeColor=#b85450;fontSize=11;entryX=1;entryY=0.75;entryDx=0;entryDy=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" target="transfer" value="approve / reject">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="onPremObs" value="On-Prem Observability&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Prometheus / Loki / Tempo&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="1900" y="790" width="230" height="85" as="geometry" />
+        <mxCell id="e-fraudrt-audit" edge="1" parent="onPremBoundary" source="fraudOffline" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#9673a6;fontSize=11;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" target="audit" value="audit">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
         </mxCell>
-
-        <!-- Legacy core -->
-        <mxCell id="cbs" value="CBS&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;COBOL on z/OS / IBM iSeries&lt;br&gt;Transaction source of truth&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#333333;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="2510" y="260" width="230" height="95" as="geometry" />
+        <mxCell id="e-transfer-fraudrt" edge="1" parent="onPremBoundary" source="transfer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#b85450;fontSize=11;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="fraudRT" value="fraud check">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="db2" value="DB2 Transactions&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Transaction records&lt;/font&gt;" style="shape=cylinder3d;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="2450" y="470" width="190" height="100" as="geometry" />
+        <mxCell id="cbsGw" parent="onPremBoundary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#333333;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;arcSize=12;" value="CBS Transaction Gateway&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Only path to CBS; idempotency / audit&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="230" x="780" y="60" as="geometry" />
         </mxCell>
-        <mxCell id="adabas" value="ADABAS Customers&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Customer records&lt;/font&gt;" style="shape=cylinder3d;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="2670" y="470" width="190" height="100" as="geometry" />
+        <mxCell id="e-transfer-cbsgw" edge="1" parent="onPremBoundary" source="transfer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#b85450;fontSize=11;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" target="cbsGw" value="execute transaction">
+          <mxGeometry relative="1" x="-0.3773" y="-5" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
-
-        <!-- Legend / rule callouts -->
-        <mxCell id="rule1" value="Rule 1: Public channels must not bypass WAF." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;fontSize=13;align=left;verticalAlign=middle;spacingLeft=10;" vertex="1" parent="1">
-          <mxGeometry x="40" y="680" width="300" height="50" as="geometry" />
+        <mxCell id="e-cbsgw-audit" edge="1" parent="onPremBoundary" source="cbsGw" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#9673a6;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="audit" value="audit">
+          <mxGeometry relative="1" x="-0.9176" y="15" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="rule2" value="Rule 2: CBS Transaction Gateway is the only path to CBS." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#333333;fontSize=13;align=left;verticalAlign=middle;spacingLeft=10;" vertex="1" parent="1">
-          <mxGeometry x="40" y="740" width="300" height="50" as="geometry" />
+        <mxCell id="e-offline-ods" edge="1" parent="onPremBoundary" source="fraudOffline" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#6c8ebf;fontSize=11;" target="ods" value="SQL">
+          <mxGeometry relative="1" x="-0.511" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="rule3" value="Rule 3: AI Advisor uses Advisor Context API; no direct ODS / CBS access." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;fontSize=13;align=left;verticalAlign=middle;spacingLeft=10;" vertex="1" parent="1">
-          <mxGeometry x="40" y="800" width="300" height="65" as="geometry" />
+        <mxCell id="e-offline-rules" edge="1" parent="onPremBoundary" source="fraudOffline" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;dashed=1;strokeColor=#b85450;fontSize=11;" target="fraudRT" value="publishes rules">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <!-- Edges: public ingress -->
-        <mxCell id="e-mobile-waf" value="HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#666666;fontSize=11;" edge="1" parent="1" source="mobile" target="waf"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-web-waf" value="HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#666666;fontSize=11;" edge="1" parent="1" source="web" target="waf"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-tpp-waf" value="Open Banking HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#666666;fontSize=11;" edge="1" parent="1" source="tpp" target="waf"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-waf-apigw" value="forwards" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#b85450;fontSize=11;fontStyle=1;" edge="1" parent="1" source="waf" target="apigw"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-apigw-iam" value="OAuth2 / OIDC" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#666666;fontSize=11;" edge="1" parent="1" source="apigw" target="iam"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-apigw-bff" value="routes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#666666;fontSize=11;" edge="1" parent="1" source="apigw" target="bff"><mxGeometry relative="1" as="geometry" /></mxCell>
-
-        <!-- Edges: cloud to on-prem services -->
-        <mxCell id="e-bff-ai" value="requests advice" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d6b656;fontSize=11;" edge="1" parent="1" source="bff" target="ai"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-bff-account" value="mTLS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#82b366;fontSize=11;" edge="1" parent="1" source="bff" target="account"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-bff-consent" value="mTLS / consent" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#82b366;fontSize=11;" edge="1" parent="1" source="bff" target="consent"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-bff-report" value="mTLS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#82b366;fontSize=11;" edge="1" parent="1" source="bff" target="report"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-bff-transfer" value="mTLS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d79b00;fontSize=11;" edge="1" parent="1" source="bff" target="transfer"><mxGeometry relative="1" as="geometry" /></mxCell>
-
-        <!-- Edges: AI context boundary -->
-        <mxCell id="e-ai-context" value="minimized context only" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d6b656;fontSize=11;fontStyle=1;" edge="1" parent="1" source="ai" target="advisorContext"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-context-consent" value="checks scope" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d6b656;fontSize=11;" edge="1" parent="1" source="advisorContext" target="consent"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-context-ods" value="authorized SQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d6b656;fontSize=11;" edge="1" parent="1" source="advisorContext" target="ods"><mxGeometry relative="1" as="geometry" /></mxCell>
-
-        <!-- Edges: transfer command path -->
-        <mxCell id="e-transfer-fraudrt" value="fraud check" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#b85450;fontSize=11;" edge="1" parent="1" source="transfer" target="fraudRT"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-fraudrt-transfer" value="approve / reject" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;dashed=1;strokeColor=#b85450;fontSize=11;" edge="1" parent="1" source="fraudRT" target="transfer"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-transfer-cbsgw" value="execute transaction" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#b85450;fontSize=11;fontStyle=1;" edge="1" parent="1" source="transfer" target="cbsGw"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-cbsgw-cbs" value="mainframe protocol" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#b85450;fontSize=11;fontStyle=1;" edge="1" parent="1" source="cbsGw" target="cbs"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-cbs-db2" value="reads / writes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#b85450;fontSize=11;" edge="1" parent="1" source="cbs" target="db2"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-cbs-adabas" value="reads / writes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#b85450;fontSize=11;" edge="1" parent="1" source="cbs" target="adabas"><mxGeometry relative="1" as="geometry" /></mxCell>
-
-        <!-- Edges: CDC and projections -->
-        <mxCell id="e-db2-db2adapter" value="CDC" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#6c8ebf;fontSize=11;" edge="1" parent="1" source="db2" target="db2Adapter"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-adabas-adapter" value="CDC" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#6c8ebf;fontSize=11;" edge="1" parent="1" source="adabas" target="adabasAdapter"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-db2adapter-eventbus" value="publishes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d79b00;fontSize=11;" edge="1" parent="1" source="db2Adapter" target="eventBus"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-adabasadapter-eventbus" value="publishes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d79b00;fontSize=11;" edge="1" parent="1" source="adabasAdapter" target="eventBus"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-eventbus-ods" value="projects" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d79b00;fontSize=11;" edge="1" parent="1" source="eventBus" target="ods"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-eventbus-offline" value="feeds" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d79b00;fontSize=11;" edge="1" parent="1" source="eventBus" target="fraudOffline"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-eventbus-audit" value="writes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d79b00;fontSize=11;" edge="1" parent="1" source="eventBus" target="audit"><mxGeometry relative="1" as="geometry" /></mxCell>
-
-        <!-- Edges: read paths -->
-        <mxCell id="e-account-ods" value="SQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#6c8ebf;fontSize=11;" edge="1" parent="1" source="account" target="ods"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-consent-ods" value="SQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#6c8ebf;fontSize=11;" edge="1" parent="1" source="consent" target="ods"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-report-ods" value="SQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#6c8ebf;fontSize=11;" edge="1" parent="1" source="report" target="ods"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-offline-ods" value="SQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#6c8ebf;fontSize=11;" edge="1" parent="1" source="fraudOffline" target="ods"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-offline-rules" value="publishes rules" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;dashed=1;strokeColor=#b85450;fontSize=11;" edge="1" parent="1" source="fraudOffline" target="fraudRT"><mxGeometry relative="1" as="geometry" /></mxCell>
-
-        <!-- Edges: audit / observability -->
-        <mxCell id="e-transfer-audit" value="audit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#9673a6;fontSize=11;" edge="1" parent="1" source="transfer" target="audit"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-cbsgw-audit" value="audit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#9673a6;fontSize=11;" edge="1" parent="1" source="cbsGw" target="audit"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-fraudrt-audit" value="audit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#9673a6;fontSize=11;" edge="1" parent="1" source="fraudRT" target="audit"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e-onpremobs-cloudobs" value="ships telemetry" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#9673a6;fontSize=11;" edge="1" parent="1" source="onPremObs" target="cloudObs"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="aYhEC8F2HncMS-AEqSTg-3" edge="1" parent="onPremBoundary" source="fraudRT" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#9673a6;fontSize=11;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="fraudOffline" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="602" y="200" />
+              <mxPoint x="603" y="233" />
+            </Array>
+            <mxPoint x="1643" y="295" as="sourcePoint" />
+            <mxPoint x="1458" y="789" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fraudOffline" parent="onPremBoundary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" value="Offline Fraud Analytics&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Batch risk scoring / rules&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="230" x="430" y="232.5" as="geometry" />
+        </mxCell>
+        <mxCell id="legacyBoundary" parent="1" style="swimlane;html=1;whiteSpace=wrap;startSize=36;rounded=1;fontStyle=1;fontSize=15;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#333333;" value="Existing Legacy Core&#xa;[System of Record]" vertex="1">
+          <mxGeometry height="1030" width="530" x="2360" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="cbs" parent="legacyBoundary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#333333;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;arcSize=12;" value="CBS&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;COBOL on z/OS / IBM iSeries&lt;br&gt;Transaction source of truth&lt;/font&gt;" vertex="1">
+          <mxGeometry height="95" width="230" x="145" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="drNote" parent="legacyBoundary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;fontSize=13;dashed=1;align=center;verticalAlign=middle;" value="DR / HA markers to be completed in MS2&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;99.999% target, RTO/RPO per component&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="520" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="db2" parent="legacyBoundary" style="shape=cylinder3d;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;" value="DB2 Transactions&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Transaction records&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="190" x="47" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="e-cbs-db2" edge="1" parent="legacyBoundary" source="cbs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#b85450;fontSize=11;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" target="db2" value="reads / writes">
+          <mxGeometry relative="1" x="-0.1541" y="15" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="adabas" parent="legacyBoundary" style="shape=cylinder3d;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;" value="ADABAS Customers&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Customer records&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="190" x="290" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="e-cbs-adabas" edge="1" parent="legacyBoundary" source="cbs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#b85450;fontSize=11;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" target="adabas" value="reads / writes">
+          <mxGeometry relative="1" x="-0.1792" y="-15" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="apigw" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" value="API Gateway&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Routing / throttling&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="220" x="690" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="iam" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" value="Customer IAM&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;OAuth2 / OIDC / MFA&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="220" x="690" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="bff" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" value="BFF / Digital API&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Client-oriented API layer&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="220" x="410" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="eventBus" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontColor=#333333;fontSize=14;align=center;verticalAlign=middle;arcSize=12;" value="Durable Event Bus&lt;br&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;Kafka / projections / audit / analytics&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="230" x="1630" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="rule1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;fontSize=13;align=left;verticalAlign=middle;spacingLeft=10;" value="Rule 1: Public channels must not bypass WAF." vertex="1">
+          <mxGeometry height="50" width="300" x="40" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="rule2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#333333;fontSize=13;align=left;verticalAlign=middle;spacingLeft=10;" value="Rule 2: CBS Transaction Gateway is the only path to CBS." vertex="1">
+          <mxGeometry height="50" width="300" x="40" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="rule3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;fontSize=13;align=left;verticalAlign=middle;spacingLeft=10;" value="Rule 3: AI Advisor uses Advisor Context API; no direct ODS / CBS access." vertex="1">
+          <mxGeometry height="65" width="300" x="40" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="e-mobile-waf" edge="1" parent="1" source="mobile" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#666666;fontSize=11;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="waf" value="HTTPS">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="290" y="271" />
+              <mxPoint x="290" y="271" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-web-waf" edge="1" parent="1" source="web" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#666666;fontSize=11;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="waf" value="HTTPS">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="260" y="425" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-tpp-waf" edge="1" parent="1" source="tpp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#666666;fontSize=11;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" target="waf" value="Open Banking HTTPS">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="340" y="545" />
+              <mxPoint x="340" y="314" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-waf-apigw" edge="1" parent="1" source="waf" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#b85450;fontSize=11;fontStyle=1;" target="apigw" value="forwards">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-apigw-iam" edge="1" parent="1" source="apigw" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#666666;fontSize=11;" target="iam" value="OAuth2 / OIDC">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-apigw-bff" edge="1" parent="1" source="apigw" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#666666;fontSize=11;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" target="bff" value="routes">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="650" y="314" />
+              <mxPoint x="650" y="370" />
+              <mxPoint x="520" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-bff-ai" edge="1" parent="1" source="bff" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d6b656;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="ai" value="requests advice">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-bff-account" edge="1" parent="1" source="bff" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#82b366;fontSize=11;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="account" value="mTLS">
+          <mxGeometry relative="1" x="0.0424" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="1010" y="564" />
+              <mxPoint x="1010" y="593" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-bff-consent" edge="1" parent="1" source="bff" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#82b366;fontSize=11;exitX=0.75;exitY=0;exitDx=0;exitDy=0;" target="consent" value="mTLS / consent">
+          <mxGeometry relative="1" x="0.2401" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-bff-report" edge="1" parent="1" source="bff" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#82b366;fontSize=11;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="report" value="mTLS">
+          <mxGeometry relative="1" x="-0.1994" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="1010" y="543" />
+              <mxPoint x="1010" y="371" />
+              <mxPoint x="1080" y="371" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-bff-transfer" edge="1" parent="1" source="bff" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d79b00;fontSize=11;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="transfer" value="mTLS">
+          <mxGeometry relative="1" x="-0.3044" y="1" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="1000" y="521" />
+              <mxPoint x="1000" y="253" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-ai-context" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d6b656;fontSize=11;fontStyle=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="advisorContext" value="minimized context only">
+          <mxGeometry relative="1" x="-0.0096" y="-20" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="630" y="720" />
+              <mxPoint x="1080" y="720" />
+            </Array>
+            <mxPoint x="630" y="730" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-cbsgw-cbs" edge="1" parent="1" source="cbsGw" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#b85450;fontSize=11;fontStyle=1;" target="cbs" value="mainframe protocol">
+          <mxGeometry relative="1" x="-0.5269" y="13" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-db2-db2adapter" edge="1" parent="1" source="db2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#6c8ebf;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="db2Adapter" value="CDC">
+          <mxGeometry relative="1" x="0.6522" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="2502" y="830" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-adabas-adapter" edge="1" parent="1" source="adabas" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#6c8ebf;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" target="adabasAdapter" value="CDC">
+          <mxGeometry relative="1" x="0.7817" y="-1" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="2745" y="951" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-adabasadapter-eventbus" edge="1" parent="1" source="adabasAdapter" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d79b00;fontSize=11;" target="eventBus" value="publishes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-eventbus-ods" edge="1" parent="1" source="eventBus" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d79b00;fontSize=11;" target="ods" value="projects">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-eventbus-offline" edge="1" parent="1" source="eventBus" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d79b00;fontSize=11;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" target="fraudOffline" value="feeds">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-eventbus-audit" edge="1" parent="1" source="eventBus" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d79b00;fontSize=11;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="audit" value="writes">
+          <mxGeometry relative="1" x="-0.2416" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-onpremobs-cloudobs" edge="1" parent="1" source="onPremObs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#9673a6;fontSize=11;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="cloudObs" value="ships telemetry">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-db2adapter-eventbus" edge="1" parent="1" source="db2Adapter" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#d79b00;fontSize=11;entryX=0.75;entryY=1;entryDx=0;entryDy=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" target="eventBus" value="publishes">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2000" y="810" />
+              <mxPoint x="1802" y="810" />
+            </Array>
+            <mxPoint x="2057.5" y="739.5" as="sourcePoint" />
+            <mxPoint x="1802.5" y="627" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
