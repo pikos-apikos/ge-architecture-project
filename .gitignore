@@ -1,6 +1,12 @@
 # macOS Finder metadata
 .DS_Store
 
+# JetBrains IDE config
+.idea/
+
+# VS Code config
+.vscode/
+
 # Repository is documentation-only: never track build / dependency artifacts
 # (kept here as a guardrail for future agents — see AGENTS.md "Working rules").
 node_modules/
