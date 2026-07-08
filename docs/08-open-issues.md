@@ -19,6 +19,7 @@
 | OI-009 | What is the regulatory approval status of the regional cloud for AI advisor workloads? (A-003) | Legal / Compliance | Open | MS2 |
 | OI-010 | What is the migration / cutover plan for the first 100K digital users? | Operations / Product | Open | MS2 |
 | OI-011 | Is there an existing bank WAF / DDoS service to reuse, or do we provision a new one? | Infrastructure / Security | Open | MS2 |
+| OI-012 | What is the bank's mechanism and policy for reversing an executed transfer flagged by offline fraud analytics — compensating CBS transaction, interbank recall, customer notification and refund SLA? (FN-075) | Fraud / Risk / Mainframe | Open | MS2 |
 
 ## Notes
 

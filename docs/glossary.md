@@ -3,6 +3,7 @@
 | Term | Meaning |
 |---|---|
 | ADABAS | Legacy database used for customer information in the current NeoBank estate. |
+| Advisor Context API | On-premises data-minimization boundary between the cloud AI Financial Advisor and the ODS. Checks consent scope, returns only authorized minimized customer context, and records the data-minimization decision in the audit log (D-008). |
 | AI Financial Advisor | Cloud-allowed digital service that provides financial guidance based on authorized customer data. |
 | API Gateway | Managed entry point for public APIs, responsible for routing, throttling, request validation, and policy enforcement. |
 | BFF | Backend for Frontend. A client-oriented API layer optimized for mobile and web application needs. |
@@ -17,6 +18,7 @@
 | GDPR | General Data Protection Regulation. European data protection regulation. |
 | IAM | Identity and Access Management. Authentication, authorization, token, and session management capability. |
 | MVP | Minimum Viable Product. The first production launch scope for the one-year delivery target. |
+| NGFW | Next-Generation Firewall. On-premises firewall inspecting and filtering traffic between the cloud link, the DMZ, and internal zones. |
 | ODS | Operational Data Store. A read-optimized data store used for digital queries and operational projections. |
 | Open Banking | Regulated API access pattern that allows third-party providers to access customer banking data with consent. |
 | RDBMS | Relational Database Management System. Example candidates for the ODS include Oracle, SQL Server, and Db2. |

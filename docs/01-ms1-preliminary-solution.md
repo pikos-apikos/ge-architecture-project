@@ -127,6 +127,7 @@ The channels must not bypass the WAF and must not point directly to the API Gate
 | Offline Fraud Analytics / Batch Risk Scoring | Performs deeper fraud analysis using larger historical datasets and longer processing windows. Produces risk findings, rules, and model feedback for the real-time fraud engine. |
 | Income / Expense Report Service | Generates monthly income/expense reports from categorized transaction data. |
 | Open Banking Consent Service | Manages customer consent and access boundaries for third-party providers. |
+| Advisor Context API | Data-minimization boundary for the cloud AI Financial Advisor (D-008). Checks consent scope with the Consent Service, reads only authorized projections from the ODS, and records data-minimization decisions in the audit log. The AI advisor never reads the ODS directly. |
 | CBS Transaction Gateway | Single controlled interface for executing CBS transactions. Handles idempotency, validation, throttling, and audit. |
 | DB2 Adapter | Ingests transactional data from DB2 into the event bus/read models. |
 | ADABAS Adapter | Ingests customer data from ADABAS into the event bus/read models. |
@@ -167,9 +168,9 @@ DB2 and ADABAS adapters ingest legacy data changes into the durable event bus. P
 
 ### 6.4 AI Financial Advisor Flow
 
-The AI advisor runs in the regional cloud. It does not directly access CBS, DB2, or ADABAS. It receives minimized, authorized, and regionally compliant customer context through the Digital API/BFF layer and on-premises services.
+The AI advisor runs in the regional cloud. It does not directly access CBS, DB2, ADABAS, or the ODS. It requests minimized customer context from the on-premises Advisor Context API, which checks consent scope with the Consent Service, reads only authorized projections from the ODS, and returns an AI-safe, regionally compliant context.
 
-**Design decision:** The AI advisor may run in the cloud, but it should only access minimized, authorized, regionally compliant customer data.
+**Design decision:** The AI advisor may run in the cloud, but it only receives minimized, authorized, regionally compliant customer data through the Advisor Context API (D-008). The Advisor Context API — not the AI service — writes the data-minimization audit record.
 
 ---
 
@@ -184,7 +185,7 @@ The AI advisor runs in the regional cloud. It does not directly access CBS, DB2,
 | Fraud real-time decision | Fraud Engine | Transfer Service |
 | Fraud offline analysis | Fraud Analytics Dataset | Offline Fraud Analytics / Batch Risk Scoring |
 | Monthly income/expense report | Derived from transaction data | Report Read Model |
-| AI advice context | Minimized authorized customer view | AI Financial Advisor |
+| AI advice context | Minimized authorized customer view | Advisor Context API |
 | Consent | Consent Service | Consent Store |
 | Audit trail | Audit / Compliance Store | Append-only audit queries |
 

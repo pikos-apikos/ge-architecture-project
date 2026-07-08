@@ -12,13 +12,15 @@ C4Container
 
     System_Boundary(c1, "NeoBank Digital Leap") {
 
+        %% Cloud provider labels are candidates pending OI-001 (provider/region
+        %% approval); AWS is shown as the working candidate given team skills.
         System_Boundary(cloud, "Regional Cloud Environment") {
-            Container(waf, "WAF / DDoS", "AWS WAF", "Public traffic protection")
-            Container(apigw, "API Gateway", "AWS API Gateway", "Public entry point, routing, throttling")
-            Container(iam, "Customer IAM", "AWS Cognito", "OAuth2 / OIDC / MFA")
+            Container(waf, "WAF / DDoS", "AWS WAF (candidate)", "Public traffic protection")
+            Container(apigw, "API Gateway", "AWS API Gateway (candidate)", "Public entry point, routing, throttling")
+            Container(iam, "Customer IAM", "AWS Cognito (candidate)", "OAuth2 / OIDC / MFA")
             Container(bff, "BFF / Digital API", "Quarkus", "Client-oriented API layer")
             Container(aiAdvisor, "AI Financial Advisor", "Quarkus", "Cloud-only advice orchestration; no direct CBS/ODS access")
-            Container(cloudObs, "Cloud Observability", "AWS CloudWatch + X-Ray", "Metrics, logs, traces")
+            Container(cloudObs, "Cloud Observability", "AWS CloudWatch + X-Ray (candidate)", "Metrics, logs, traces")
         }
 
         System_Boundary(onPrem, "New On-Premises Digital Core") {
@@ -35,7 +37,7 @@ C4Container
             ContainerQueue(eventBus, "Durable Event Bus", "Apache Kafka", "Backbone for projections, audit, analytics")
             Container(audit, "Audit / Compliance Store", "Append-only log", "Immutable audit trail")
             Container(onPremObs, "On-Prem Observability", "Prometheus + Loki + Tempo", "Metrics, logs, traces")
-            ContainerDb(ods, "Read Models / ODS", "IBM Db2 LUW (or Oracle / SQL Server)", "Read-optimized projections")
+            ContainerDb(ods, "Read Models / ODS", "Enterprise RDBMS — Oracle / SQL Server / Db2 (MS2 decision, ADR-002)", "Read-optimized projections")
         }
 
         System_Boundary(legacy, "Existing Legacy Core") {
@@ -96,6 +98,7 @@ C4Container
     Rel(transferSvc, audit, "Writes", "append-only")
     Rel(cbsGw, audit, "Writes", "append-only")
     Rel(fraudRT, audit, "Writes", "append-only")
+    Rel(advisorContext, audit, "Records data-minimization decisions", "append-only")
 
     %% --- Observability ---
     Rel(accountSvc, onPremObs, "Emits", "OTel")

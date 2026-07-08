@@ -21,6 +21,7 @@
 | A-008 | Team profile is ~60 Java + AWS developers with 5 COBOL developers; CBS remains COBOL. | deck p.15 |
 | A-009 | MVP must launch within one year (deck p.13 / p.15). | deck |
 | A-010 | All 1M target users are in the same geographic region within three years (NFR-GDPR-010). | deck p.15 |
+| A-011 | Peak concurrency is ~5% of registered digital users (5K concurrent sessions at 100K users, 50K at 1M). Drives NFR-PC-015 and the sizing in HLD §3.6. | working estimate — validate in MS2 |
 
 ## Notes
 

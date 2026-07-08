@@ -24,6 +24,7 @@ flowchart LR
         FraudOffline[Offline Fraud Analytics\nBatch Risk Scoring]
         ReportSvc[Income / Expense Report Service]
         ConsentSvc[Open Banking Consent Service]
+        AdvisorCtx[Advisor Context API]
         CBSGW[CBS Transaction Gateway]
         DB2Adapter[DB2 Adapter]
         ADABASAdapter[ADABAS Adapter]
@@ -57,6 +58,10 @@ flowchart LR
     BFF --> ReportSvc
     BFF --> ConsentSvc
 
+    %% AI data-minimization boundary (D-008): AI never reads the ODS directly
+    AI --> AdvisorCtx
+    AdvisorCtx --> ConsentSvc
+
     %% Transfer command path
     TransferSvc --> FraudRT
     FraudRT --> TransferSvc
@@ -80,6 +85,7 @@ flowchart LR
     ODS --> AccountSvc
     ODS --> ReportSvc
     ODS --> ConsentSvc
+    ODS --> AdvisorCtx
     FraudOffline --> FraudRT
 
     %% Observability and audit
@@ -87,6 +93,8 @@ flowchart LR
     TransferSvc --> OnPremObs
     ReportSvc --> OnPremObs
     ConsentSvc --> OnPremObs
+    AdvisorCtx --> OnPremObs
     CBSGW --> Audit
     FraudRT --> Audit
+    AdvisorCtx --> Audit
     APIGW --> CloudObs

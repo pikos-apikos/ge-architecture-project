@@ -40,9 +40,9 @@ flowchart LR
             ODS[ODS / Read Models\nEnterprise RDBMS]
             Audit[Audit / Compliance Store]
             OnPremObs[On-Prem Observability]
+            CBSGateway[CBS Transaction Gateway\n_Only path to CBS_]
         end
         subgraph OnPremMainframe[Mainframe Zone]
-            CBSGateway[CBS Transaction Gateway\n_Only path to CBS_]
             CBS[COBOL CBS on z/OS]
             DB2[(DB2 Transactions)]
             ADABAS[(ADABAS Customers)]
@@ -76,7 +76,7 @@ flowchart LR
     EventBus --> ODS
     EventBus --> Audit
 
-    %% --- Money-moving path: the only route to the mainframe ---
+    %% --- Money-moving path: the only route into the mainframe zone ---
     Core --> CBSGateway
     CBSGateway --> CBS
     CBS --> DB2

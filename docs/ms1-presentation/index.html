@@ -262,38 +262,41 @@
     box-shadow: var(--shadow);
   }
 
-  /* Vertical flow stack (slide 7) */
+  /* Vertical flow stack (slide 7) — text on top, full-width image below */
   .flow-grid {
     flex: 1;
+    min-height: 0;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
     width: 100%;
-    max-width: 1000px;
-    margin: 16px auto 0;
-    align-items: center;
+    margin: 16px 0 0;
   }
   .flow-card {
     background: var(--bg-2);
     border: 1px solid var(--grid);
     border-radius: 10px;
-    padding: 14px 20px 16px;
+    padding: 12px 20px 14px;
     width: 100%;
+    flex: 1;
+    min-height: 0;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 24px;
+    flex-direction: column;
+    gap: 8px;
     text-align: left;
   }
   .flow-card-text {
-    flex: 1;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
     min-width: 0;
   }
   .flow-card-title {
     color: var(--accent);
     font-weight: 700;
     font-size: 1.2em;
-    margin-bottom: 4px;
+    white-space: nowrap;
   }
   .flow-card-caption {
     color: var(--fg-dim);
@@ -301,17 +304,16 @@
     line-height: 1.4;
   }
   .flow-card-image {
-    flex: 0 0 auto;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    max-height: 160px;
   }
   .flow-card-image img {
-    max-width: 380px;
-    max-height: 160px;
-    width: auto;
-    height: auto;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
   }
 
@@ -454,11 +456,11 @@
 <main class="deck" id="deck">
 
   <!-- Slide 1: Title -->
-  <section class="slide title-slide centered" data-notes="I'm [name]. This is the MS1 preliminary solution for NeoBank Digital Leap, the Software Architecture course final project. I won't spend time on the bank or the requirements — you know them. I'll spend the next ten minutes on the design decisions and what we learned.">
+  <section class="slide title-slide centered" data-notes="I'm Yiannis. This is the MS1 preliminary solution for NeoBank Digital Leap, the Software Architecture course final project. I won't spend time on the bank or the requirements — you know them. I'll spend the next ten minutes on the design decisions and what we learned.">
     <h1>NeoBank Digital Leap</h1>
     <div class="accent-line"></div>
     <p class="subtitle">Software Architecture — MS1 Preliminary Solution</p>
-    <p class="meta">Replace with your name, date, and course tag.</p>
+    <p class="meta">Yiannis Miliaresis, 2026-07-08, GDE Architecture - Week 7.</p>
   </section>
 
   <!-- Slide 2: The constraint that shaped everything -->
@@ -517,22 +519,22 @@
   </section>
 
   <!-- Slide 4: Insight #2 — Reads and writes are different -->
-  <section class="slide" data-notes="The second aha-moment was a number. The mainframe does about five thousand transactions per second. A million users, each checking their balance once a day, is roughly twelve reads per second on average — but during business hours it's a hundred-plus, and during a payroll run it's thousands. Across the whole day, we need to absorb a million balance checks. A million reads a day, all going through the mainframe, would crush it. Even if it didn't, every read costs the bank money — the mainframe bills by the operation. So the design has to separate reads from writes. That's CQRS. Commands — money-moving operations — go to the CBS. Queries — balance checks, account lookups, reports — go to replicated projections in the ODS, populated by change-data-capture from the mainframe. The ODS is not a second system of record. It's a projection, refreshed from the source of truth. The bank accepts a 24-hour staleness window on incoming external transactions — that's the only honest trade-off — and the rest of the read path is fully consistent. Without this split, the architecture is infeasible. CQRS isn't an optimization. It's the reason the MVP can launch at all.">
+  <section class="slide" data-notes="The second aha-moment was about money, not throughput. The mainframe bills by the operation. A million users, each checking their balance once a day, is a million billable reads — every day, forever. On average that's only about twelve reads per second, which the mainframe could technically absorb — but the bank would pay for every single one, and during business hours and payroll runs the spikes reach thousands of reads per second, contending with the transaction workload the mainframe exists to protect. So the design has to separate reads from writes. That's CQRS. Commands — money-moving operations — go to the CBS. Queries — balance checks, account lookups, reports — go to replicated projections in the ODS, populated by change-data-capture from the mainframe. The ODS is not a second system of record. It's a projection, refreshed from the source of truth. The bank accepts a 24-hour staleness window on incoming external transactions — that's the only honest trade-off — and the rest of the read path is fully consistent. Without this split, the architecture is infeasible. CQRS isn't an optimization. It's the reason the MVP can launch at all.">
     <div class="insight-headline">CQRS isn't an optimization. <em>It's a survival strategy.</em></div>
     <div class="math-callout">
       <div class="math-cell">
-        <div class="math-num">5,000</div>
-        <div class="math-label">mainframe tx/sec</div>
+        <div class="math-num">$ / op</div>
+        <div class="math-label">the mainframe bills every operation</div>
       </div>
       <div class="math-cell">
-        <div class="math-num danger">vs</div>
+        <div class="math-num danger">×</div>
       </div>
       <div class="math-cell">
         <div class="math-num">~1M</div>
-        <div class="math-label">reads/day from 1M users</div>
+        <div class="math-label">reads/day from 1M users — plus payroll-day spikes of thousands/sec</div>
       </div>
     </div>
-    <p class="lead">If reads went to the mainframe, the MVP doesn't launch. The mainframe is a payment-per-operation machine — every read costs the bank money.</p>
+    <p class="lead">If reads went to the mainframe, the MVP doesn't launch — on cost alone. And the read spikes would contend with the transaction workload the mainframe exists to protect.</p>
     <div class="math-result">
       <div class="math-result-text">Solution: commands to CBS · queries to replicated projections in the ODS</div>
     </div>
@@ -559,13 +561,13 @@
   </section>
 
   <!-- Slide 6: The C4 -->
-  <section class="slide image-slide" data-notes="Here's the architecture in one diagram. I'll walk it left to right, but I'll anchor each region back to one of the three insights. Far left: the three external actors — mobile, web, and Open Banking third-party providers. All three enter through the WAF. That's Insight #1's first consequence: there is exactly one public front door. Rule 1. The WAF forwards to the API Gateway, which authenticates and routes to the BFF. The BFF is the only thing the cloud and on-prem worlds share directly. Now into the on-prem Digital Core. Account, Consent, Report, Transfer, and the AI's advisor context — all reachable from the BFF, all serving the bank's regulated, mainframe-adjacent workloads. The Transfer Service is the one that touches the ledger: it goes through the Real-Time Fraud Engine, and if approved, through the CBS Transaction Gateway, to reach the CBS. That's Insight #1's second consequence: the mainframe has exactly one door, and we never bypass it. Rule 2. The AI Advisor sits in the cloud. But its data access is mediated by the Advisor Context API, which is on-prem. That's Insight #3: the AI is a privacy boundary, not a feature. Rule 3. On the data side: CDC from DB2 and ADABAS flows into adapters, into a durable event bus, into the ODS. Insight #2 in action: reads come from projections, not from the mainframe. Three boundaries, color-coded. Yellow for cloud, orange for on-prem, red for legacy. Three rules. The C4 is just the picture of the constraints and the consequences. Note: this is the Mermaid-rendered horizontal view for the slide. The full C4 Container view is in docs/diagrams/neobank-digital-leap-c4.drawio and the Mermaid C4 mirror is in docs/diagrams/07-c4-container.mmd.">
+  <section class="slide image-slide" data-notes="Here's the architecture in one diagram. I'll walk it left to right, but I'll anchor each region back to one of the three insights. Far left: the three external actors — mobile, web, and Open Banking third-party providers. All three enter through the WAF. That's Insight #1's first consequence: there is exactly one public front door. Rule 1. The WAF forwards to the API Gateway, which authenticates and routes to the BFF. The BFF is the only thing the cloud and on-prem worlds share directly. Now into the on-prem Digital Core. Account, Consent, Report, Transfer, and the AI's advisor context — all reachable from the BFF, all serving the bank's regulated, mainframe-adjacent workloads. The Transfer Service is the one that touches the ledger: it goes through the Real-Time Fraud Engine, and if approved, through the CBS Transaction Gateway, to reach the CBS. That's Insight #1's second consequence: the mainframe has exactly one door, and we never bypass it. Rule 2. The AI Advisor sits in the cloud. But its data access is mediated by the Advisor Context API, which is on-prem. That's Insight #3: the AI is a privacy boundary, not a feature. Rule 3. On the data side: CDC from DB2 and ADABAS flows into adapters, into a durable event bus, into the ODS. Insight #2 in action: reads come from projections, not from the mainframe. Three boundaries, color-coded. Yellow for cloud, orange for on-prem, red for legacy. Three rules. The C4 is just the picture of the constraints and the consequences. Note: the image is the C4 Container view exported from docs/diagrams/neobank-digital-leap-c4.drawio; the Mermaid mirror is docs/diagrams/07-c4-container.mmd. If asked about the AWS labels: they are working candidates pending OI-001, the cloud provider and region approval.">
     <h2>The C4</h2>
     <p class="lead">Three boundaries · three rules · one mainframe · one source of truth.</p>
     <div class="image-frame">
       <img src="img/c4.png" alt="C4 Container view of NeoBank Digital Leap">
     </div>
-    <p class="small">Source: <code>docs/diagrams/01-high-level-solution.mmd</code> (horizontal walk) · Full C4: <code>docs/diagrams/neobank-digital-leap-c4.drawio</code> · Mermaid C4 mirror: <code>docs/diagrams/07-c4-container.mmd</code></p>
+    <p class="small">Source: <code>docs/diagrams/neobank-digital-leap-c4.drawio</code> (C4 Container view) · Mermaid mirror: <code>docs/diagrams/07-c4-container.mmd</code> · AWS labels are candidates pending OI-001</p>
   </section>
 
   <!-- Slide 7: The 3 flows -->
@@ -597,7 +599,7 @@
   </section>
 
   <!-- Slide 8: What we'd revisit -->
-  <section class="slide" data-notes="Now the part the teacher asked for — what we'd do differently with more time. We don't have aha-moments without also having things we got wrong. Four. First, the 24-hour staleness tolerance. It's an honest trade-off, but it can hurt customer trust if a balance looks wrong. With more time, we'd add a 'live refresh on transfer' pattern — any time a transfer touches a balance, the BFF forces a fresh read through a synchronous path. For MVP, we accepted the trade-off. Second, the five COBOL developers. We have five deep experts on the system that processes 99.999% of the bank's money. That's a feature, not a bug — but it's also a capacity risk. With more time, we'd pair-program the Java team with the COBOL team on the CBS Gateway contract, and document runbooks so the gateway is operable by more than five people. Third, no DR topology yet. The C4 shows HA markers on the CBS Gateway, the event bus, and the ODS — but those are aspirational. The full network topology and DR runbook is MS2 work; we have a scaffold. Fourth, the ODS vendor. Oracle, SQL Server, or Db2 — all viable. We deferred the decision to MS2. The architecture works for any of the three, so the decision is a procurement call, not a design call. We're not inventing rockets. We're building a working system, and these are the rough edges.">
+  <section class="slide" data-notes="Now the part the teacher asked for — what we'd do differently with more time. We don't have aha-moments without also having things we got wrong. Four. First, the 24-hour staleness tolerance. It's an honest trade-off, but it can hurt customer trust if a balance looks wrong. With more time, we'd add a 'live refresh on transfer' pattern — any time a transfer touches a balance, the BFF forces a fresh read through a synchronous path. For MVP, we accepted the trade-off. Second, the five COBOL developers. We have five deep experts on the system that processes 99.999% of the bank's money. That's a feature, not a bug — but it's also a capacity risk. With more time, we'd pair-program the Java team with the COBOL team on the CBS Gateway contract, and document runbooks so the gateway is operable by more than five people. Third, no DR topology yet. The C4 carries an explicit 'DR and HA markers to be completed in MS2' note — deliberately visible, not hidden. The full network topology and DR runbook is MS2 work; we have a scaffold. Fourth, the ODS vendor. Oracle, SQL Server, or Db2 — all viable. We deferred the decision to MS2. The architecture works for any of the three, so the decision is a procurement call, not a design call. We're not inventing rockets. We're building a working system, and these are the rough edges.">
     <h2>What we'd revisit</h2>
     <p class="lead">Honest trade-offs, not apologies. Every architectural choice has a rough edge; here's ours.</p>
     <table class="revisit-table">
@@ -621,7 +623,7 @@
         </tr>
         <tr>
           <td class="risk-name">No DR topology yet</td>
-          <td>The C4 marks ‖ HA pairs on the CBS Gateway, the event bus, and the ODS — but those are aspirational. The full network topology and DR runbook is not yet designed.</td>
+          <td>The C4 explicitly defers DR/HA topology to MS2 (visible note on the diagram). The full network topology and DR runbook is not yet designed.</td>
           <td>Full network topology + DR runbook in MS2 (scaffold ready in <code>docs/diagrams/06-network-topology.mmd</code>).</td>
         </tr>
         <tr>
@@ -634,7 +636,7 @@
   </section>
 
   <!-- Slide 9: What's open -->
-  <section class="slide" data-notes="For MS2 in Week 13: we add the four diagrams — security boundary, network topology, performance, and data flow. We resolve the eleven open questions. We pick the ODS vendor. We design the DR topology. Final HLD is due at the end of the course. Any questions?">
+  <section class="slide" data-notes="For MS2 in Week 13: we add the four diagrams — security boundary, network topology, performance, and data flow. We resolve the twelve open questions, including the newest one: how an executed transfer gets reversed when offline fraud analytics flags it after the fact. We pick the ODS vendor. We design the DR topology. Final HLD is due at the end of the course. Any questions?">
     <h2>What's open</h2>
     <div class="timeline">
       <div class="timeline-step current">

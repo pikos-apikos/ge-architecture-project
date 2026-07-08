@@ -4,7 +4,8 @@
 > 1. C4 diagram reference (the architectural rules to preserve in `docs/diagrams/neobank-digital-leap-c4.drawio`).
 > 2. A full slide-by-slide setup with speaker notes — rewritten around Jukka's note: lead with **insights and aha-moments**, not context; the audience already knows the business goal, requirements, and system landscape.
 >
-> **Status (as of `1b79aaf`):** the .drawio was hardened by the 6 commits between `a7ab9ac` and `770f065` and the C4 cleanup spec below was applied. The current .drawio has all D-001..D-008 boundaries; the C4 Mermaid mirror (`docs/diagrams/07-c4-container.mmd`) matches it. Part 1 below is a **reference for the design rules**, not an open work item.
+> **Status (as of `1b79aaf`):** the .drawio was hardened by the 6 commits between `a7ab9ac` and `770f065` and the C4 cleanup spec below was applied. The current .drawio has all D-001..D-008 boundaries. Part 1 below is a **reference for the design rules**, not an open work item.
+> **Drawio drift: resolved.** The .drawio now carries the "(candidate)" markers on AWS-specific tech labels (pending OI-001), the neutral ODS label (Oracle / SQL Server / Db2, ADR-002), the `Advisor Context API → Audit` edge, and an explicit "DR / HA markers to be completed in MS2" note. The exported `docs/ms1-presentation/img/c4.png` matches. The Mermaid mirror (`docs/diagrams/07-c4-container.mmd`) is in sync.
 
 ---
 
@@ -125,8 +126,8 @@ Mark the CBS Gateway, Event Bus, and Data Stores as HA pairs (e.g. `‖` or `(re
 #### Slide 4 — Insight #2: Reads and writes are different (1:00)
 **Visual**
 - Big headline: **CQRS isn't an optimization. It's a survival strategy.**
-- A small table: *Mainframe: 5,000 tx/sec* vs *1M users × 1 balance check = 1M reads* vs *Result: 200× over budget*
-- One line: *If reads went to the mainframe, the MVP doesn't launch.*
+- A small table: *Mainframe: bills per operation* vs *1M users × daily balance checks = millions of billable reads* vs *Peaks: payroll-day spikes of thousands of reads/sec*
+- One line: *If reads went to the mainframe, the MVP doesn't launch — on cost alone.*
 
 **Speaker**
 > The second aha-moment was a number. The mainframe does about five thousand transactions per second. A million users, each checking their balance once a day, is roughly twelve reads per second on average — but during business hours it's a hundred-plus, and during a payroll run it's thousands. Across the whole day, we need to absorb a million balance checks.

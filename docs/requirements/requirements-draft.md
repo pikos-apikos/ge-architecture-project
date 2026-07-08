@@ -9,8 +9,9 @@
 | FN-030 | The system shall allow authenticated customers to perform bank transfers to another bank. |
 | FN-040 | The system shall execute all money-moving transactions through a CBS transaction. |
 | FN-050 | The system shall evaluate transfer requests using a real-time fraud detection engine before transaction execution. |
-| FN-060 | The system shall cancel a transaction when fraud is detected and inform the customer in the application. |
+| FN-060 | The system shall cancel a transaction before CBS execution when the real-time fraud engine detects fraud, and inform the customer in the application. |
 | FN-070 | The system shall support offline fraud analytics using larger historical datasets and longer processing windows. |
+| FN-075 | The system shall initiate a reversal (compensating CBS transaction) for a transfer flagged as fraudulent by offline fraud analytics after execution, where legally permitted, and inform the customer in the application (see OI-012 for the reversal mechanism and policy). |
 | FN-080 | The system shall show a monthly income and expenses report to the customer. |
 | FN-090 | The system shall expose Open Banking APIs over REST. |
 | FN-100 | The system shall manage customer consent for Open Banking third-party providers. |
@@ -46,8 +47,9 @@
 | ID | Requirement |
 |---|---|
 | NFR-PC-010 | The system shall support 100,000 digital users within one year. |
+| NFR-PC-015 | The system shall support at least 5,000 concurrent digital user sessions at year-1 scale and 50,000 concurrent sessions at year-3 scale, assuming ~5% peak concurrency of registered users (A-011). |
 | NFR-PC-020 | The system shall support architectural scalability toward 1,000,000 digital users within three years. |
-| NFR-PC-030 | The system shall provide low-latency responses for read-heavy digital use cases through read models and caching. |
+| NFR-PC-030 | The system shall provide low-latency responses for read-heavy digital use cases through read models and caching, with p95 server-side response time of at most 200 ms for account and balance queries. |
 | NFR-PC-040 | The system shall protect the CBS from direct high-volume digital read traffic. |
 | NFR-PC-050 | The system shall monitor event ingestion lag and read model freshness. |
 | NFR-PC-060 | The system shall display account information that may be up to 24 hours stale for incoming transactions from other banks or payments not made through the app, with visible freshness metadata. |

@@ -6,10 +6,10 @@ sequenceDiagram
     participant APIGW as API Gateway
     participant IAM as Customer IAM
     participant BFF as Digital API / BFF Layer
+    participant AI as AI Financial Advisor (cloud)
+    participant Context as Advisor Context API (on-prem)
     participant Consent as Consent Service
-    participant Context as AI Advisor Context Builder
     participant ODS as Read Models / ODS
-    participant AI as AI Financial Advisor
     participant Audit as Audit / Compliance Store
 
     Customer->>Channel: Request financial advice
@@ -18,18 +18,21 @@ sequenceDiagram
     APIGW->>IAM: Validate identity and session
     IAM-->>APIGW: Authorized customer context
     APIGW->>BFF: Route AI advice request
-    BFF->>Consent: Check customer consent and eligibility
-    Consent-->>BFF: Consent decision
+    BFF->>AI: Request advice for customer
+    AI->>Context: Request minimized customer context
+    Context->>Consent: Check consent and authorization scope
+    Consent-->>Context: Consent decision
 
     alt Consent missing or not allowed
+        Context->>Audit: Record refused context request
+        Context-->>AI: Refuse context (consent required)
+        AI-->>BFF: Advice unavailable (consent required)
         BFF-->>Channel: Ask customer for consent or reject request
     else Consent valid
-        BFF->>Context: Build minimized customer context
         Context->>ODS: Read authorized summaries only
         ODS-->>Context: Minimized data view
-        Context-->>BFF: AI-safe customer context
-        BFF->>AI: Request advice with minimized context
+        Context->>Audit: Record data-minimization decision and consent reference
+        Context-->>AI: AI-safe minimized context
         AI-->>BFF: Advice response
-        BFF->>Audit: Record AI advice metadata and consent reference
         BFF-->>Channel: Show advice and disclaimer
     end
