@@ -6,16 +6,18 @@
 <title>NeoBank Digital Leap — MS1 Presentation</title>
 <style>
   :root {
-    --bg: #0a0e1a;
-    --bg-2: #131829;
-    --fg: #e8eaf0;
-    --fg-dim: #8a91a5;
-    --accent: #d4af37;     /* banking gold */
-    --accent-2: #4ecdc4;   /* teal */
-    --rule: #ff6b6b;       /* red for the 3 rules */
-    --rule-bg: rgba(255, 107, 107, 0.08);
-    --rule-border: rgba(255, 107, 107, 0.5);
-    --grid: rgba(255, 255, 255, 0.06);
+    --bg: #ffffff;
+    --bg-2: #f8f9fa;
+    --bg-3: #f1f3f5;
+    --fg: #1a1a1a;
+    --fg-dim: #6b7280;
+    --accent: #2563eb;       /* blue — primary accent */
+    --accent-2: #059669;     /* green — insight color */
+    --rule: #ea580c;          /* orange — the 3 rules */
+    --rule-bg: rgba(234, 88, 12, 0.06);
+    --rule-border: rgba(234, 88, 12, 0.35);
+    --grid: rgba(0, 0, 0, 0.08);
+    --shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -57,6 +59,7 @@
     letter-spacing: -0.02em;
     line-height: 1.05;
     margin-bottom: 0.3em;
+    color: var(--fg);
   }
   h2 {
     font-size: 3em;
@@ -98,7 +101,7 @@
   .title-slide { text-align: center; align-items: center; }
   .title-slide h1 {
     font-size: 5.5em;
-    background: linear-gradient(135deg, var(--accent) 0%, #f0d77b 100%);
+    background: linear-gradient(135deg, var(--accent) 0%, #60a5fa 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -177,8 +180,8 @@
     border-radius: 10px;
     padding: 24px 28px;
   }
-  .compare-card.bad { border-color: rgba(255, 107, 107, 0.4); }
-  .compare-card.good { border-color: rgba(78, 205, 196, 0.5); }
+  .compare-card.bad { border-color: rgba(234, 88, 12, 0.4); background: rgba(234, 88, 12, 0.03); }
+  .compare-card.good { border-color: rgba(5, 150, 105, 0.4); background: rgba(5, 150, 105, 0.03); }
   .compare-card h3 { color: var(--fg); margin-bottom: 12px; }
   .compare-card.bad h3 { color: var(--rule); }
   .compare-card.good h3 { color: var(--accent-2); }
@@ -209,7 +212,7 @@
     text-align: center;
   }
   .math-result {
-    background: rgba(255, 107, 107, 0.15);
+    background: rgba(234, 88, 12, 0.08);
     border: 1px solid var(--rule);
     border-radius: 8px;
     padding: 18px;
@@ -239,7 +242,7 @@
   }
   .rule-body { color: var(--fg); }
 
-  /* Image slides (6, 7) */
+  /* Image slide (6) */
   .image-slide { align-items: center; text-align: center; width: 100%; }
   .image-slide h2 { margin-bottom: 0.2em; text-align: center; width: 100%; }
   .image-slide p.lead { text-align: center; width: 100%; }
@@ -256,51 +259,59 @@
     max-height: 100%;
     object-fit: contain;
     border-radius: 6px;
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow);
   }
 
-  /* 3-column flow grid (slide 7) */
+  /* Vertical flow stack (slide 7) */
   .flow-grid {
     flex: 1;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
     width: 100%;
-    align-items: stretch;
-    margin-top: 20px;
+    max-width: 1000px;
+    margin: 16px auto 0;
+    align-items: center;
   }
   .flow-card {
     background: var(--bg-2);
     border: 1px solid var(--grid);
     border-radius: 10px;
-    padding: 14px 14px 18px;
+    padding: 14px 20px 16px;
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    text-align: left;
+  }
+  .flow-card-text {
+    flex: 1;
+    min-width: 0;
   }
   .flow-card-title {
     color: var(--accent);
     font-weight: 700;
-    font-size: 1.15em;
-    text-align: center;
-    margin-bottom: 6px;
+    font-size: 1.2em;
+    margin-bottom: 4px;
   }
   .flow-card-caption {
     color: var(--fg-dim);
-    font-size: 0.9em;
-    line-height: 1.35;
-    text-align: center;
-    margin-bottom: 12px;
+    font-size: 0.95em;
+    line-height: 1.4;
   }
   .flow-card-image {
-    flex: 1;
+    flex: 0 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 0;
+    max-height: 160px;
   }
-  .flow-card img {
-    width: 100%;
-    max-height: 100%;
+  .flow-card-image img {
+    max-width: 380px;
+    max-height: 160px;
+    width: auto;
+    height: auto;
     object-fit: contain;
   }
 
@@ -344,7 +355,7 @@
   }
   .timeline-step:last-child { border-right: 1px solid var(--grid); border-radius: 0 10px 10px 0; }
   .timeline-step:first-child { border-radius: 10px 0 0 10px; }
-  .timeline-step.current { background: rgba(212, 175, 55, 0.1); border-color: var(--accent); }
+  .timeline-step.current { background: rgba(37, 99, 235, 0.05); border-color: var(--accent); }
   .timeline-step-week { color: var(--accent); font-weight: 700; font-size: 1.1em; }
   .timeline-step-title { font-size: 1.1em; margin: 8px 0; font-weight: 600; }
   .timeline-step-detail { color: var(--fg-dim); font-size: 0.95em; }
@@ -380,11 +391,11 @@
     gap: 16px;
     font-size: 0.85em;
     color: var(--fg-dim);
-    background: rgba(10, 14, 26, 0.7);
+    background: rgba(255, 255, 255, 0.92);
     padding: 8px 14px;
     border-radius: 6px;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid var(--grid);
+    box-shadow: var(--shadow);
   }
   .hud .counter { color: var(--accent); font-weight: 600; }
   .hud .hint { letter-spacing: 0.02em; }
@@ -405,15 +416,14 @@
     right: 0;
     bottom: 0;
     z-index: 20;
-    background: rgba(8, 12, 22, 0.96);
+    background: rgba(248, 249, 250, 0.98);
     border-top: 2px solid var(--accent);
     padding: 24px 60px 28px;
     max-height: 50vh;
     overflow-y: auto;
     transform: translateY(100%);
     transition: transform 0.25s ease;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
   }
   .notes.visible { transform: translateY(0); }
   .notes-header {
@@ -563,18 +573,24 @@
     <h2>Three flows, three insights</h2>
     <div class="flow-grid">
       <div class="flow-card">
-        <div class="flow-card-title">Account info</div>
-        <div class="flow-card-caption">BFF → Account Service → ODS. Read models with visible freshness metadata. <em>Insight #2.</em></div>
+        <div class="flow-card-text">
+          <div class="flow-card-title">Account info</div>
+          <div class="flow-card-caption">BFF → Account Service → ODS. Read models with visible freshness metadata. <em>Insight #2.</em></div>
+        </div>
         <div class="flow-card-image"><img src="img/account-info.png" alt="Account information flow"></div>
       </div>
       <div class="flow-card">
-        <div class="flow-card-title">Bank transfer</div>
-        <div class="flow-card-caption">BFF → Transfer → Real-Time Fraud → CBS Gateway → CBS. Only path to the mainframe. <em>Insight #1.</em></div>
+        <div class="flow-card-text">
+          <div class="flow-card-title">Bank transfer</div>
+          <div class="flow-card-caption">BFF → Transfer → Real-Time Fraud → CBS Gateway → CBS. Only path to the mainframe. <em>Insight #1.</em></div>
+        </div>
         <div class="flow-card-image"><img src="img/transfer.png" alt="Bank transfer flow"></div>
       </div>
       <div class="flow-card">
-        <div class="flow-card-title">AI advisor</div>
-        <div class="flow-card-caption">BFF → AI → Advisor Context → Consent + authorized ODS projection. Data-minimized. <em>Insight #3.</em></div>
+        <div class="flow-card-text">
+          <div class="flow-card-title">AI advisor</div>
+          <div class="flow-card-caption">BFF → AI → Advisor Context → Consent + authorized ODS projection. Data-minimized. <em>Insight #3.</em></div>
+        </div>
         <div class="flow-card-image"><img src="img/ai-advisor.png" alt="AI advisor flow"></div>
       </div>
     </div>
