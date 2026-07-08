@@ -55,6 +55,7 @@ docs/c4-model.md
 docs/glossary.md                    # authoritative terminology
 docs/requirements/requirements-draft.md   # FN-* and NFR-<CAT>-* IDs
 docs/ms1-presentation-prep.md      # MS1 talk prep: C4 cleanup spec + slide outline
+docs/ms1-presentation/index.html    # Self-contained HTML deck for the MS1 talk
 docs/diagrams/*.mmd                 # Mermaid sources — edit these, not images
                                     # 01 high-level, 02-05 use-case flows,
                                     # 06 network topology (MS2 scaffold),

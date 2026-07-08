@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeoBank Digital Leap — MS1 Presentation</title>
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg-2: #131829;
+    --fg: #e8eaf0;
+    --fg-dim: #8a91a5;
+    --accent: #d4af37;     /* banking gold */
+    --accent-2: #4ecdc4;   /* teal */
+    --rule: #ff6b6b;       /* red for the 3 rules */
+    --rule-bg: rgba(255, 107, 107, 0.08);
+    --rule-border: rgba(255, 107, 107, 0.5);
+    --grid: rgba(255, 255, 255, 0.06);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 22px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Deck */
+  .deck {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: none;
+    padding: 60px 80px;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    overflow: hidden;
+  }
+  .slide.active { display: flex; opacity: 1; }
+  .slide.centered { align-items: center; text-align: center; }
+
+  /* Typography */
+  h1 {
+    font-size: 5em;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 0.3em;
+  }
+  h2 {
+    font-size: 3em;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin-bottom: 0.4em;
+    color: var(--accent);
+  }
+  h3 {
+    font-size: 1.6em;
+    font-weight: 600;
+    color: var(--accent-2);
+    margin-bottom: 0.4em;
+  }
+  p, li {
+    font-size: 1.15em;
+    line-height: 1.55;
+  }
+  .lead { font-size: 1.35em; color: var(--fg-dim); }
+  .small { font-size: 0.85em; color: var(--fg-dim); }
+  strong { color: var(--accent); font-weight: 600; }
+  em { color: var(--accent-2); font-style: normal; }
+
+  ul { list-style: none; }
+  ul li { margin-bottom: 0.5em; padding-left: 1.6em; position: relative; }
+  ul li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  /* Subtitle / meta */
+  .subtitle { font-size: 1.5em; color: var(--fg-dim); margin-bottom: 1em; }
+  .meta { font-size: 1em; color: var(--fg-dim); margin-top: 1em; }
+
+  /* Title slide */
+  .title-slide { text-align: center; align-items: center; }
+  .title-slide h1 {
+    font-size: 5.5em;
+    background: linear-gradient(135deg, var(--accent) 0%, #f0d77b 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .title-slide .accent-line {
+    width: 120px;
+    height: 4px;
+    background: var(--accent);
+    margin: 0.5em auto 1.5em;
+    border-radius: 2px;
+  }
+
+  /* Constraint grid (slide 2) */
+  .constraint-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin: 30px 0 40px;
+  }
+  .stat {
+    background: var(--bg-2);
+    border: 1px solid var(--grid);
+    border-radius: 12px;
+    padding: 28px 16px;
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 2.8em;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.95em;
+    color: var(--fg-dim);
+    margin-top: 8px;
+  }
+  .stat-emoji { font-size: 1.5em; margin-bottom: 6px; }
+  .constraint-grid .bottom-line {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 1.3em;
+    color: var(--accent-2);
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+  /* Insight slides (3, 4, 5) */
+  .insight-headline {
+    font-size: 3em;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--fg);
+    margin-bottom: 0.4em;
+  }
+  .insight-headline em {
+    color: var(--accent);
+    font-style: normal;
+  }
+  .insight-takeaway {
+    font-size: 1.2em;
+    color: var(--accent-2);
+    margin-top: 1.2em;
+    padding-top: 1em;
+    border-top: 1px solid var(--grid);
+  }
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin: 30px 0;
+  }
+  .compare-card {
+    background: var(--bg-2);
+    border: 1px solid var(--grid);
+    border-radius: 10px;
+    padding: 24px 28px;
+  }
+  .compare-card.bad { border-color: rgba(255, 107, 107, 0.4); }
+  .compare-card.good { border-color: rgba(78, 205, 196, 0.5); }
+  .compare-card h3 { color: var(--fg); margin-bottom: 12px; }
+  .compare-card.bad h3 { color: var(--rule); }
+  .compare-card.good h3 { color: var(--accent-2); }
+
+  /* Math callout (slide 4) */
+  .math-callout {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    align-items: center;
+    margin: 30px 0;
+    background: var(--bg-2);
+    border: 1px solid var(--grid);
+    border-radius: 10px;
+    padding: 24px 20px;
+  }
+  .math-cell { text-align: center; }
+  .math-num {
+    font-size: 2.6em;
+    font-weight: 800;
+    color: var(--fg);
+    line-height: 1;
+  }
+  .math-num.danger { color: var(--rule); }
+  .math-op {
+    font-size: 2.5em;
+    color: var(--accent);
+    text-align: center;
+  }
+  .math-result {
+    background: rgba(255, 107, 107, 0.15);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 18px;
+    text-align: center;
+    margin-top: 16px;
+  }
+  .math-result-text {
+    font-size: 1.3em;
+    color: var(--rule);
+    font-weight: 700;
+  }
+
+  /* Rules box (slide 5) */
+  .rule-list { margin: 30px 0; }
+  .rule {
+    background: var(--rule-bg);
+    border-left: 4px solid var(--rule);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    border-radius: 0 8px 8px 0;
+  }
+  .rule-title {
+    color: var(--rule);
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-bottom: 6px;
+  }
+  .rule-body { color: var(--fg); }
+
+  /* Image slides (6, 7) */
+  .image-slide { align-items: center; text-align: center; width: 100%; }
+  .image-slide h2 { margin-bottom: 0.2em; text-align: center; width: 100%; }
+  .image-slide p.lead { text-align: center; width: 100%; }
+  .image-frame {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  .image-frame img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  /* 3-column flow grid (slide 7) */
+  .flow-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    align-items: stretch;
+    margin-top: 20px;
+  }
+  .flow-card {
+    background: var(--bg-2);
+    border: 1px solid var(--grid);
+    border-radius: 10px;
+    padding: 14px 14px 18px;
+    display: flex;
+    flex-direction: column;
+  }
+  .flow-card-title {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.15em;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .flow-card-caption {
+    color: var(--fg-dim);
+    font-size: 0.9em;
+    line-height: 1.35;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .flow-card-image {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+  }
+  .flow-card img {
+    width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  /* Revisit table (slide 8) */
+  .revisit-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 0.95em;
+  }
+  .revisit-table th {
+    background: var(--bg-2);
+    color: var(--accent);
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid var(--accent);
+    font-weight: 700;
+  }
+  .revisit-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--grid);
+    vertical-align: top;
+  }
+  .revisit-table tr:last-child td { border-bottom: none; }
+  .revisit-table .risk-name { color: var(--rule); font-weight: 700; }
+
+  /* Timeline (slide 9) */
+  .timeline {
+    display: flex;
+    gap: 0;
+    margin: 30px 0;
+    align-items: stretch;
+  }
+  .timeline-step {
+    flex: 1;
+    padding: 24px;
+    background: var(--bg-2);
+    border: 1px solid var(--grid);
+    border-right: none;
+    text-align: center;
+  }
+  .timeline-step:last-child { border-right: 1px solid var(--grid); border-radius: 0 10px 10px 0; }
+  .timeline-step:first-child { border-radius: 10px 0 0 10px; }
+  .timeline-step.current { background: rgba(212, 175, 55, 0.1); border-color: var(--accent); }
+  .timeline-step-week { color: var(--accent); font-weight: 700; font-size: 1.1em; }
+  .timeline-step-title { font-size: 1.1em; margin: 8px 0; font-weight: 600; }
+  .timeline-step-detail { color: var(--fg-dim); font-size: 0.95em; }
+  .open-questions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 24px;
+    margin-top: 20px;
+  }
+  .open-questions li { font-size: 1em; }
+
+  /* Q&A closing (slide 10) */
+  .qa-slide { text-align: center; align-items: center; }
+  .qa-slide h1 { font-size: 6em; color: var(--accent); }
+  .qa-rules {
+    margin-top: 40px;
+    font-size: 0.95em;
+    color: var(--fg-dim);
+    border-top: 1px solid var(--grid);
+    padding-top: 20px;
+    max-width: 700px;
+  }
+  .qa-rules strong { color: var(--rule); }
+
+  /* HUD */
+  .hud {
+    position: fixed;
+    bottom: 18px;
+    right: 24px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 0.85em;
+    color: var(--fg-dim);
+    background: rgba(10, 14, 26, 0.7);
+    padding: 8px 14px;
+    border-radius: 6px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .hud .counter { color: var(--accent); font-weight: 600; }
+  .hud .hint { letter-spacing: 0.02em; }
+  .hud kbd {
+    background: var(--bg-2);
+    border: 1px solid var(--grid);
+    border-radius: 3px;
+    padding: 1px 6px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.95em;
+    color: var(--fg);
+  }
+
+  /* Notes panel */
+  .notes {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    background: rgba(8, 12, 22, 0.96);
+    border-top: 2px solid var(--accent);
+    padding: 24px 60px 28px;
+    max-height: 50vh;
+    overflow-y: auto;
+    transform: translateY(100%);
+    transition: transform 0.25s ease;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .notes.visible { transform: translateY(0); }
+  .notes-header {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.9em;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .notes-content {
+    color: var(--fg);
+    font-size: 1.05em;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    max-width: 1100px;
+  }
+
+  /* Print fallback */
+  @media print {
+    .slide { display: flex !important; opacity: 1 !important; page-break-after: always; position: relative; height: 100vh; }
+    .hud, .notes { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<main class="deck" id="deck">
+
+  <!-- Slide 1: Title -->
+  <section class="slide title-slide centered" data-notes="I'm [name]. This is the MS1 preliminary solution for NeoBank Digital Leap, the Software Architecture course final project. I won't spend time on the bank or the requirements — you know them. I'll spend the next ten minutes on the design decisions and what we learned.">
+    <h1>NeoBank Digital Leap</h1>
+    <div class="accent-line"></div>
+    <p class="subtitle">Software Architecture — MS1 Preliminary Solution</p>
+    <p class="meta">Replace with your name, date, and course tag.</p>
+  </section>
+
+  <!-- Slide 2: The constraint that shaped everything -->
+  <section class="slide" data-notes="Four numbers, four constraints. The mainframe has been running since the 1980s. It's the system of record. We are not allowed to replace it. The bank needs to launch a digital platform in one year. The platform has to be up 99.999% of the time, which is less than six minutes of downtime per year. And it has to serve a million users inside the same geographic region within three years. Pick any three of those four, and the architecture is forced. The combination rules out most options. Big-bang replacement is out. All-cloud is out — the regulator won't approve a public cloud for the regulated workloads. An all-on-prem digital platform is out — a year isn't enough time to procure, install, and operate new on-prem capacity. What's left is a hybrid: regulated, mainframe-adjacent services on-prem; elastic, customer-facing services in the regional cloud. The mainframe stays. New services are added around it. The one-year MVP is the consequence of that single design decision — wrap, don't replace.">
+    <h2>The constraint that shaped everything</h2>
+    <div class="constraint-grid">
+      <div class="stat">
+        <div class="stat-emoji">⏱</div>
+        <div class="stat-num">1 year</div>
+        <div class="stat-label">MVP delivery</div>
+      </div>
+      <div class="stat">
+        <div class="stat-emoji">⚡</div>
+        <div class="stat-num">99.999%</div>
+        <div class="stat-label">uptime (under 6 min/yr)</div>
+      </div>
+      <div class="stat">
+        <div class="stat-emoji">🖥</div>
+        <div class="stat-num">120 yrs</div>
+        <div class="stat-label">COBOL mainframe, untouchable</div>
+      </div>
+      <div class="stat">
+        <div class="stat-emoji">👥</div>
+        <div class="stat-num">1M</div>
+        <div class="stat-label">peak digital users (3 yrs)</div>
+      </div>
+      <div class="bottom-line">Pick any three of these. The architecture is forced.</div>
+    </div>
+  </section>
+
+  <!-- Slide 3: Insight #1 — Wrap, don't replace -->
+  <section class="slide" data-notes="The first aha-moment for me was this: the mainframe isn't the obstacle, it's the foundation. Most teams, when they're handed a COBOL system, think 'we need to modernize it'. But the mainframe's contract is actually quite small. It's an authoritative ledger. It processes transactions. It produces audit trails. It does a few things very well, very fast, and very reliably — and we don't need it to do anything else. So instead of replacing it, we wrap it. The Strangler Fig pattern: new digital capabilities are added around the CBS, not against it. The CBS doesn't change in MVP. The COBOL team owns the contract. The Java + AWS team builds the wrapper. This single decision cascades into everything else. It forces CQRS, because reads from the new digital services can't go through the mainframe. It forces the event bus, because data has to flow out of the mainframe. It forces the ODS, because reads need a home. It forces the CBS Transaction Gateway, because there has to be exactly one way to talk to the mainframe. Once you stop trying to replace the mainframe, the rest of the architecture falls out almost mechanically.">
+    <div class="insight-headline">Wrap, don't replace.</div>
+    <p class="lead">The mainframe's contract is small: it's an authoritative ledger, not a feature platform. That's what makes wrapping possible.</p>
+    <div class="compare-grid">
+      <div class="compare-card bad">
+        <h3>Replace (ruled out)</h3>
+        <ul>
+          <li>1 year deadline: impossible</li>
+          <li>5 nines: would reset to lower</li>
+          <li>5 COBOL developers: tiny capacity</li>
+          <li>Regulator: mainframe is the audit record</li>
+        </ul>
+      </div>
+      <div class="compare-card good">
+        <h3>Strangler Fig (chosen)</h3>
+        <ul>
+          <li>CBS stays; we add around it</li>
+          <li>COBOL team owns the contract</li>
+          <li>Java + AWS team builds the wrapper</li>
+          <li>One decision cascades into everything else</li>
+        </ul>
+      </div>
+    </div>
+    <p class="insight-takeaway">Once you stop trying to replace the mainframe, CQRS, the event bus, the ODS, and the CBS Transaction Gateway all follow.</p>
+  </section>
+
+  <!-- Slide 4: Insight #2 — Reads and writes are different -->
+  <section class="slide" data-notes="The second aha-moment was a number. The mainframe does about five thousand transactions per second. A million users, each checking their balance once a day, is roughly twelve reads per second on average — but during business hours it's a hundred-plus, and during a payroll run it's thousands. Across the whole day, we need to absorb a million balance checks. A million reads a day, all going through the mainframe, would crush it. Even if it didn't, every read costs the bank money — the mainframe bills by the operation. So the design has to separate reads from writes. That's CQRS. Commands — money-moving operations — go to the CBS. Queries — balance checks, account lookups, reports — go to replicated projections in the ODS, populated by change-data-capture from the mainframe. The ODS is not a second system of record. It's a projection, refreshed from the source of truth. The bank accepts a 24-hour staleness window on incoming external transactions — that's the only honest trade-off — and the rest of the read path is fully consistent. Without this split, the architecture is infeasible. CQRS isn't an optimization. It's the reason the MVP can launch at all.">
+    <div class="insight-headline">CQRS isn't an optimization. <em>It's a survival strategy.</em></div>
+    <div class="math-callout">
+      <div class="math-cell">
+        <div class="math-num">5,000</div>
+        <div class="math-label">mainframe tx/sec</div>
+      </div>
+      <div class="math-cell">
+        <div class="math-num danger">vs</div>
+      </div>
+      <div class="math-cell">
+        <div class="math-num">~1M</div>
+        <div class="math-label">reads/day from 1M users</div>
+      </div>
+    </div>
+    <p class="lead">If reads went to the mainframe, the MVP doesn't launch. The mainframe is a payment-per-operation machine — every read costs the bank money.</p>
+    <div class="math-result">
+      <div class="math-result-text">Solution: commands to CBS · queries to replicated projections in the ODS</div>
+    </div>
+    <p class="insight-takeaway">The ODS is not a second system of record. It's a projection. The 24h staleness tolerance (NFR-PC-060) is the only honest trade-off — and it's enough headroom to scale to a million users.</p>
+  </section>
+
+  <!-- Slide 5: Insight #3 — AI is a privacy problem -->
+  <section class="slide" data-notes="The third aha-moment was about the AI Advisor. I started this work assuming the AI Advisor was a machine-learning problem. Build a model, feed it data, get advice. That framing is wrong. The AI Advisor is a privacy problem. The hard question isn't 'what can the model do?' — it's 'what does the model have the right to see?' A cloud-hosted AI service that reads the full customer record is a non-starter. The customer record contains things the customer has not authorized for advice — payment history, fraud signals, sensitive personal data. The AI doesn't need any of that. It needs a minimal, authorized, regionally compliant context. So we added a new on-prem service — the Advisor Context API. It sits between the AI and the data. Every AI request goes: what's the customer authorized for (checked against the consent service) → give me only the authorized projection (read from the ODS) → return the minimum. The AI never sees the full record. The AI never crosses the on-prem zone directly. This isn't a feature. It's a boundary. And once we drew it, the architecture got simpler — not harder.">
+    <div class="insight-headline">AI is a privacy problem, <em>not an ML problem.</em></div>
+    <p class="lead">The hard question isn't "what can the model do?" — it's "what does it have the right to see?"</p>
+    <div class="compare-grid">
+      <div class="compare-card bad">
+        <h3>Naive (ruled out)</h3>
+        <p>AI Advisor &rarr; ODS directly.</p>
+        <p class="small" style="color: var(--fg-dim); margin-top: 8px;">The model sees the full customer record. It doesn't need most of it. The customer never authorized most of it.</p>
+      </div>
+      <div class="compare-card good">
+        <h3>D-008: Advisor Context boundary</h3>
+        <p>AI Advisor &rarr; Advisor Context API &rarr; Consent + authorized projection.</p>
+        <p class="small" style="color: var(--fg-dim); margin-top: 8px;">The API authorizes and minimizes. The AI only sees what it needs to render advice. Every request is audited.</p>
+      </div>
+    </div>
+    <p class="insight-takeaway">This isn't a feature. It's a boundary. And once we drew it, the architecture got simpler — not harder.</p>
+  </section>
+
+  <!-- Slide 6: The C4 -->
+  <section class="slide image-slide" data-notes="Here's the architecture in one diagram. I'll walk it left to right, but I'll anchor each region back to one of the three insights. Far left: the three external actors — mobile, web, and Open Banking third-party providers. All three enter through the WAF. That's Insight #1's first consequence: there is exactly one public front door. Rule 1. The WAF forwards to the API Gateway, which authenticates and routes to the BFF. The BFF is the only thing the cloud and on-prem worlds share directly. Now into the on-prem Digital Core. Account, Consent, Report, Transfer, and the AI's advisor context — all reachable from the BFF, all serving the bank's regulated, mainframe-adjacent workloads. The Transfer Service is the one that touches the ledger: it goes through the Real-Time Fraud Engine, and if approved, through the CBS Transaction Gateway, to reach the CBS. That's Insight #1's second consequence: the mainframe has exactly one door, and we never bypass it. Rule 2. The AI Advisor sits in the cloud. But its data access is mediated by the Advisor Context API, which is on-prem. That's Insight #3: the AI is a privacy boundary, not a feature. Rule 3. On the data side: CDC from DB2 and ADABAS flows into adapters, into a durable event bus, into the ODS. Insight #2 in action: reads come from projections, not from the mainframe. Three boundaries, color-coded. Yellow for cloud, orange for on-prem, red for legacy. Three rules. The C4 is just the picture of the constraints and the consequences. Note: this is the Mermaid-rendered horizontal view for the slide. The full C4 Container view is in docs/diagrams/neobank-digital-leap-c4.drawio and the Mermaid C4 mirror is in docs/diagrams/07-c4-container.mmd.">
+    <h2>The C4</h2>
+    <p class="lead">Three boundaries · three rules · one mainframe · one source of truth.</p>
+    <div class="image-frame">
+      <img src="img/c4.png" alt="C4 Container view of NeoBank Digital Leap">
+    </div>
+    <p class="small">Source: <code>docs/diagrams/01-high-level-solution.mmd</code> (horizontal walk) · Full C4: <code>docs/diagrams/neobank-digital-leap-c4.drawio</code> · Mermaid C4 mirror: <code>docs/diagrams/07-c4-container.mmd</code></p>
+  </section>
+
+  <!-- Slide 7: The 3 flows -->
+  <section class="slide image-slide" data-notes="Three flows illustrate the insights in action. Twenty seconds each. Account info: the customer opens the app, the BFF calls the Account Information Service, which reads from the ODS. The read model may be up to 24 hours stale for incoming external transactions — that's a deliberate trade-off, captured as NFR-PC-060, and the customer sees the freshness on screen. Insight #2 in action: reads don't go to the mainframe. Bank transfer: the customer submits a transfer, the Transfer Service calls the Real-Time Fraud Engine, and if approved, the CBS Transaction Gateway executes the transaction. Insight #1 in action: there's exactly one way to the mainframe. AI advisor: the BFF requests advice, the AI Advisor asks the Advisor Context API for minimized context, the API checks the consent service for what the customer has authorized, reads the authorized projection, and returns a minimal dataset. Insight #3 in action: the AI never sees the full customer record.">
+    <h2>Three flows, three insights</h2>
+    <div class="flow-grid">
+      <div class="flow-card">
+        <div class="flow-card-title">Account info</div>
+        <div class="flow-card-caption">BFF → Account Service → ODS. Read models with visible freshness metadata. <em>Insight #2.</em></div>
+        <div class="flow-card-image"><img src="img/account-info.png" alt="Account information flow"></div>
+      </div>
+      <div class="flow-card">
+        <div class="flow-card-title">Bank transfer</div>
+        <div class="flow-card-caption">BFF → Transfer → Real-Time Fraud → CBS Gateway → CBS. Only path to the mainframe. <em>Insight #1.</em></div>
+        <div class="flow-card-image"><img src="img/transfer.png" alt="Bank transfer flow"></div>
+      </div>
+      <div class="flow-card">
+        <div class="flow-card-title">AI advisor</div>
+        <div class="flow-card-caption">BFF → AI → Advisor Context → Consent + authorized ODS projection. Data-minimized. <em>Insight #3.</em></div>
+        <div class="flow-card-image"><img src="img/ai-advisor.png" alt="AI advisor flow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 8: What we'd revisit -->
+  <section class="slide" data-notes="Now the part the teacher asked for — what we'd do differently with more time. We don't have aha-moments without also having things we got wrong. Four. First, the 24-hour staleness tolerance. It's an honest trade-off, but it can hurt customer trust if a balance looks wrong. With more time, we'd add a 'live refresh on transfer' pattern — any time a transfer touches a balance, the BFF forces a fresh read through a synchronous path. For MVP, we accepted the trade-off. Second, the five COBOL developers. We have five deep experts on the system that processes 99.999% of the bank's money. That's a feature, not a bug — but it's also a capacity risk. With more time, we'd pair-program the Java team with the COBOL team on the CBS Gateway contract, and document runbooks so the gateway is operable by more than five people. Third, no DR topology yet. The C4 shows HA markers on the CBS Gateway, the event bus, and the ODS — but those are aspirational. The full network topology and DR runbook is MS2 work; we have a scaffold. Fourth, the ODS vendor. Oracle, SQL Server, or Db2 — all viable. We deferred the decision to MS2. The architecture works for any of the three, so the decision is a procurement call, not a design call. We're not inventing rockets. We're building a working system, and these are the rough edges.">
+    <h2>What we'd revisit</h2>
+    <p class="lead">Honest trade-offs, not apologies. Every architectural choice has a rough edge; here's ours.</p>
+    <table class="revisit-table">
+      <thead>
+        <tr>
+          <th style="width: 22%;">Risk</th>
+          <th style="width: 33%;">What it is</th>
+          <th style="width: 45%;">What we'd do with more time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="risk-name">24h staleness</td>
+          <td>Customers may see outdated balances for external transactions (NFR-PC-060).</td>
+          <td>Add a "live refresh on transfer" pattern in MVP+1: any transfer that touches a balance triggers a synchronous read.</td>
+        </tr>
+        <tr>
+          <td class="risk-name">5 COBOL developers</td>
+          <td>Single point of capacity for any CBS change. Also a feature: 5 deep experts on the system that processes 99.999% of the money.</td>
+          <td>Pair-program the Java team with the COBOL team on the gateway contract. Document runbooks so the gateway is operable beyond 5 people.</td>
+        </tr>
+        <tr>
+          <td class="risk-name">No DR topology yet</td>
+          <td>The C4 marks ‖ HA pairs on the CBS Gateway, the event bus, and the ODS — but those are aspirational. The full network topology and DR runbook is not yet designed.</td>
+          <td>Full network topology + DR runbook in MS2 (scaffold ready in <code>docs/diagrams/06-network-topology.mmd</code>).</td>
+        </tr>
+        <tr>
+          <td class="risk-name">ODS vendor not picked</td>
+          <td>Oracle / SQL Server / Db2 shortlist (ADR-002). All viable; the architecture works for any of the three.</td>
+          <td>MS2 decision. This is a procurement call, not a design call.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Slide 9: What's open -->
+  <section class="slide" data-notes="For MS2 in Week 13: we add the four diagrams — security boundary, network topology, performance, and data flow. We resolve the eleven open questions. We pick the ODS vendor. We design the DR topology. Final HLD is due at the end of the course. Any questions?">
+    <h2>What's open</h2>
+    <div class="timeline">
+      <div class="timeline-step current">
+        <div class="timeline-step-week">Week 7 — now</div>
+        <div class="timeline-step-title">MS1</div>
+        <div class="timeline-step-detail">Preliminary solution + C4 + 3 use-case flows. This presentation.</div>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-week">Week 13</div>
+        <div class="timeline-step-title">MS2</div>
+        <div class="timeline-step-detail">Security / network topology / performance / data flow diagrams · DR runbook · ODS vendor decision.</div>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-week">End of course</div>
+        <div class="timeline-step-title">Final HLD</div>
+        <div class="timeline-step-detail">Full HLD assembled from Markdown sources per the Lesson 1B template. One Word file with embedded diagrams.</div>
+      </div>
+    </div>
+    <h3>Three biggest open questions</h3>
+    <ul class="open-questions">
+      <li><strong>ODS vendor</strong> — Oracle, SQL Server, or Db2? (MS2)</li>
+      <li><strong>Cloud region for the AI Advisor</strong> — regulatory approval pending.</li>
+      <li><strong>RTO / RPO per component</strong> — required by NFR-AR-020, MS2 deliverable.</li>
+    </ul>
+  </section>
+
+  <!-- Slide 10: Thank you / Q&A -->
+  <section class="slide qa-slide centered" data-notes="Thank you.">
+    <h1>Thank you.</h1>
+    <p class="subtitle">Questions are welcome — the architecture crystallizes once you stress it.</p>
+    <div class="qa-rules">
+      <strong>Rule 1:</strong> WAF is the only public front door.<br>
+      <strong>Rule 2:</strong> The CBS Transaction Gateway is the only path to the mainframe.<br>
+      <strong>Rule 3:</strong> The AI Advisor reads through a minimized context boundary.
+    </div>
+  </section>
+
+</main>
+
+<aside class="notes" id="notes">
+  <div class="notes-header">Speaker notes</div>
+  <div class="notes-content" id="notes-content"></div>
+</aside>
+
+<div class="hud" aria-hidden="true">
+  <span class="counter" id="counter">1 / 10</span>
+  <span class="hint">
+    <kbd>←</kbd> <kbd>→</kbd> navigate ·
+    <kbd>N</kbd> notes ·
+    <kbd>F</kbd> fullscreen
+  </span>
+</div>
+
+<script>
+  (function () {
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const total = slides.length;
+    const notes = document.getElementById('notes');
+    const notesContent = document.getElementById('notes-content');
+    const counter = document.getElementById('counter');
+    let current = 0;
+    let notesVisible = false;
+
+    function show(i) {
+      if (i < 0) i = 0;
+      if (i >= total) i = total - 1;
+      slides[current].classList.remove('active');
+      current = i;
+      slides[current].classList.add('active');
+      counter.textContent = (current + 1) + ' / ' + total;
+      notesContent.textContent = slides[current].dataset.notes || '';
+    }
+
+    function next() { show(Math.min(current + 1, total - 1)); }
+    function prev() { show(Math.max(current - 1, 0)); }
+    function toggleNotes() {
+      notesVisible = !notesVisible;
+      notes.classList.toggle('visible', notesVisible);
+    }
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen?.();
+      } else {
+        document.exitFullscreen?.();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault(); next();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault(); prev();
+      } else if (e.key === 'Home') { e.preventDefault(); show(0); }
+      else if (e.key === 'End') { e.preventDefault(); show(total - 1); }
+      else if (e.key === 'n' || e.key === 'N' || e.key === 'Escape') { e.preventDefault(); toggleNotes(); }
+      else if (e.key === 'f' || e.key === 'F') { e.preventDefault(); toggleFullscreen(); }
+      else if (/^[1-9]$/.test(e.key)) {
+        const idx = parseInt(e.key, 10) - 1;
+        if (idx < total) { e.preventDefault(); show(idx); }
+      }
+    });
+
+    // Click to advance (left half = prev, right half = next) — only on non-link clicks
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('a, button, kbd, .hud, .notes')) return;
+      if (e.clientX < window.innerWidth / 3) prev();
+      else if (e.clientX > (2 * window.innerWidth) / 3) next();
+    });
+
+    // First slide
+    show(0);
+  })();
+</script>
+
+</body>
+</html>

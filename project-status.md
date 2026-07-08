@@ -40,6 +40,7 @@ Submission timeline (deck page 17): **MS1 by Week 7**, **MS2 by Week 13**, **Fin
 | `docs/c4-model.md` | C4 model layer description. |
 | `docs/glossary.md` | Common project terminology. |
 | `docs/ms1-presentation-prep.md` | MS1 talk prep: draw.io cleanup spec + slide outline + speaker notes. |
+| `docs/ms1-presentation/index.html` | Self-contained HTML deck for the MS1 talk. Open in any browser, use arrow keys, press N for notes, F for fullscreen. |
 | `docs/requirements/requirements-draft.md` | Functional and non-functional requirements (`FN-NNN`, `NFR-<CAT>-NNN`). |
 | `docs/diagrams/01..05-*.mmd` | Mermaid sources for the high-level solution and use-case flows. |
 | `docs/diagrams/06-network-topology.mmd` | Network topology scaffold (MS2 teacher-mandated). |
