@@ -12,7 +12,7 @@ This section is normative for detailed design and implementation. The CBS remain
 | CDC → ODS projection | ODS is non-authoritative. Freshness SLO is p95 ≤ 5 s and p99 ≤ 30 s. | Bounded retry, then account-scoped quarantine. Other accounts continue. Beyond 60 s, show `Data temporarily delayed` and `Last updated`. |
 | Quarantined account | CBS remains authoritative; last complete ODS view remains readable. | Hold later events for that account, block balance-dependent writes before Fraud/CBS, and resume only after ordered replay and successful comparison. |
 | Account-data cache | ODS projection version governs version-aware cache-aside; TTL ≤ 30 s. | ODS events invalidate/update. Cache failure falls back to ODS, never CBS. Quarantine and freshness state take precedence. |
-| External/non-app activity | CBS is authoritative. | A source-specific delay up to 24 h is permitted and must be timestamped. This allowance does not apply to NeoBank transfers or ordinary CDC lag. |
+| External/non-app activity | CBS is authoritative. | A source-specific delay up to 24 h is permitted. When this allowance is active, Channel BFFs MUST render a customer-facing delay warning and the last-updated timestamp. This allowance does not apply to NeoBank transfers or ordinary CDC lag. |
 | Mobile/Web and Open Banking AIS | ODS, cache and CBS overlay under the same freshness contract. | Responses expose timestamps/freshness; quarantined accounts are readable but write-blocked. |
 | Open Banking PIS | Common Transfer path with the same consent, fraud, idempotency, CBS and outcome rules. | Unknown results remain `PROCESSING`; quarantined accounts are rejected before submission. |
 | Monthly statement | Reconciled month-end snapshot by T+1 day; issued version is immutable. | A correction creates a new version. Every artifact exposes period, `As of` and version. |
@@ -20,6 +20,14 @@ This section is normative for detailed design and implementation. The CBS remain
 | CBS–ODS mismatch | CBS always wins. | Preserve evidence, quarantine, rebuild from the last trusted checkpoint and compare again. Never patch rows to force convergence. |
 
 Cross-path invariants are no loss of transaction commands, integration events or audit evidence; no duplicate business effect; no interpretation of a timeout as proof; stable idempotency identifiers; explicit stale-state disclosure; and immutable/versioned evidence for every persisted transfer transition.
+
+### LLD carry-forward constraints
+
+| LLD topic | Constraint that MUST be preserved | Required Phase-0 / LLD evidence |
+|---|---|---|
+| Read-your-writes overlay lifecycle | The Account Information Service MUST merge only CBS-confirmed recent writes, suppress duplicates, and retire an overlay only after the matching ODS projection version is observed. The Digital Core MUST NOT calculate a replacement balance. | State-transition design, merge/deduplication rules, expiry and recovery behavior, concurrency tests, and proof that the p95 ≤ 5 s / p99 ≤ 30 s projection targets remain measurable. |
+| Mainframe/COBOL capacity protection | The CBS Transaction Gateway MUST remain the only digital command path to the CBS. Delivery planning MUST treat the five-person COBOL team as a constrained critical-path capability. | Phase-0 throughput and batch-window measurements, gateway contract ownership, interface/change calendar, performance budget, and an agreed escalation or sequencing plan for mainframe dependencies. |
+| Hybrid synchronous latency budgets | Each synchronous transfer hop across the regional-cloud/on-premises boundary MUST have an explicit latency and timeout budget. Retries MUST NOT create duplicate CBS effects or convert an unknown outcome into a fabricated result. | Direct Connect/VPN round-trip measurements, per-hop p95/p99 budgets, end-to-end load and failure tests, retry/timeout matrix, and evidence that unknown CBS outcomes remain `PROCESSING` until reconciliation. |
 
 ## 3.2.2 Security model
 
