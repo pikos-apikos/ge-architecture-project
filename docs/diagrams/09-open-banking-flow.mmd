@@ -1,0 +1,14 @@
+sequenceDiagram
+  participant T as TPP
+  participant W as WAF / API Gateway
+  participant C as Consent Service
+  participant B as Open Banking BFF
+  participant S as Account / Transfer Service
+  T->>W: AIS or PIS request
+  W->>C: Validate TPP, consent, SCA and scope
+  C-->>W: Short-lived verified ConsentContext
+  W->>B: Request + verified context
+  B->>S: Reused managed business contract
+  S-->>B: Account or transfer result
+  B-->>T: Versioned REST response
+

@@ -1,100 +1,14 @@
 flowchart LR
-    %% NeoBank Digital Leap — High Level System Architecture
-    %% Important: public digital channels point to WAF first, not directly to API Gateway.
+  CH["Digital Channels<br/>Mobile, Web, TPP"] --> WAF["WAF and DDoS"]
+  WAF --> GW["API Gateway"]
+  GW --> EDGE["IAM, BFF and Consent"]
+  EDGE --> CORE["On-prem Digital Core"]
+  CORE --> CBSGW["CBS Transaction Gateway"]
+  CBSGW --> CBS["CBS on z/OS<br/>DB2 and ADABAS"]
+  CBS --> CDC["Mainframe CDC"]
+  CDC --> BUS["Event Bus"]
+  BUS --> ODS["Enterprise RDBMS ODS"]
+  ODS --> CORE
+  EDGE --> AI["Regional Cloud<br/>AI Advisor"]
+  CORE --> AI
 
-    subgraph Channels[Digital Channels]
-        Mobile[Mobile App]
-        Web[Web App]
-        TPP[Open Banking TPPs]
-    end
-
-    subgraph Cloud[Regional Cloud Environment]
-        WAF[WAF / DDoS Protection]
-        APIGW[API Gateway]
-        IAM[Customer IAM\nOAuth2 / OIDC / MFA]
-        BFF[Digital API / BFF Layer]
-        AI[AI Financial Advisor]
-        CloudObs[Cloud Observability]
-    end
-
-    subgraph OnPrem[New On-Premises Digital Core]
-        AccountSvc[Account Information Service]
-        TransferSvc[Transfer Service]
-        FraudRT[Real-Time Fraud Engine]
-        FraudOffline[Offline Fraud Analytics\nBatch Risk Scoring]
-        ReportSvc[Income / Expense Report Service]
-        ConsentSvc[Open Banking Consent Service]
-        AdvisorCtx[Advisor Context API]
-        CBSGW[CBS Transaction Gateway]
-        DB2Adapter[DB2 Adapter]
-        ADABASAdapter[ADABAS Adapter]
-        EventBus[Durable Event Bus / Streaming]
-        ODS[Read Models / Operational Data Stores\nEnterprise RDBMS ODS\nOracle / SQL Server / Db2]
-        Audit[Audit Log / Compliance Store]
-        OnPremObs[On-Prem Observability]
-    end
-
-    subgraph Legacy[Legacy Core]
-        CBS[COBOL CBS on z/OS]
-        DB2[(DB2 Transactions DB)]
-        ADABAS[(ADABAS Customer DB)]
-    end
-
-    %% Public ingress: corrected route
-    Mobile --> WAF
-    Web --> WAF
-    TPP --> WAF
-    WAF --> APIGW
-
-    %% Cloud edge
-    APIGW --> IAM
-    APIGW --> BFF
-    BFF --> AI
-    BFF --> CloudObs
-
-    %% Cloud to on-prem service access
-    BFF --> AccountSvc
-    BFF --> TransferSvc
-    BFF --> ReportSvc
-    BFF --> ConsentSvc
-
-    %% AI data-minimization boundary (D-008): AI never reads the ODS directly
-    AI --> AdvisorCtx
-    AdvisorCtx --> ConsentSvc
-
-    %% Transfer command path
-    TransferSvc --> FraudRT
-    FraudRT --> TransferSvc
-    TransferSvc --> CBSGW
-    CBSGW --> CBS
-
-    %% Legacy data ownership
-    CBS --> DB2
-    CBS --> ADABAS
-
-    %% Data ingestion and projections
-    DB2 --> DB2Adapter
-    ADABAS --> ADABASAdapter
-    DB2Adapter --> EventBus
-    ADABASAdapter --> EventBus
-    EventBus --> ODS
-    EventBus --> FraudOffline
-    EventBus --> Audit
-
-    %% Read model consumers
-    ODS --> AccountSvc
-    ODS --> ReportSvc
-    ODS --> ConsentSvc
-    ODS --> AdvisorCtx
-    FraudOffline --> FraudRT
-
-    %% Observability and audit
-    AccountSvc --> OnPremObs
-    TransferSvc --> OnPremObs
-    ReportSvc --> OnPremObs
-    ConsentSvc --> OnPremObs
-    AdvisorCtx --> OnPremObs
-    CBSGW --> Audit
-    FraudRT --> Audit
-    AdvisorCtx --> Audit
-    APIGW --> CloudObs

@@ -1,0 +1,20 @@
+flowchart TD
+  subgraph PRIMARY["Primary Failure Domain"]
+    PCL["Cloud Region A"]
+    PDC["On-prem Site A"]
+    PCBS["CBS Primary"]
+  end
+  subgraph RECOVERY["Recovery Failure Domain"]
+    RCL["Cloud Region B"]
+    RDC["On-prem Site B"]
+    RCBS["CBS Recovery"]
+  end
+  PCL <--> RCL
+  PDC <--> RDC
+  PCBS --> RCBS
+  PCL <--> PDC
+  RCL <--> RDC
+  CTRL["Dual-authority DR Control"] --> RCL
+  CTRL --> RDC
+  CTRL --> RCBS
+

@@ -1,79 +1,62 @@
-# NeoBank HLD — Sizing (HLD §3.6)
+# 3.6 Sizing
 
-> Required by the HLD template. Covers on-premises hardware and software
-> sizing, cloud sizing, units of scale, HA/DR topology, and an operational
-> cost estimate (deck page 15: "present your calculation of operational costs",
-> with the AWS and Azure pricing calculators as references).
-> Status: **scaffold — to be filled during MS2.**
+## 3.6.1 Executive sizing summary
 
-## 1. On-Premises Digital Core — Hardware and Software
+The sizing model is derived from registered users, peak concurrency, traffic mix, synchronous amplification, durable event volume, ODS record arrival, retention, telemetry, monthly statements, and AI context workload. Appendix C contains the complete formulas and evidence.
 
-> Deck page 13 is explicit: "You need to define the hardware and software
-> aspects of" the new on-premises deployment. This section is therefore
-> in-scope, not optional.
+| Scale measure | Year 1 | Year 3 |
+|---|---:|---:|
+| Registered digital users | 100,000 | 1,000,000 |
+| Peak concurrent sessions | 5,000 | 50,000 |
+| Peak session assumption | 5% | 5% |
+| Application compute physical nodes | 8 | 14 |
+| ODS physical nodes | 6 | 12 |
+| Event Bus physical nodes | 6 | 12 |
+| Object archive/evidence/backup nodes | 8 | 16 |
+| Hot observability physical nodes | 6 | 12 |
+| Total approved physical nodes | 34 | 66 |
 
-| Layer | Technology / Spec | Quantity | Notes |
+Stateless services use a standard compute unit and maintain at least 30% headroom under the approved base peak. The platform applies quotas, backpressure, bounded queues, and CBS protection rather than scaling an unsafe dependency without limit.
+
+## 3.6.2 On-premises hardware and software
+
+| Layer | Hardware baseline | Software baseline | HA/DR rule |
 |---|---|---|---|
-| Compute — API / BFF tier | _to be sized_ | | VM count, vCPU, RAM, OS |
-| Compute — Application services (Account, Transfer, Fraud RT, Report, Consent) | _to be sized_ | | |
-| Compute — CBS Transaction Gateway | _to be sized_ | | Latency-sensitive, near-CBS |
-| Compute — DB2 / ADABAS adapters + event workers | _to be sized_ | | |
-| Storage — ODS (Enterprise RDBMS) | Oracle / SQL Server / Db2 — see [`02-ods-database-recommendation.md`](02-ods-database-recommendation.md) | | Vendor deferred to MS2 |
-| Storage — Audit / Compliance Store | _to be sized_ | | Append-only, retention per regulator |
-| Messaging — Durable Event Bus / Streaming | _to be sized_ | | Throughput target, partition count |
-| Network — Internal segmentation | _to be sized_ | | Segregation between regulated and DMZ tiers |
-| HA / DR topology | Active-passive / active-active per tier | | RTO / RPO per NFR-AR-020 |
+| Application platform | x86 hosts with redundant CPU, memory, NIC, boot and data paths | Enterprise Linux plus Kubernetes/OpenShift-class platform, service mesh and secrets integration | N+2 primary capacity; warm recovery-site reserve by recovery class |
+| ODS | Enterprise x86 database nodes with NVMe tier and SAN/object backup integration | Oracle, SQL Server, or Db2 Enterprise; product selected in Phase 0 | Synchronous/local HA and governed cross-site replication |
+| Event Bus | Dedicated broker nodes with NVMe and 25-GbE-class networking | Kafka-compatible enterprise distribution | Odd-sized quorum in each active cluster; replicated recovery capacity |
+| Archive/evidence/backup | Capacity-optimized object nodes with erasure coding and immutable storage capability | S3-compatible object platform, backup catalog and WORM/retention controls | Site copy plus protected backup; evidence integrity verification |
+| Observability | Compute/storage nodes sized for hot search and metric cardinality | Metrics, logs, traces, SIEM integration and evidence exporters | Failure-domain separation from monitored workloads |
+| Mainframe integration | Gateway HA pair on separate hosts/zones | Canonical gateway, protocol adapter, HSM/KMS client and reconciliation worker | Only digital path to CBS; no channel or ODS bypass |
 
-## 2. Regional Cloud Digital Edge
+## 3.6.3 Performance and Capacity View
 
-| Layer | Technology / Spec | Quantity | Notes |
-|---|---|---|---|
-| WAF / DDoS Protection | _to be sized_ | | Public ingress — see ADR-001 design rule |
-| API Gateway | _to be sized_ | | Routing, throttling, OAuth2 / OIDC |
-| Customer IAM | _to be sized_ | | MFA per NFR-SEC-020 |
-| BFF / Digital API | _to be sized_ | | Client-oriented aggregation |
-| AI Financial Advisor | _to be sized_ | | Cloud-only; data minimization per FN-120 |
-| Cloud observability | _to be sized_ | | Metrics, logs, traces, dashboards |
+Diagram: `docs/diagrams/17-performance-capacity.mmd`.
 
-## 3. Units of Scale
+The diagram traces the calculation from users to sessions, edge requests, internal amplification, compute, events, storage, the CBS protection envelope, and TCO. Every input is a planning assumption until Phase-0 measurement or load-test evidence confirms it.
 
-| Unit | Scale | Trigger to scale out |
-|---|---|---|
-| Customer (registered) | 100K year 1 → 1M year 3 (NFR-PC-010 / NFR-PC-020) | |
-| Concurrent session | _to be sized_ | |
-| Transactions / second | _to be sized_ | |
-| Read-model records | _to be sized_ | |
-| Event-bus throughput | _to be sized_ | |
+## 3.6.4 Annual operational cost
 
-## 4. HA / DR Targets
+All values are USD millions per year, priced on 2026-08-27 using AWS Europe public/on-demand anchors and enterprise hardware/software bands. Taxes, discounts, implementation labor, and project delivery cost are excluded. Hardware is amortized over five years. A 20% contingency is included.
 
-Per NFR-AR-010 (99.999% uptime) and NFR-AR-020 (RTO / RPO per component by MS2):
+| Cost category | Y1 low | Y1 base | Y1 high | Y3 low | Y3 base | Y3 high |
+|---|---:|---:|---:|---:|---:|---:|
+| Cloud, connectivity, support and AI | 0.30 | 0.45 | 0.70 | 0.75 | 1.15 | 1.90 |
+| Hardware amortization and support | 0.35 | 0.50 | 0.65 | 0.83 | 1.10 | 1.49 |
+| ODS RDBMS license and support | 0.15 | 0.35 | 1.00 | 0.30 | 0.70 | 2.00 |
+| Platform software and support | 0.25 | 0.45 | 0.75 | 0.50 | 0.90 | 1.50 |
+| Power, cooling, floor and network | 0.18 | 0.27 | 0.43 | 0.30 | 0.48 | 0.70 |
+| Subtotal | 1.23 | 2.02 | 3.53 | 2.68 | 4.33 | 7.59 |
+| 20% contingency | 0.25 | 0.40 | 0.71 | 0.54 | 0.87 | 1.52 |
+| **Infrastructure TCO** | **1.48** | **2.42** | **4.24** | **3.22** | **5.20** | **9.11** |
 
-| Component | RTO | RPO | Pattern |
-|---|---|---|---|
-| CBS | _to be sized_ | _to be sized_ | |
-| CBS Transaction Gateway | _to be sized_ | _to be sized_ | |
-| Account / Transfer / Report services | _to be sized_ | _to be sized_ | |
-| ODS (RDBMS) | _to be sized_ | _to be sized_ | |
-| Event bus | _to be sized_ | _to be sized_ | |
-| Cloud API Gateway / BFF | _to be sized_ | _to be sized_ | |
+Operational staffing is separate: Y1 USD 0.7M/1.2M/1.8M and Y3 USD 1.0M/1.8M/3.0M for low/base/high. Infrastructure plus staffing is therefore Y1 USD 2.2M/3.6M/6.0M and Y3 USD 4.2M/7.0M/12.1M.
 
-## 5. Operational Cost Estimate
+## 3.6.5 AI inference allowance
 
-Use https://calculator.aws/#/ or https://azure.microsoft.com/en-us/pricing/calculator/ to size the cloud portion. On-prem costs (licensing, support, hardware amortization) should be sized separately.
+The approved workload is 15.77B input and 3.15B output tokens in Year 1, growing to 157.68B input and 31.54B output tokens in Year 3. At least 90% uses a cost-efficient route; no more than 10% uses premium escalation. The allowance is approximately USD 0.003M/0.006M/0.025M in Y1 and USD 0.030M/0.060M/0.250M in Y3 for low/base/high.
 
-| Category | Annual cost (USD) | Source / notes |
-|---|---|---|
-| Cloud compute | _to be calculated_ | |
-| Cloud managed services (DB, messaging, IAM) | _to be calculated_ | |
-| Cloud network egress | _to be calculated_ | |
-| On-prem hardware amortization | _to be calculated_ | |
-| On-prem software licensing (incl. ODS) | _to be calculated_ | Oracle / SQL Server / Db2 |
-| On-prem operations (power, cooling, floor) | _to be calculated_ | |
-| **Total annual** | _sum_ | |
+## 3.6.6 Validation gates
 
-## 6. Notes
+Phase 0 MUST validate cloud provider and regions, ODS product and licenses, CBS throughput, CDC volume, row/event/telemetry sizes, load-test capacity, retention, hardware quotes, facilities inputs, connectivity, and support plans. A result outside the approved low-to-high band triggers re-sizing. This estimate is not purchasing authority.
 
-- Anchors the deck's cost calculation requirement (deck page 15).
-- The 24-hour account-info staleness tolerance (NFR-PC-060) relaxes read-model freshness targets and therefore the storage / replication sizing — call this out explicitly in the final HLD.
-- Reuse the sizing approach when the high-level solution is later stress-tested.

@@ -1,0 +1,15 @@
+sequenceDiagram
+  participant U as Customer
+  participant W as WAF / DDoS
+  participant G as API Gateway
+  participant I as IAM
+  participant B as Channel BFF
+  U->>W: TLS request
+  W->>W: Bot, rate and threat checks
+  W->>G: Allowed request
+  G->>I: Validate token / MFA state
+  I-->>G: Identity and assurance context
+  G->>B: Authenticated request + correlation
+  B-->>G: Channel response
+  G-->>U: Response
+

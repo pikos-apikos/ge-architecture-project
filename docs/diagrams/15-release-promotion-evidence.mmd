@@ -1,0 +1,13 @@
+flowchart TD
+  DEV["Development"] --> MERGE["Merge Gate"]
+  MERGE --> INT["Integration"]
+  INT --> PRE["Pre-production"]
+  PRE --> CAN["Production Canary"]
+  CAN --> PROD["Production"]
+  MERGE --> RECEIPT["Signed Build Receipt"]
+  INT --> RECEIPT
+  PRE --> RECEIPT
+  CAN --> RECEIPT
+  PROD --> RECEIPT
+  RECEIPT --> EVID["Immutable Release Evidence"]
+

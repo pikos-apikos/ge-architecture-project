@@ -157,3 +157,4 @@ Cache = short-lived acceleration layer
 Search = investigation and audit exploration layer
 Data lake/object storage = historical analytics and immutable evidence
 ```
+

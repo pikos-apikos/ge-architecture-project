@@ -47,3 +47,4 @@ Use a **hybrid Strangler Fig modernization architecture** combined with **CQRS-s
 - Customer-facing account screens must show freshness metadata where relevant.
 - All transfer requests must be idempotent and auditable.
 - No digital channel may call CBS, DB2, or ADABAS directly.
+

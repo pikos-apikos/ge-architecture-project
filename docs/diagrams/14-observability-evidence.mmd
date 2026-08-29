@@ -1,0 +1,12 @@
+flowchart TD
+  J["Eight Customer and Control Journeys"] --> OT["Operational Telemetry"]
+  J --> ST["Security Telemetry"]
+  J --> AE["Audit Evidence"]
+  OT --> CORR["Correlation Spine"]
+  ST --> CORR
+  AE --> CORR
+  CORR --> DASH["Layered Dashboards"]
+  CORR --> ALERT["SLO Burn Alerts"]
+  CORR --> BUNDLE["Incident Evidence Bundle"]
+  BUNDLE --> RUN["Executable Runbooks"]
+

@@ -1,0 +1,11 @@
+flowchart TD
+  USERS["Users<br/>Y1 100K / Y3 1M"] --> CONC["Peak Sessions<br/>5K / 50K"]
+  CONC --> EDGE["Edge RPS Envelope"]
+  EDGE --> AMP["Internal Amplification"]
+  AMP --> APP["Stateless Compute Units"]
+  AMP --> BUS["Durable Event Throughput"]
+  BUS --> STORE["ODS, Archive and Evidence Storage"]
+  APP --> CBS["CBS Protection Envelope"]
+  STORE --> COST["Year-1 / Year-3 TCO Bands"]
+  APP --> COST
+
