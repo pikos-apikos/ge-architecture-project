@@ -58,3 +58,4 @@ Oracle, SQL Server, and Db2 are more natural enterprise shortlist options for an
 - Cache is optional and short-lived.
 - Search/indexing is optional and used for investigation, not for authoritative banking state.
 - ODS data freshness must be observable and visible to dependent services.
+

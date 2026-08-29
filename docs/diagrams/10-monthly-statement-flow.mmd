@@ -1,0 +1,11 @@
+flowchart TD
+  ODS["Reconciled ODS Projection"] --> CUT["Month-end Cut-off"]
+  CUT --> GEN["Statement Generator"]
+  GEN --> SNAP["Immutable Versioned Snapshot"]
+  SNAP --> REC["CBS / ODS Reconciliation"]
+  REC -->|pass| PUB["Publish T+1"]
+  REC -->|fail| HOLD["Hold and investigate"]
+  PUB --> API["Reporting API"]
+  API --> C["Customer"]
+  SNAP --> AUD["Audit Evidence"]
+

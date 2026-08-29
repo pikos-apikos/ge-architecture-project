@@ -270,3 +270,4 @@ The AI advisor runs in the regional cloud. It does not directly access CBS, DB2,
 - Define message schemas and API contracts at high level.
 - Define sizing assumptions and operational cost model.
 - Expand risks and mitigations.
+

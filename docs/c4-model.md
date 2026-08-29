@@ -238,3 +238,4 @@ For this project, the C4 model should be applied pragmatically:
 - **Level 4** explains code-level design only when it protects an important architectural decision.
 
 The most important diagrams for NeoBank are Level 1 and Level 2. They show that the new digital platform improves customer experience and scalability while keeping the legacy CBS as the authoritative transaction system.
+

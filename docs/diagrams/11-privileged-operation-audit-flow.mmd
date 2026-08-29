@@ -1,0 +1,14 @@
+sequenceDiagram
+  participant A as Administrator
+  participant P as PAM / JIT
+  participant C as Change Control
+  participant S as Target System
+  participant E as Audit Evidence Plane
+  A->>P: Request time-bound access
+  P->>C: Verify ticket and approvals
+  C-->>P: Approved scope and expiry
+  P->>S: Brokered recorded session
+  S-->>P: Operation result
+  P->>E: Canonical evidence receipt
+  E-->>C: Immutable verification reference
+

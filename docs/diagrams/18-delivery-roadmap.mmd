@@ -1,0 +1,10 @@
+flowchart TD
+  P0["Phase 0<br/>Mobilize and Validate"] --> P1["Platform and Thin Slices"]
+  P1 --> P2["Account and Transfer MVP"]
+  P2 --> P3["Open Banking, Reports, AI"]
+  P3 --> P4["Scale, DR and Operational Proof"]
+  P4 --> P5["Launch and Hypercare"]
+  AIE["Agentic Engineering Enablement<br/>Weeks 1–10"] -. parallel .-> P0
+  AIE -. parallel .-> P1
+  EXT["External approvals<br/>Scenario delay"] -. affects .-> P3
+

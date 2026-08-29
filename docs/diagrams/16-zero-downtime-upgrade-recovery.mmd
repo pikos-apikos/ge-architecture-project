@@ -1,0 +1,19 @@
+sequenceDiagram
+  participant P as Pipeline
+  participant C as Consumers
+  participant N as New Version
+  participant O as Old Version
+  participant S as Stateful Store
+  P->>C: Deploy consumer-compatible change
+  P->>N: Deploy new version
+  N->>S: Additive schema / dual read-write
+  P->>N: Start canary traffic
+  alt SLO and integrity pass
+    P->>N: Increase traffic
+    P->>O: Drain and retire after window
+  else Failure
+    P->>N: Stop traffic
+    P->>O: Restore prior route
+    P->>S: Roll forward or compensate state
+  end
+

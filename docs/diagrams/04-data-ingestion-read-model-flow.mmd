@@ -1,46 +1,13 @@
-flowchart LR
-    subgraph Legacy[Legacy Data Sources]
-        DB2[(DB2 Transactions DB)]
-        ADABAS[(ADABAS Customer DB)]
-    end
+flowchart TD
+  CBS["CBS / DB2 / ADABAS"] --> CDC["Mainframe CDC"]
+  CDC --> MAP["Canonical Mapper"]
+  MAP --> BUS["Durable Event Bus"]
+  BUS --> PROJ["ODS Projection Service"]
+  PROJ --> ODS["Enterprise RDBMS ODS"]
+  PROJ --> STATUS["Projection Status Event"]
+  ODS --> REC["CBS-led Reconciliation"]
+  REC -->|match| READY["Account available"]
+  REC -->|mismatch| QUAR["Account-scoped quarantine"]
+  QUAR --> REPLAY["Controlled replay / rebuild"]
+  REPLAY --> REC
 
-    subgraph Ingestion[On-Premises Data Ingestion]
-        DB2Adapter[DB2 Adapter\nCDC / Batch / Controlled Export]
-        ADABASAdapter[ADABAS Adapter\nCDC / Batch / Controlled Export]
-        EventBus[Durable Event Bus / Streaming]
-        DLQ[Dead Letter Queue]
-    end
-
-    subgraph Projections[Read Model Projection Layer]
-        ProjectionWorkers[Projection Workers]
-        ODS[(Enterprise RDBMS ODS\nOracle / SQL Server / Db2)]
-        Cache[(Short-Lived Cache)]
-        Search[(Search / Investigation Index)]
-    end
-
-    subgraph Consumers[Digital Consumers]
-        AccountSvc[Account Information Service]
-        ReportSvc[Income / Expense Report Service]
-        ConsentSvc[Consent Service]
-        FraudOffline[Offline Fraud Analytics\nBatch Risk Scoring]
-        AIContext[Advisor Context API]
-    end
-
-    DB2 --> DB2Adapter
-    ADABAS --> ADABASAdapter
-    DB2Adapter --> EventBus
-    ADABASAdapter --> EventBus
-    DB2Adapter --> DLQ
-    ADABASAdapter --> DLQ
-
-    EventBus --> ProjectionWorkers
-    ProjectionWorkers --> ODS
-    ProjectionWorkers --> Cache
-    ProjectionWorkers --> Search
-    EventBus --> FraudOffline
-
-    ODS --> AccountSvc
-    ODS --> ReportSvc
-    ODS --> ConsentSvc
-    ODS --> AIContext
-    Search --> FraudOffline

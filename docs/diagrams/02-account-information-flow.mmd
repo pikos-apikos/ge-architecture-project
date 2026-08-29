@@ -1,26 +1,15 @@
 sequenceDiagram
-    autonumber
-    actor Customer
-    participant Channel as Mobile/Web App
-    participant WAF as WAF / DDoS Protection
-    participant APIGW as API Gateway
-    participant IAM as Customer IAM
-    participant BFF as Digital API / BFF Layer
-    participant AccountSvc as Account Information Service
-    participant ODS as Read Models / ODS
-    participant Audit as Audit / Observability
+  participant C as Customer
+  participant E as WAF / API / BFF
+  participant A as Account Information
+  participant O as ODS Projection
+  participant T as Transfer Overlay
+  C->>E: GET account summary / history
+  E->>A: Authenticated request
+  A->>O: Read account-scoped projection
+  O-->>A: Balances, history, freshness
+  A->>T: Read recent CBS-confirmed writes
+  T-->>A: Newer transfer snapshot, if any
+  A-->>E: AccountInformationResponse
+  E-->>C: Data with freshness and write capability
 
-    Customer->>Channel: Open account overview
-    Channel->>WAF: HTTPS request
-    WAF->>APIGW: Forward allowed request
-    APIGW->>IAM: Validate token / session
-    IAM-->>APIGW: Authorized customer context
-    APIGW->>BFF: Route account overview request
-    BFF->>AccountSvc: Get customer account view
-    AccountSvc->>ODS: Query account read model
-    ODS-->>AccountSvc: Account data + freshness metadata
-    AccountSvc->>Audit: Emit read/access telemetry
-    AccountSvc-->>BFF: Account view response
-    BFF-->>APIGW: Client-shaped response
-    APIGW-->>Channel: Response
-    Channel-->>Customer: Show accounts, balances, freshness indicator

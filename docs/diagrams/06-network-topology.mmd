@@ -1,95 +1,14 @@
-flowchart LR
-    %% NeoBank Digital Leap — Network Topology
-    %% Scaffold for MS2. Fill in: CIDR blocks, ports/protocols, HA/DR
-    %% topology, NGFW rule sets, and the chosen cloud-to-on-prem link
-    %% (VPN / Direct Connect / both). Source of truth is the teacher's
-    %% class guidance — keep this diagram aligned with the security
-    %% boundary diagram (MS2) and the high-level solution in
-    %% 01-high-level-solution.mmd.
+flowchart TD
+  INTERNET["Internet / TPP Networks"] --> WAF["Managed WAF + DDoS<br/>Cloud public subnets"]
+  WAF --> GW["API Gateway<br/>TLS 443"]
+  GW --> CP["Regional Cloud Private Subnets<br/>IAM, BFF, AI Advisor"]
+  CP --> LINK["Dual Direct Connect<br/>VPN backup, encrypted BGP"]
+  LINK --> NGFW["On-prem NGFW Pair"]
+  NGFW --> DMZ["On-prem DMZ<br/>Reverse proxy / ingress"]
+  DMZ --> K8S["Digital Core Kubernetes<br/>3 control + 8/14 worker hosts"]
+  K8S --> ODS["ODS Cluster<br/>4 primary + 4 warm-DR nodes"]
+  K8S --> BUS["Event Bus<br/>5 primary + 5 warm-DR brokers"]
+  K8S --> CBSGW["CBS Gateway HA Pair"]
+  CBSGW --> MF["Mainframe Zone<br/>z/OS CBS, DB2, ADABAS"]
+  K8S --> OBS["Observability Cluster<br/>4 primary + 4 warm-DR nodes"]
 
-    subgraph Internet[Public Internet]
-        Clients[Mobile / Web / TPP Clients]
-    end
-
-    subgraph CloudVPC[Regional Cloud VPC]
-        direction LR
-        subgraph CloudPublic[Public Subnets]
-            WAF[WAF / DDoS]
-        end
-        subgraph CloudPrivate[Private Subnets]
-            APIGW[API Gateway]
-            IAM[Customer IAM]
-            BFF[BFF / Digital API]
-            AI[AI Financial Advisor]
-        end
-        subgraph CloudLink[Cloud-to-On-Prem Link]
-            VPNTunnel[VPN / Direct Connect\n_TODO: pick one or both_]
-        end
-    end
-
-    subgraph OnPrem[On-Premises Network]
-        direction LR
-        subgraph OnPremDMZ[On-Prem DMZ]
-            NGFW[NGFW\n_TODO: model inspection, default-deny_]
-            EdgeProxy[Reverse Proxy / Controlled API Ingress]
-        end
-        subgraph OnPremReg[Regulated Zone — Digital Core]
-            Core[Core Services\nAccount / Transfer / Consent / Report / Advisor Context]
-            FraudRT[Real-Time Fraud Engine]
-            EventBus[Durable Event Bus]
-            ODS[ODS / Read Models\nEnterprise RDBMS]
-            Audit[Audit / Compliance Store]
-            OnPremObs[On-Prem Observability]
-            CBSGateway[CBS Transaction Gateway\n_Only path to CBS_]
-        end
-        subgraph OnPremMainframe[Mainframe Zone]
-            CBS[COBOL CBS on z/OS]
-            DB2[(DB2 Transactions)]
-            ADABAS[(ADABAS Customers)]
-        end
-    end
-
-    %% --- Public ingress (WAF -> API Gateway is non-negotiable) ---
-    Clients --> WAF
-    WAF --> APIGW
-    APIGW --> IAM
-    APIGW --> BFF
-    BFF --> AI
-
-    %% --- Cloud egress to on-prem (must traverse the link + NGFW) ---
-    APIGW --> VPNTunnel
-    BFF --> VPNTunnel
-    AI --> VPNTunnel
-    VPNTunnel --> NGFW
-    NGFW --> EdgeProxy
-
-    %% --- DMZ to regulated zone (no direct DMZ access to ODS/EventBus) ---
-    EdgeProxy --> Core
-
-    %% --- Regulated zone internal wiring ---
-    Core --> ODS
-    Core --> EventBus
-    Core --> Audit
-    Core --> OnPremObs
-    Core --> FraudRT
-    FraudRT --> Core
-    EventBus --> ODS
-    EventBus --> Audit
-
-    %% --- Money-moving path: the only route into the mainframe zone ---
-    Core --> CBSGateway
-    CBSGateway --> CBS
-    CBS --> DB2
-    CBS --> ADABAS
-    CBSGateway --> Audit
-
-    %% --- MS2 checklist (do not render — for the author) ---
-    %% [ ] CIDR blocks per subnet (e.g. cloud public 10.0.0.0/24, private 10.0.10.0/24, ...)
-    %% [ ] Port / protocol per edge (e.g. 443/HTTPS for client -> WAF, 8443/mTLS for BFF -> Core, ...)
-    %% [ ] NGFW rule set summary: allowlist of source -> destination -> port
-    %% [ ] HA / DR topology per zone (active-active vs active-passive, RTO/RPO)
-    %% [ ] VPN vs Direct Connect decision (latency, throughput, cost, regulatory)
-    %% [ ] DNS, certificate, and secrets management placement
-    %% [ ] Egress controls (AI advisor must not call CBS/DB2/ADABAS and must use Advisor Context API)
-    %% [ ] Observability traffic: where metrics/logs/traces cross zones
-    %% [ ] Align with the security boundary diagram (MS2) and the high-level solution
