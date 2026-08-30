@@ -60,11 +60,13 @@ The proposed architecture uses a **hybrid on-premises and regional cloud model**
 
 ## Milestones
 
-| Milestone | Scope | Status |
-|---|---|---|
-| MS1 | Preliminary solution diagram and architecture narrative | In progress |
-| MS2 | HLD + data + security + performance diagrams | Not started |
-| Final | Full High Level Design document | Not started |
+| Milestone | Scope | Evidence | Status |
+|---|---|---|---|
+| MS1 | Preliminary solution, architecture narrative, and presentation | [MS1 source](docs/01-ms1-preliminary-solution.md) · [MS1 deck](docs/ms1-presentation/index.html) | Completed |
+| MS2 | Expanded HLD with data, security, performance, resilience, and network-topology views | [Architecture source](docs/09-system-architecture.md) · [governed diagrams](docs/diagrams/) | Completed |
+| Final HLD | Submission-ready HLD, managed contracts, traceability, sizing, cost, and delivery estimate | [Assembly manifest](docs/final-hld-assembly-manifest.md) · [appendices](docs/appendices/) | Completed |
+| Final presentation | Fifteen-slide Final HLD presentation with speaker notes | [Final presentation](docs/final-presentation/index.html) | Completed |
+| Workflow retrospective | Wayfinder adaptation and Agent Technical English workflow presentation | [Wayfinder + ATE presentation](docs/wayfinder-ate-presentation/index.html) | Completed |
 
 ## Working Rule
 
