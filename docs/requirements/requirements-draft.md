@@ -19,7 +19,7 @@ All requirements are testable HLD contracts. “The system” means the NeoBank 
 | FN-100 | The system shall verify TPP identity, PSU, consent scope, permitted accounts, status, expiry, and SCA before Open Banking processing. |
 | FN-110 | The system shall provide AI-generated financial guidance from an authorized, purpose-limited customer context. |
 | FN-115 | The system shall allow governed bank rules to select eligible product candidates and shall allow the AI Advisor only to rank and explain those candidates. |
-| FN-120 | The system shall prevent the AI Advisor from directly accessing the CBS, DB2, ADABAS, or the ODS. |
+| FN-120 | The system shall prevent the AI Advisor from directly accessing the CBS, Db2, ADABAS, or the ODS. |
 | FN-130 | The system shall ingest canonical ACCOUNT, BALANCE, and TRANSACTION changes from the legacy environment into digital read models. |
 | FN-140 | The system shall provide account-scoped projection quarantine, replay, and CBS-led reconciliation. |
 | FN-150 | The system shall provide canonical audit evidence for customer actions, transfer and fraud decisions, consent changes, release actions, and privileged operations. |

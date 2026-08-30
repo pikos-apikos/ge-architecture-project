@@ -47,7 +47,7 @@ The calculation aggregates independent task variances before applying the confid
 | WS5.4 | Contract and capacity tests | 55 | 85 | 140 |
 | WS5.5 | Version and DR coordination | 45 | 70 | 120 |
 | WS6.1 | ODS platform | 90 | 130 | 200 |
-| WS6.2 | DB2 CDC | 70 | 105 | 170 |
+| WS6.2 | Db2 CDC | 70 | 105 | 170 |
 | WS6.3 | ADABAS ingestion | 55 | 85 | 145 |
 | WS6.4 | Event schemas and governance | 60 | 90 | 135 |
 | WS6.5 | Projections | 80 | 120 | 180 |

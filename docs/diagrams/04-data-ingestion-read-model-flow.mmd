@@ -1,5 +1,5 @@
 flowchart TD
-  CBS["CBS / DB2 / ADABAS"] --> CDC["Mainframe CDC"]
+  CBS["CBS / Db2 / ADABAS"] --> CDC["Mainframe CDC"]
   CDC --> MAP["Canonical Mapper"]
   MAP --> BUS["Durable Event Bus"]
   BUS --> PROJ["ODS Projection Service"]

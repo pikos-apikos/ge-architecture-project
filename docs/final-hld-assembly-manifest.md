@@ -8,7 +8,7 @@
 - Body order: Lesson 1B sections 1–7
 - Appendices: exactly four
 - Diagrams: exactly eighteen
-- Page target: 80–95 readable pages
+- Page target: 75–95 readable pages with no blank transition pages
 
 ## Main-body sources
 
@@ -34,7 +34,28 @@
 
 ## Diagram sources
 
-All files `docs/diagrams/01-*.mmd` through `docs/diagrams/18-*.mmd`, ordered numerically.
+All files `docs/diagrams/01-*.mmd` through `docs/diagrams/18-*.mmd` are embedded. Figure captions MUST use the document reading order below. Source filename numbers identify governed diagram assets; they MUST NOT determine the displayed figure number.
+
+| Displayed figure | Governed source | Caption |
+|---:|---|---|
+| 1 | `01-high-level-solution.mmd` | High-Level Solution |
+| 2 | `07-c4-container.mmd` | C4 Container View |
+| 3 | `06-network-topology.mmd` | Network Topology |
+| 4 | `12-security-trust-boundaries.mmd` | Security Trust Boundaries |
+| 5 | `13-resilience-dr-topology.mmd` | Resilience and DR Topology |
+| 6 | `14-observability-evidence.mmd` | Observability and Evidence View |
+| 7 | `08-authentication-public-ingress.mmd` | Authentication and Public Ingress |
+| 8 | `02-account-information-flow.mmd` | Account Information Flow |
+| 9 | `03-bank-transfer-flow.mmd` | Bank Transfer Flow |
+| 10 | `09-open-banking-flow.mmd` | Open Banking Flow |
+| 11 | `04-data-ingestion-read-model-flow.mmd` | Data Ingestion and Read-Model Flow |
+| 12 | `10-monthly-statement-flow.mmd` | Monthly Statement Flow |
+| 13 | `05-ai-financial-advisor-flow.mmd` | AI Financial Advisor Flow |
+| 14 | `11-privileged-operation-audit-flow.mmd` | Privileged Operation and Audit Flow |
+| 15 | `15-release-promotion-evidence.mmd` | Release Promotion and Evidence Flow |
+| 16 | `16-zero-downtime-upgrade-recovery.mmd` | Zero-Downtime Upgrade and Recovery |
+| 17 | `17-performance-capacity.mmd` | Performance and Capacity View |
+| 18 | `18-delivery-roadmap.mmd` | Delivery Roadmap |
 
 ## Supporting evidence only
 
@@ -52,4 +73,3 @@ The following sources inform the HLD but MUST NOT be assembled as duplicate chap
 - Place each diagram with a numbered caption and alternative text.
 - Allocate one page to a diagram when necessary for approximately 9-point minimum visible labels.
 - Inspect every final Word/PDF page for clipping, overlap, broken tables, missing glyphs and illegible labels.
-

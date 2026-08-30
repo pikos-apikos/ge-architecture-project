@@ -1,10 +1,8 @@
 # Appendix B — Managed API and Event Contract Catalog
 
-## Comment 22
-
 ## B.1 API and value conventions
 
-This comment compiles the approved decisions into HLD-level field tables. It does not define a complete OpenAPI specification.
+This appendix compiles the approved contracts into HLD-level field tables. It does not define a complete OpenAPI specification.
 
 ### B.1.1 Common API and value conventions
 
@@ -189,10 +187,6 @@ Public request bodies MUST NOT supply trusted consent attributes. A missing, exp
 
 The AI MUST obtain banking data only through this API. It MUST NOT read CBS or ODS directly. It MUST NOT decide eligibility, create binding terms, or execute a sale.
 
----
-
-## Comment 23
-
 ## B.2 Event contracts
 
 ### B.2.1 Common event envelope
@@ -285,14 +279,15 @@ A quarantined account MUST NOT stop other account streams. A global pipeline wat
 | `currency` | ISO 4217 code | Yes | CBS/reporting rules | Statement currency. |
 | `openingBalance` | Money | Yes | Reconciled CBS data | Currency MUST match statement currency. |
 | `closingBalance` | Money | Yes | Reconciled CBS data | Currency MUST match statement currency. |
-| `lineItems` | ordered array | Yes | Reconciled transaction projection | Complete statement-period lines with transaction ID, dates, amount, direction, and description/reference. |
+| `lineItemCount` | non-negative integer | Yes | Reporting Service | Number of transaction lines in the immutable statement artifact. |
+| `statementObject` | immutable object reference | Yes | Reporting Service / governed object storage | Contains `objectUri`, `contentType`, `sizeBytes`, and cryptographic `checksum`; the referenced object contains the complete ordered line items. |
 | `periodTotals` | typed Money totals | Yes | Reporting Service | Reconciled debit/credit totals; currencies MUST match statement currency. |
 | `dataAsOf` | Timestamp | Yes | Reporting Service | Latest source data included. |
 | `reconciledAt` | Timestamp | Yes | Reconciliation Service | Successful reconciliation time. |
 | `generatedAt` | Timestamp | Yes | Reporting Service | Immutable artifact creation time; MUST meet T+1 SLO. |
 | `supersedesStatementId` | Id | No | Reporting Service | REQUIRED for a correction; earlier version MUST remain retained. |
 
-An issued statement MUST NOT be overwritten. A correction MUST create a new version and reference the superseded statement.
+An issued statement MUST NOT be overwritten. A correction MUST create a new version and reference the superseded statement. The event payload MUST NOT embed the complete statement line items. It MUST remain within the 256 KB event limit and reference the immutable statement object.
 
 ### 12. `AuditEvidenceEvent` payload
 
@@ -353,10 +348,6 @@ The event is a complete current-state snapshot and MUST NOT contain access token
 | `effectiveAt` | Timestamp | Yes | Producer | Time the newer source state became effective. |
 
 The event MUST NOT carry replacement business data. Cache correctness MUST also use the approved TTL and freshness/version checks. This event MUST NOT become an authority for balances, transfers, consents, or product eligibility.
-
----
-
-## Comment 24
 
 ## B.3 Contract examples
 
