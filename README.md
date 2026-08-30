@@ -73,3 +73,11 @@ All official project text is written in **English** and maintained as **Markdown
 ## Author
 
 Yiannis Miliaresis
+
+## License
+
+Except for the third-party material identified below, this repository is licensed under the [Apache License 2.0](LICENSE).
+
+The project-specific Wayfinder adaptation in `.codex/skills/wayfinder/SKILL.md` incorporates material from Matt Pocock's MIT-licensed Wayfinder. The original MIT notice is preserved in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+Copyright 2026 Yiannis Miliaresis.
