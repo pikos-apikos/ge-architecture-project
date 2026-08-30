@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wayfinder + Agent Technical English — NeoBank Workflow Retrospective</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-2: #f8f9fa;
+    --fg: #1a1a1a;
+    --fg-dim: #6b7280;
+    --accent: #2563eb;
+    --accent-2: #059669;
+    --rule: #ea580c;
+    --rule-bg: rgba(234, 88, 12, 0.06);
+    --grid: rgba(0, 0, 0, 0.08);
+    --shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 22px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .deck { position: relative; width: 100vw; height: 100vh; }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: none;
+    padding: 60px 80px;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    overflow: hidden;
+  }
+  .slide.active { display: flex; opacity: 1; }
+  .slide.centered { align-items: center; text-align: center; }
+
+  h1 {
+    font-size: 5em;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 0.3em;
+  }
+  h2 {
+    font-size: 3em;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin-bottom: 0.35em;
+    color: var(--accent);
+  }
+  p, li { font-size: 1.15em; line-height: 1.55; }
+  .lead { font-size: 1.3em; color: var(--fg-dim); }
+  .small { font-size: 0.85em; color: var(--fg-dim); }
+  strong { color: var(--accent); font-weight: 600; }
+  em { color: var(--accent-2); font-style: normal; }
+
+  ul { list-style: none; }
+  ul li { margin-bottom: 0.5em; padding-left: 1.6em; position: relative; }
+  ul li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  .subtitle { font-size: 1.4em; color: var(--fg-dim); margin-bottom: 1em; }
+  .meta { font-size: 0.95em; color: var(--fg-dim); margin-top: 1em; }
+
+  /* Title */
+  .title-slide { text-align: center; align-items: center; }
+  .title-slide h1 {
+    font-size: 4.6em;
+    background: linear-gradient(135deg, var(--accent) 0%, #60a5fa 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .title-slide .accent-line {
+    width: 120px; height: 4px;
+    background: var(--accent);
+    margin: 0.5em auto 1.2em;
+    border-radius: 2px;
+  }
+
+  /* Compare cards */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin: 24px 0;
+  }
+  .compare-card {
+    background: var(--bg-2);
+    border: 1px solid var(--grid);
+    border-radius: 10px;
+    padding: 24px 28px;
+  }
+  .compare-card.bad { border-color: rgba(234, 88, 12, 0.4); background: rgba(234, 88, 12, 0.03); }
+  .compare-card.good { border-color: rgba(5, 150, 105, 0.4); background: rgba(5, 150, 105, 0.03); }
+  .compare-card h3 { color: var(--fg); margin-bottom: 12px; font-size: 1.3em; }
+  .compare-card.bad h3 { color: var(--rule); }
+  .compare-card.good h3 { color: var(--accent-2); }
+
+  .insight-headline {
+    font-size: 2.9em;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--fg);
+    margin-bottom: 0.4em;
+  }
+  .insight-takeaway {
+    font-size: 1.2em;
+    color: var(--accent-2);
+    margin-top: 1.1em;
+    padding-top: 0.9em;
+    border-top: 1px solid var(--grid);
+  }
+
+  /* Numbered list (slide 7, 11) */
+  ol.numbered {
+    list-style: none;
+    counter-reset: item;
+    padding-left: 0;
+  }
+  ol.numbered li {
+    counter-increment: item;
+    margin-bottom: 0.5em;
+    padding-left: 2.2em;
+    position: relative;
+  }
+  ol.numbered li::before {
+    content: counter(item);
+    position: absolute;
+    left: 0;
+    top: 0.15em;
+    width: 1.6em; height: 1.6em;
+    background: var(--bg-2);
+    border: 1px solid var(--grid);
+    border-radius: 50%;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.85em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ATE contract slide 9 */
+  .contract-list { margin: 20px 0; }
+  .contract-item {
+    display: flex;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--grid);
+    align-items: baseline;
+  }
+  .contract-item:last-child { border-bottom: none; }
+  .contract-key {
+    color: var(--rule);
+    font-weight: 700;
+    min-width: 190px;
+    font-size: 1em;
+  }
+  .contract-def { color: var(--fg); }
+
+  /* Human-gate badge (slide 6) */
+  .gate-badge {
+    display: inline-block;
+    background: var(--rule-bg);
+    border: 1px solid var(--rule);
+    color: var(--rule);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 6px 14px;
+    border-radius: 6px;
+    margin-top: 14px;
+    font-size: 0.95em;
+  }
+
+  /* Known/Unknown/Assumption (slide 10) */
+  .kua-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin: 26px 0 20px;
+  }
+  .kua {
+    background: var(--bg-2);
+    border: 1px solid var(--grid);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .kua .kua-key {
+    font-weight: 800;
+    font-size: 1.3em;
+    margin-bottom: 6px;
+  }
+  .kua.known .kua-key { color: var(--accent-2); }
+  .kua.unknown .kua-key { color: var(--rule); }
+  .kua.assumption .kua-key { color: var(--accent); }
+
+  /* When/when-not (slide 15) */
+  .when-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin: 22px 0;
+  }
+  .when-do, .when-dont {
+    padding: 20px 24px;
+    border-radius: 10px;
+  }
+  .when-do { background: rgba(5,150,105,0.05); border: 1px solid rgba(5,150,105,0.3); }
+  .when-dont { background: rgba(234,88,12,0.05); border: 1px solid rgba(234,88,12,0.3); }
+  .when-do h3 { color: var(--accent-2); margin-bottom: 8px; }
+  .when-dont h3 { color: var(--rule); margin-bottom: 8px; }
+
+  /* QA closing */
+  .qa-slide { text-align: center; align-items: center; }
+  .qa-slide h1 { font-size: 6em; color: var(--accent); }
+
+  /* HUD + notes (fixed variants) */
+  .hud {
+    position: fixed; bottom: 18px; right: 24px; z-index: 10;
+    display: flex; align-items: center; gap: 16px;
+    font-size: 0.85em; color: var(--fg-dim);
+    background: rgba(255,255,255,0.92);
+    padding: 8px 14px; border-radius: 6px;
+    border: 1px solid var(--grid); box-shadow: var(--shadow);
+  }
+  .hud .counter { color: var(--accent); font-weight: 600; }
+  .hud kbd {
+    background: var(--bg-2); border: 1px solid var(--grid);
+    border-radius: 3px; padding: 1px 6px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.95em; color: var(--fg);
+  }
+  .notes {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+    background: rgba(248,249,250,0.98);
+    border-top: 2px solid var(--accent);
+    padding: 24px 60px 28px;
+    max-height: 50vh; overflow-y: auto;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+  }
+  .notes.visible { opacity: 1; visibility: visible; }
+  .notes-header {
+    color: var(--accent); font-weight: 700; font-size: 0.9em;
+    letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 12px;
+  }
+  .notes-content { color: var(--fg); font-size: 1.05em; line-height: 1.6; white-space: pre-wrap; max-width: 1100px; }
+
+  @media print {
+    .slide { display: flex !important; opacity: 1 !important; page-break-after: always; position: relative; height: 100vh; }
+    .hud, .notes { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<main class="deck" id="deck">
+
+  <!-- Slide 1: Title -->
+  <section class="slide title-slide centered" data-notes="The NeoBank HLD was too large to solve reliably in one prompt or one session. It contained architecture, security, resilience, contracts, cost, delivery planning, and regulatory constraints. We therefore adapted two complementary methods: Wayfinder for navigating decisions and Agent Technical English for controlling execution.">
+    <h1>Wayfinder + Agent Technical English</h1>
+    <div class="accent-line"></div>
+    <p class="subtitle">Keeping architectural exploration flexible, decisions human-owned, and execution precise.</p>
+    <p class="meta">NeoBank Digital Leap · Workflow Retrospective · August 2026</p>
+  </section>
+
+  <!-- Slide 2: The main risk -->
+  <section class="slide" data-notes="The model could generate architecture quickly. That was not the difficult part. The difficult part was preserving consistency across many decisions and many sessions without allowing the agent to make product choices silently. We needed a process that could remember what was decided, expose what remained uncertain, and stop at the correct human gates.">
+    <h2>The main risk was not missing intelligence</h2>
+    <p class="lead">Long-running AI work usually fails through:</p>
+    <ul>
+      <li>Hidden decisions</li>
+      <li>Context drift</li>
+      <li>Premature implementation</li>
+      <li>Ambiguous instructions</li>
+      <li>Uncontrolled parallel work</li>
+      <li>Unrecorded human approvals</li>
+    </ul>
+    <p class="insight-takeaway">The problem was coordination under uncertainty.</p>
+  </section>
+
+  <!-- Slide 3: Two methods, two problems -->
+  <section class="slide" data-notes="Wayfinder operates at the planning and decision level. Agent Technical English—ATE—operates at the execution boundary. Wayfinder tells us which question should be answered next. ATE tells the agent exactly what it may do after the answer exists. Neither method replaces human judgment.">
+    <h2>The two methods solve different problems</h2>
+    <div class="compare-grid">
+      <div class="compare-card good">
+        <h3>Wayfinder finds the route</h3>
+        <ul>
+          <li>Maps unresolved decisions</li>
+          <li>Exposes dependencies</li>
+          <li>Preserves uncertainty</li>
+          <li>Maintains human authority</li>
+        </ul>
+      </div>
+      <div class="compare-card">
+        <h3>Agent Technical English secures each step</h3>
+        <ul>
+          <li>Reduces semantic freedom</li>
+          <li>Defines scope and authority</li>
+          <li>Makes completion observable</li>
+          <li>Controls side effects</li>
+        </ul>
+      </div>
+    </div>
+    <p class="insight-takeaway">Wayfinder at the decision level. ATE at the execution boundary. Neither replaces human judgment.</p>
+  </section>
+
+  <!-- Slide 4: The map is a hypothesis -->
+  <section class="slide" data-notes="We did not create a large implementation backlog at the beginning. That would have converted uncertainty into false precision. Instead, the map recorded the destination and only the questions that were precise enough to ask. The remaining uncertainty stayed visible as 'Not yet specified.'">
+    <h2>The map is a hypothesis, not a backlog</h2>
+    <p class="lead">A Wayfinder map contains:</p>
+    <ul>
+      <li><strong>Destination</strong> — what "done" means</li>
+      <li><strong>Notes</strong> — constraints and execution boundaries</li>
+      <li><strong>Decisions so far</strong> — accepted conclusions</li>
+      <li><strong>Not yet specified</strong> — visible fog</li>
+      <li><strong>Out of scope</strong> — deliberate exclusions</li>
+    </ul>
+    <p class="insight-takeaway">The map evolves when evidence changes the route.</p>
+  </section>
+
+  <!-- Slide 5: One frontier decision at a time -->
+  <section class="slide" data-notes="Most NeoBank tickets were grilling tickets. We presented one material architectural choice, normally with three alternatives and a recommendation. After the human answered, we recorded the decision and re-evaluated the frontier. We did not run several human decision conversations in parallel because one answer could invalidate the assumptions of another.">
+    <h2>One frontier decision at a time</h2>
+    <p class="lead">Four ticket types:</p>
+    <ul>
+      <li><strong>Grilling</strong> — clarify through one material question at a time</li>
+      <li><strong>Research</strong> — gather evidence without selecting the outcome</li>
+      <li><strong>Prototype</strong> — create cheap alternatives for human comparison</li>
+      <li><strong>Task</strong> — complete a prerequisite that exposes facts</li>
+    </ul>
+    <p class="insight-takeaway">Structural independence does not authorize parallel execution.</p>
+  </section>
+
+  <!-- Slide 6: A recommendation is not a decision -->
+  <section class="slide" data-notes="This was the most important adaptation. The agent could explain why one option was stronger, but it could not treat its recommendation as accepted. Even when an answer seemed obvious, the workflow stopped at the human gate. The user's actual decision was then recorded in the issue so that a later session could audit why the gate was considered satisfied.">
+    <h2>A recommendation is not a decision</h2>
+    <p class="lead">For every material choice:</p>
+    <ul>
+      <li>The agent <strong>MAY</strong> prepare alternatives.</li>
+      <li>The agent <strong>MAY</strong> recommend one alternative.</li>
+      <li>The <strong>human</strong> selects, rejects, or defers.</li>
+      <li>Generic "continue" does not approve an unnamed option.</li>
+      <li>The ticket closes only after an explicit decision.</li>
+    </ul>
+    <div class="gate-badge">DECISION OWNER: HUMAN</div>
+  </section>
+
+  <!-- Slide 7: Each answer reshapes the route -->
+  <section class="slide" data-notes="The map was intentionally non-rigid. One answer could create a new decision, merge two suspected questions, or make an existing ticket unnecessary. This prevented the initial plan from becoming a permanent structure that the project had to obey after its assumptions had changed.">
+    <h2>Each answer reshapes the remaining route</h2>
+    <p class="lead">After every decision:</p>
+    <ol class="numbered">
+      <li>Record the approved answer.</li>
+      <li>Update the map.</li>
+      <li>Re-evaluate dependent tickets.</li>
+      <li>Remove obsolete questions.</li>
+      <li>Promote newly precise uncertainty.</li>
+      <li>Recommend one next frontier.</li>
+    </ol>
+    <p class="insight-takeaway">Fog becomes work only when the question is precise.</p>
+  </section>
+
+  <!-- Slide 8: Controlled language begins at execution -->
+  <section class="slide" data-notes="ATE is inspired by controlled-language principles from ASD-STE100, but it is not an ASD-STE100 compliance claim. Its purpose is narrower: reduce semantic freedom when words become executable instructions. We kept the human conversation natural and applied controlled language only when an agent or tool had to act.">
+    <h2>Controlled language begins at execution</h2>
+    <div class="compare-grid">
+      <div class="compare-card">
+        <h3>Use normal language for</h3>
+        <ul>
+          <li>Exploration</li>
+          <li>Discussion</li>
+          <li>Comparison</li>
+          <li>Architectural reasoning</li>
+        </ul>
+      </div>
+      <div class="compare-card bad">
+        <h3>Use ATE for</h3>
+        <ul>
+          <li>Agent handoffs</li>
+          <li>Implementation instructions</li>
+          <li>Tool procedures</li>
+          <li>Publishing, merging, or deployment</li>
+          <li>Completion and stop conditions</li>
+        </ul>
+      </div>
+    </div>
+    <p class="insight-takeaway">Do not flatten thinking before the decision exists.</p>
+  </section>
+
+  <!-- Slide 9: An executable contract has explicit boundaries -->
+  <section class="slide" data-notes="Vague instructions such as 'clean it up' or 'fix whatever is needed' allow too many valid interpretations. ATE replaces them with named objects, concrete actions, explicit side effects, and an observable completion condition. Permission to edit does not imply permission to publish, and permission to publish does not imply permission to merge.">
+    <h2>An executable contract has explicit boundaries</h2>
+    <p class="lead">A high-risk instruction identifies:</p>
+    <div class="contract-list">
+      <div class="contract-item"><div class="contract-key">GOAL</div><div class="contract-def">the observable outcome</div></div>
+      <div class="contract-item"><div class="contract-key">SCOPE</div><div class="contract-def">where the agent may act</div></div>
+      <div class="contract-item"><div class="contract-key">DECISION OWNER</div><div class="contract-def">human, agent, or existing contract</div></div>
+      <div class="contract-item"><div class="contract-key">MUST / MUST NOT</div><div class="contract-def">requirements and prohibitions</div></div>
+      <div class="contract-item"><div class="contract-key">STOP CONDITIONS</div><div class="contract-def">when execution must pause</div></div>
+      <div class="contract-item"><div class="contract-key">DONE WHEN</div><div class="contract-def">objective completion evidence</div></div>
+    </div>
+  </section>
+
+  <!-- Slide 10: Unknowns remain visible -->
+  <section class="slide" data-notes="Fluent language can make uncertainty disappear without actually resolving it. We therefore treated unknowns as operational states. If an unknown could materially change the result, the affected action stopped. The workflow then returned to Wayfinder so the missing decision or evidence could become a proper ticket.">
+    <h2>Unknowns remain visible</h2>
+    <div class="kua-grid">
+      <div class="kua known">
+        <div class="kua-key">KNOWN</div>
+        <div>Supported by available evidence.</div>
+      </div>
+      <div class="kua unknown">
+        <div class="kua-key">UNKNOWN</div>
+        <div>Required information is missing.</div>
+      </div>
+      <div class="kua assumption">
+        <div class="kua-key">ASSUMPTION</div>
+        <div>Temporary; safe to use explicitly.</div>
+      </div>
+    </div>
+    <p class="insight-takeaway">An UNKNOWN must not become an assumption merely to keep moving.</p>
+  </section>
+
+  <!-- Slide 11: The combined operating loop -->
+  <section class="slide" data-notes="The two skills form a closed loop. Wayfinder decides what needs clarification. Human approval establishes authority. ATE translates the approved decision into an execution contract. Verification produces durable evidence, which returns to the map and may change the next frontier.">
+    <h2>The combined operating loop</h2>
+    <ol class="numbered">
+      <li>Define the destination.</li>
+      <li>Expose the current decision frontier.</li>
+      <li>Explore one material question.</li>
+      <li>Stop at the human gate.</li>
+      <li>Record the approved decision.</li>
+      <li>Compile execution into ATE.</li>
+      <li>Execute and verify.</li>
+      <li>Return evidence to the map.</li>
+    </ol>
+    <p class="insight-takeaway">Wayfinder governs direction. ATE governs action.</p>
+  </section>
+
+  <!-- Slide 12: Applied to the NeoBank HLD -->
+  <section class="slide" data-notes="We did not ask the model to generate the complete HLD in one pass. We resolved the difficult boundaries first: where financial authority lives, how unknown transaction outcomes behave, what freshness customers can see, what AI may access, and what recovery guarantees apply. Later sections were constrained by those earlier decisions instead of inventing new answers.">
+    <h2>How we applied it to the NeoBank HLD</h2>
+    <p class="lead">The workflow resolved, among others:</p>
+    <ul>
+      <li>Consistency and freshness contracts</li>
+      <li>CBS and ODS authority boundaries</li>
+      <li>API and event contracts</li>
+      <li>Eight end-to-end journeys</li>
+      <li>Availability and recovery classes</li>
+      <li>Security and release controls</li>
+      <li>Sizing, cost, and delivery estimates</li>
+      <li>Agentic-engineering bootstrap cost</li>
+    </ul>
+    <p class="insight-takeaway">Each section inherited previously approved decisions.</p>
+  </section>
+
+  <!-- Slide 13: Issue tracker as decision memory -->
+  <section class="slide" data-notes="Conversation alone was not sufficient because the work continued across many sessions. GitHub issues became the durable decision layer. The final document could then be traced back to specific questions, alternatives, approvals, and evidence without copying the complete conversation into the HLD.">
+    <h2>The issue tracker became decision memory</h2>
+    <p class="lead">The durable evidence included:</p>
+    <ul>
+      <li>One canonical Wayfinder map</li>
+      <li>One ticket per material decision</li>
+      <li>Explicit human-gate comments</li>
+      <li>Stable decision summaries</li>
+      <li>Linked dependencies and assumptions</li>
+      <li>QA and merge receipts</li>
+      <li>A traceable route from question to final HLD</li>
+    </ul>
+    <p class="insight-takeaway">Chat supported the work; issues preserved the contract.</p>
+  </section>
+
+  <!-- Slide 14: The failure mode it exposed -->
+  <section class="slide" data-notes="The external review found that some workflow language had entered the final HLD. The architecture was correct, but the document contained process artifacts. We corrected them and added a stronger publication check. This is an important lesson: an auditable workflow still needs a clean boundary between decision evidence and audience-facing deliverables.">
+    <h2>The workflow also exposed its own failure mode</h2>
+    <div class="compare-grid">
+      <div class="compare-card bad">
+        <h3>What went wrong</h3>
+        <p style="margin-bottom: 8px;">Some Wayfinder scaffolding leaked into the final document:</p>
+        <ul>
+          <li>Human-gate labels</li>
+          <li>Issue-comment headings</li>
+          <li>Approval language</li>
+          <li>Working-file notes</li>
+        </ul>
+      </div>
+      <div class="compare-card good">
+        <h3>What we learned</h3>
+        <p>Process evidence belongs in the issue tracker — <strong>not in the submission artifact</strong>.</p>
+        <p class="small" style="color: var(--fg-dim); margin-top: 10px;">An auditable workflow still needs a clean boundary between decision evidence and audience-facing deliverables.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 15: Closing -->
+  <section class="slide" data-notes="The method is not intended for every task. It adds overhead and can become bureaucracy if used mechanically. Its value appears when work is long-running, uncertain, interconnected, or high-risk. In that environment, it gives us something more useful than autonomous generation: controlled collaboration with a durable memory of why the final result exists.">
+    <h2>Human authority, adaptable planning, precise execution</h2>
+    <p class="lead" style="margin-bottom: 20px;">
+      <strong>Wayfinder keeps the route honest.</strong><br>
+      <strong>Agent Technical English keeps each step precise.</strong><br>
+      <strong>The human keeps decision authority.</strong>
+    </p>
+    <div class="when-grid">
+      <div class="when-do">
+        <h3>Use the method when</h3>
+        <ul>
+          <li>The destination spans multiple sessions.</li>
+          <li>Decisions depend on earlier decisions.</li>
+          <li>Agents can change external state.</li>
+          <li>The cost of an implicit assumption is high.</li>
+        </ul>
+      </div>
+      <div class="when-dont">
+        <h3>Do not use it when</h3>
+        <p>One clear, reversible task is enough.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<aside class="notes" id="notes">
+  <div class="notes-header">Speaker notes</div>
+  <div class="notes-content" id="notes-content"></div>
+</aside>
+
+<div class="hud" aria-hidden="true">
+  <span class="counter" id="counter">1 / 15</span>
+  <span class="hint">
+    <kbd>←</kbd> <kbd>→</kbd> navigate ·
+    <kbd>N</kbd> notes ·
+    <kbd>F</kbd> fullscreen
+  </span>
+</div>
+
+<script>
+  (function () {
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const total = slides.length;
+    const notes = document.getElementById('notes');
+    const notesContent = document.getElementById('notes-content');
+    const counter = document.getElementById('counter');
+    let current = 0;
+    let notesVisible = false;
+
+    function show(i) {
+      i = Math.max(0, Math.min(i, total - 1));
+      slides[current].classList.remove('active');
+      current = i;
+      slides[current].classList.add('active');
+      counter.textContent = (current + 1) + ' / ' + total;
+      notesContent.textContent = slides[current].dataset.notes || '';
+    }
+
+    function next() { show(Math.min(current + 1, total - 1)); }
+    function prev() { show(Math.max(current - 1, 0)); }
+    function toggleNotes() {
+      notesVisible = !notesVisible;
+      notes.classList.toggle('visible', notesVisible);
+    }
+    function toggleFullscreen() {
+      const deck = document.getElementById('deck');
+      if (!document.fullscreenElement) {
+        (deck.requestFullscreen || document.documentElement.requestFullscreen).call(deck)?.catch(() => {
+          document.documentElement.requestFullscreen?.();
+        });
+      } else {
+        document.exitFullscreen?.();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+      else if (e.key === 'Home') { e.preventDefault(); show(0); }
+      else if (e.key === 'End') { e.preventDefault(); show(total - 1); }
+      else if (e.key === 'n' || e.key === 'N') { e.preventDefault(); toggleNotes(); }
+      else if (e.key === 'f' || e.key === 'F') { e.preventDefault(); toggleFullscreen(); }
+      else if (/^[1-9]$/.test(e.key)) {
+        const idx = parseInt(e.key, 10) - 1;
+        if (idx < total) { e.preventDefault(); show(idx); }
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('a, button, kbd, .hud, .notes')) return;
+      if (e.clientX < window.innerWidth / 3) prev();
+      else if (e.clientX > (2 * window.innerWidth) / 3) next();
+    });
+
+    const initial = Math.max(0, Math.min((parseInt(location.hash.slice(1), 10) || 1) - 1, total - 1));
+    show(initial);
+  })();
+</script>
+
+</body>
+</html>
