@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeoBank Digital Leap — Final HLD Presentation</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-2: #f8f9fa;
+    --fg: #1a1a1a;
+    --fg-dim: #6b7280;
+    --accent: #2563eb;        /* blue — primary accent */
+    --accent-2: #059669;      /* green — insight color */
+    --rule: #ea580c;          /* orange — rules / risks */
+    --rule-bg: rgba(234, 88, 12, 0.06);
+    --grid: rgba(0, 0, 0, 0.08);
+    --shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 22px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .deck { position: relative; width: 100vw; height: 100vh; }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: none;
+    padding: 60px 80px;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    overflow: hidden;
+  }
+  .slide.active { display: flex; opacity: 1; }
+  .slide.centered { align-items: center; text-align: center; }
+
+  h1 {
+    font-size: 5em;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 0.3em;
+  }
+  h2 {
+    font-size: 3em;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin-bottom: 0.35em;
+    color: var(--accent);
+  }
+  h3 {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--accent-2);
+    margin-bottom: 0.35em;
+  }
+  p, li { font-size: 1.1em; line-height: 1.5; }
+  .lead { font-size: 1.25em; color: var(--fg-dim); }
+  .small { font-size: 0.8em; color: var(--fg-dim); }
+  strong { color: var(--accent); font-weight: 600; }
+  em { color: var(--accent-2); font-style: normal; }
+
+  ul { list-style: none; }
+  ul li { margin-bottom: 0.45em; padding-left: 1.6em; position: relative; }
+  ul li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  .subtitle { font-size: 1.4em; color: var(--fg-dim); margin-bottom: 0.8em; }
+  .meta { font-size: 0.95em; color: var(--fg-dim); margin-top: 0.8em; }
+
+  /* Title slide */
+  .title-slide { text-align: center; align-items: center; }
+  .title-slide h1 {
+    font-size: 5.5em;
+    background: linear-gradient(135deg, var(--accent) 0%, #60a5fa 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .title-slide .accent-line {
+    width: 120px;
+    height: 4px;
+    background: var(--accent);
+    margin: 0.5em auto 1.2em;
+    border-radius: 2px;
+  }
+
+  /* Stat cards */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    margin: 26px 0 30px;
+  }
+  .stat-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .stat {
+    background: var(--bg-2);
+    border: 1px solid var(--grid);
+    border-radius: 12px;
+    padding: 22px 14px;
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 2.6em;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.9em; color: var(--fg-dim); margin-top: 8px; }
+  .bottom-line {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 1.25em;
+    color: var(--accent-2);
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  /* Compare cards */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin: 24px 0;
+  }
+  .compare-card {
+    background: var(--bg-2);
+    border: 1px solid var(--grid);
+    border-radius: 10px;
+    padding: 20px 26px;
+  }
+  .compare-card.bad { border-color: rgba(234, 88, 12, 0.4); background: rgba(234, 88, 12, 0.03); }
+  .compare-card.good { border-color: rgba(5, 150, 105, 0.4); background: rgba(5, 150, 105, 0.03); }
+  .compare-card h3 { color: var(--fg); margin-bottom: 10px; }
+  .compare-card.bad h3 { color: var(--rule); }
+  .compare-card.good h3 { color: var(--accent-2); }
+
+  .insight-headline {
+    font-size: 2.9em;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--fg);
+    margin-bottom: 0.35em;
+  }
+  .insight-takeaway {
+    font-size: 1.15em;
+    color: var(--accent-2);
+    margin-top: 1em;
+    padding-top: 0.9em;
+    border-top: 1px solid var(--grid);
+  }
+
+  /* Tables */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    font-size: 0.9em;
+  }
+  .data-table th {
+    background: var(--bg-2);
+    color: var(--accent);
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 2px solid var(--accent);
+    font-weight: 700;
+  }
+  .data-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--grid);
+    vertical-align: top;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table .risk-name { color: var(--rule); font-weight: 700; }
+  .data-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* Image slide */
+  .image-slide { align-items: center; text-align: center; width: 100%; }
+  .image-slide h2 { text-align: center; width: 100%; }
+  .image-slide p.lead { text-align: center; width: 100%; }
+  .image-frame {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 14px 0;
+  }
+  .image-frame img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+  }
+  /* Taller-than-wide renders: fit by height so nothing clips */
+  .image-frame img.fit-height {
+    width: auto;
+    height: 100%;
+    margin: 0 auto;
+  }
+
+  /* Two-pane: text left, image right */
+  .split {
+    display: grid;
+    grid-template-columns: 44% 56%;
+    gap: 44px;
+    align-items: center;
+    width: 100%;
+  }
+  .split-full { grid-template-columns: 60% 40%; }
+  .split .split-img img {
+    max-width: 100%;
+    max-height: 76vh;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+  }
+
+  /* Timeline */
+  .timeline {
+    display: flex;
+    gap: 0;
+    margin: 26px 0 18px;
+    align-items: stretch;
+  }
+  .timeline-step {
+    flex: 1;
+    padding: 18px;
+    background: var(--bg-2);
+    border: 1px solid var(--grid);
+    border-right: none;
+    text-align: center;
+  }
+  .timeline-step:last-child { border-right: 1px solid var(--grid); border-radius: 0 10px 10px 0; }
+  .timeline-step:first-child { border-radius: 10px 0 0 10px; }
+  .timeline-step.current { background: rgba(37, 99, 235, 0.05); border-color: var(--accent); }
+  .timeline-step-week { color: var(--accent); font-weight: 700; font-size: 1em; }
+  .timeline-step-title { font-size: 1em; margin: 6px 0; font-weight: 600; }
+  .timeline-step-detail { color: var(--fg-dim); font-size: 0.85em; }
+
+  /* Q&A */
+  .qa-slide { text-align: center; align-items: center; }
+  .qa-slide h1 { font-size: 6em; color: var(--accent); }
+  .qa-rules {
+    margin-top: 36px;
+    font-size: 0.9em;
+    color: var(--fg-dim);
+    border-top: 1px solid var(--grid);
+    padding-top: 18px;
+    max-width: 780px;
+  }
+  .qa-rules strong { color: var(--rule); }
+
+  /* HUD + notes */
+  .hud {
+    position: fixed;
+    bottom: 18px;
+    right: 24px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 0.85em;
+    color: var(--fg-dim);
+    background: rgba(255, 255, 255, 0.92);
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--grid);
+    box-shadow: var(--shadow);
+  }
+  .hud .counter { color: var(--accent); font-weight: 600; }
+  .hud kbd {
+    background: var(--bg-2);
+    border: 1px solid var(--grid);
+    border-radius: 3px;
+    padding: 1px 6px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.95em;
+    color: var(--fg);
+  }
+
+  .notes {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    background: rgba(248, 249, 250, 0.98);
+    border-top: 2px solid var(--accent);
+    padding: 24px 60px 28px;
+    max-height: 50vh;
+    overflow-y: auto;
+    transform: translateY(0);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+  }
+  .notes.visible { opacity: 1; visibility: visible; }
+  .notes-header {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.9em;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .notes-content {
+    color: var(--fg);
+    font-size: 1.05em;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    max-width: 1100px;
+  }
+
+  @media print {
+    .slide { display: flex !important; opacity: 1 !important; page-break-after: always; position: relative; height: 100vh; }
+    .hud, .notes { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<main class="deck" id="deck">
+
+  <!-- Slide 1: Title -->
+  <section class="slide title-slide centered" data-notes="I'm Yiannis. This is the final HLD for NeoBank Digital Leap — the document that closes the Software Architecture course. MS1 showed the preliminary picture. Today I present the finished design: the hardened boundaries, the managed contracts, the sizing, the cost, and the plan. Roughly fifteen slides, fifteen minutes, plus questions.">
+    <h1>NeoBank Digital Leap</h1>
+    <div class="accent-line"></div>
+    <p class="subtitle">Software Architecture — Final High Level Design</p>
+    <p class="meta">Yiannis Miliaresis · Revision 1.0 · August 2026 · GDE Architecture</p>
+  </section>
+
+  <!-- Slide 2: MS1 → Final -->
+  <section class="slide" data-notes="Honest accounting first: what changed between MS1 and the final. The three insights survived intact — wrap don't replace, CQRS as survival, AI as a privacy boundary. They were approved and they carried. What we added since: eight trust zones with explicit crossing rules; recovery classes RC0 through RC3 with RTO and RPO numbers; fourteen managed API and event contracts including field-level rules; sizing, cost, and a P75 delivery plan; and the teacher-mandated network topology. The gap discipline worked: MS1 listed its deferments publicly, and MS2 plus the final closed them on schedule. That is the right way to write milestones — promise gaps, then close them.">
+    <h2>MS1 → Final: what got closed</h2>
+    <div class="compare-grid">
+      <div class="compare-card good">
+        <h3>Survived MS1 review</h3>
+        <ul>
+          <li>Wrap, don't replace (Strangler Fig)</li>
+          <li>CQRS — reads from ODS projections</li>
+          <li>AI behind Advisor Context boundary</li>
+        </ul>
+      </div>
+      <div class="compare-card">
+        <h3>Added since MS1</h3>
+        <ul>
+          <li>8 trust zones, explicit crossing rules</li>
+          <li>Recovery classes RC0–RC3 with RTO/RPO</li>
+          <li>14 managed API + event contracts</li>
+          <li>Sizing, TCO, P75 delivery plan</li>
+        </ul>
+      </div>
+    </div>
+    <p class="insight-takeaway">MS1 deferred four things publicly. MS2 and this final closed them. That's how milestones are supposed to work.</p>
+  </section>
+
+  <!-- Slide 3: The architecture in one picture -->
+  <section class="slide image-slide" data-notes="The high-level solution view — one picture, one spine. Channels: mobile, web, Open Banking TPPs. Ingress: WAF and DDoS, then API Gateway, then IAM, BFFs and consent. From the BFFs the world splits. On one side: the on-prem Digital Core — account, transfer, consent, reporting, advisor context. Commands go Transfer → Real-Time Fraud → CBS Transaction Gateway → CBS on z/OS. Reads come back through the other side: mainframe CDC → event bus → Enterprise RDBMS ODS → Digital Core services. The AI Advisor sits in the regional cloud and reaches data only through the Advisor Context boundary. Two boundaries matter for money: the ingress chain is the only public door; the CBS Gateway is the only mainframe door. Everything else is a managed projection.">
+    <h2>The architecture in one picture</h2>
+    <p class="lead">Channels → fixed ingress → Digital Core. Commands via CBS Gateway only. Reads via CDC → Event Bus → ODS projections.</p>
+    <div class="image-frame">
+      <img src="img/high-level.png" alt="High-Level Solution view" style="width: 100%; height: auto;">
+    </div>
+    <p class="small"><code>docs/diagrams/01-high-level-solution.mmd</code>. Arrow direction is normative (HLD §3.1.2).</p>
+  </section>
+
+  <!-- Slide 4: Trust boundaries by design -->
+  <section class="slide" data-notes="MS1 had three rules. The final has eight zones, and every crossing is specified: Z1 external actors — untrusted. Z2 cloud public edge — WAF, DDoS, API Gateway. Z3 cloud private — IAM, BFFs, AI Advisor. Z4 hybrid interconnect and DMZ — NGFW, reverse proxy. Z5 Digital Core — the regulated services. Z6 data and event platform — ODS, event bus, audit store. Z7 mainframe authority. Z8 security and management plane. A mobile app crosses Z1 to Z2 to Z3 to Z4 to Z5 — never directly. The AI Advisor lives in Z3 and reaches Z5 through exactly one contract: the Advisor Context boundary. A TPP enters through the same chain as a bank customer — no side door to the Consent Service. Each crossing requires authenticated workload identity, mTLS, scoped tokens, and evidence. The rules from MS1 are now zone algebra.">
+    <h2>Trust boundaries by design</h2>
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-num">Z1</div><div class="stat-label">External actors — untrusted</div></div>
+      <div class="stat"><div class="stat-num">Z2</div><div class="stat-label">Cloud public edge — WAF/DDoS/Gateway</div></div>
+      <div class="stat"><div class="stat-num">Z3</div><div class="stat-label">Cloud private — IAM, BFF, AI Advisor</div></div>
+      <div class="stat"><div class="stat-num">Z4</div><div class="stat-label">Interconnect / DMZ — NGFW, proxy</div></div>
+      <div class="stat"><div class="stat-num">Z5</div><div class="stat-label">Digital Core — regulated services</div></div>
+      <div class="stat"><div class="stat-num">Z6</div><div class="stat-label">Data &amp; event platform — ODS, bus, audit</div></div>
+      <div class="stat"><div class="stat-num">Z7</div><div class="stat-label">Mainframe authority — CBS, Db2, ADABAS</div></div>
+      <div class="stat"><div class="stat-num">Z8</div><div class="stat-label">Security &amp; management plane — PAM, KMS</div></div>
+      <div class="bottom-line">Every crossing: workload identity + mTLS + scoped tokens + evidence. Network location is not identity.</div>
+    </div>
+  </section>
+
+  <!-- Slide 5: Four journeys, one discipline -->
+  <section class="slide" data-notes="Eight approved journeys structure the HLD; four carry the talk. Authentication and ingress: OIDC tokens, MFA, correlation and idempotency headers — or the journey fails closed. Account read: ODS projection plus a CBS-confirmed recent-write overlay after transfers; read-your-writes is preserved while the ODS converges; freshness metadata is exposed on screen. Bank transfer: Fraud first — a binary APPROVE/DECLINE. Timeout is not a decline. Then the CBS Gateway. An unknown CBS outcome becomes PROCESSING — never a fabricated result. Idempotent retries reuse the same key. Open Banking: TPPs get a server-issued ConsentContext — scope, accounts, SCA. AIS reuses the account contract, PIS reuses the transfer contract. Same discipline, whichever channel the customer arrives on.">
+    <h2>Four journeys, one discipline</h2>
+    <table class="data-table">
+      <thead>
+        <tr><th style="width:20%;">Journey</th><th style="width:47%;">The rule that protects it</th><th style="width:33%;">Failure behavior</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="risk-name">Authentication &amp; ingress</td>
+          <td>OIDC + MFA + correlation / idempotency headers; domain services re-check authorization.</td>
+          <td>Fail closed; sanitized RFC 9457 problem.</td>
+        </tr>
+        <tr>
+          <td class="risk-name">Account information read</td>
+          <td>ODS projection + CBS-confirmed recent-write overlay after transfers; freshness metadata exposed.</td>
+          <td>Read-your-writes for completed transfers; quarantined account readable, writes blocked.</td>
+        </tr>
+        <tr>
+          <td class="risk-name">Bank transfer</td>
+          <td>Binary fraud decision first; CBS only via the Gateway; idempotency key spans retries.</td>
+          <td>Fraud timeout → NOT_SUBMITTED. Unknown CBS outcome → PROCESSING, never fabricated.</td>
+        </tr>
+        <tr>
+          <td class="risk-name">Open Banking AIS/PIS</td>
+          <td>Server-issued ConsentContext: TPP, PSU, scope, accounts, SCA.</td>
+          <td>Missing / expired / out-of-scope context rejected before business processing.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="insight-takeaway">An HTTP 2xx alone is never proof of success. Journeys are measured at the authoritative durable outcome.</p>
+  </section>
+
+  <!-- Slide 6: Managed contracts -->
+  <section class="slide" data-notes="The HLD manages fourteen contracts — this is what makes a hundred-page document implementable. Seven APIs: TransferCommand, TransferStatusResult, FraudDecision, CbsTransactionCommandResult, AccountInformationResponse, ConsentContext, AdvisorContextResponse. Seven events wrapped in a common envelope: LegacyDataChange, TransferOutcome, ProjectionStatus, MonthlyStatementSnapshot, AuditEvidence, ConsentChanged, CacheInvalidation. Every field has a named authority — CBS owns commit and balances; Transfer Service owns workflow state; Fraud Engine owns the decision; Consent Service owns scope; ODS Projection owns freshness, never business balances. Examples: the FraudDecision contract returns APPROVE or DECLINE — a transport failure is never a decline; and raw CBS codes never escape the Gateway. Event discipline: at-least-once delivery, eventId deduplication, account-scoped ordering. Full field tables and six JSON examples are in Appendix B.">
+    <h2>Managed contracts: the HLD's API surface</h2>
+    <div class="compare-grid">
+      <div class="compare-card">
+        <h3>7 APIs — authority per field</h3>
+        <ul>
+          <li>TransferCommand / TransferStatusResult</li>
+          <li>FraudDecision — binary; timeout is not a decline</li>
+          <li>CbsTransactionCommandResult — raw CBS codes stay in the Gateway</li>
+          <li>AccountInformationResponse — includes freshness + writeCapability</li>
+          <li>ConsentContext — server-issued, short-lived</li>
+          <li>AdvisorContextResponse — eligible candidates only</li>
+        </ul>
+      </div>
+      <div class="compare-card">
+        <h3>7 events — one envelope</h3>
+        <ul>
+          <li>eventId, correlationId, causationId, partitionKey, sourcePosition, payload</li>
+          <li>LegacyDataChange · TransferOutcome · ProjectionStatus</li>
+          <li>MonthlyStatementSnapshot · AuditEvidence · ConsentChanged</li>
+          <li>CacheInvalidation — a hint, never an authority</li>
+        </ul>
+      </div>
+    </div>
+    <p class="insight-takeaway">At-least-once delivery; consumers deduplicate by eventId and order account-scoped. Full tables: Appendix B, six JSON examples.</p>
+  </section>
+
+  <!-- Slide 7: Network topology -->
+  <section class="slide" data-notes="The teacher-mandated topology — the physical story of the zones. Internet and TPP networks hit the managed WAF and DDoS in cloud public subnets; API Gateway terminates TLS 443. IAM, BFFs and the AI Advisor live in regional cloud private subnets — no public IPs, workload mTLS. The cloud-to-bank link is two Direct Connect circuits in separate facilities, encrypted BGP, with a VPN backup — provider-diverse, validated in Phase 0. On-prem: an NGFW HA pair, then the DMZ reverse proxy, then the Digital Core on Kubernetes — three control nodes, eight to fourteen workers by year. The data tier fans out: ODS cluster, event bus quorum, and observability each with warm-DR reserve; the CBS Gateway HA pair is the single door to the mainframe zone. CIDRs, carriers and bandwidth remain Phase-0 items — the zone relationships and the prohibited routes, however, are fixed today. That was flagged as the scaffold in MS1; the final fills it in.">
+    <h2>Network topology — zones made physical</h2>
+    <div class="split">
+      <div>
+        <p class="lead" style="margin-bottom: 0.6em;">Internet → WAF/DDoS in cloud public subnets → API Gateway (TLS 443) → cloud private (IAM, BFFs, AI Advisor; mTLS, no public IPs).</p>
+        <p class="lead" style="margin-bottom: 0.6em;">Cloud↔bank: dual Direct Connect in separate facilities, encrypted BGP + VPN backup. On-prem: NGFW HA pair → DMZ reverse proxy → Digital Core (K8s 3 control + 8/14 workers).</p>
+        <p class="lead" style="margin-bottom: 0.6em;">Data tier: ODS, Event Bus quorum, Observability each with warm-DR; CBS Gateway HA pair is the only mainframe door.</p>
+        <p class="small">Zone relationships/prohibited routes fixed; CIDRs/carriers/bandwidth Phase-0 (L-006). <code>docs/diagrams/06-network-topology.mmd</code></p>
+      </div>
+      <div class="split-img" style="text-align: center;">
+        <img src="img/network-topology.png" alt="Network topology">
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 8: Recovery classes -->
+  <section class="slide" data-notes="Resilience is priced, not assumed. RC0 — authority and evidence: 15-minute RTO, zero permanent loss. RC1 — customer-critical access: 30 minutes, 5 minutes of reconstructable state. RC2 — replayable projections like the ODS: 4 hours, zero permanent loss after replay. RC3 — degradable derived capabilities, statements and AI: 24 hours. The AI and the monthly statement degrade independently — customers keep account access and money movement. Promotion to a recovery region is human-governed: the Incident Commander, the Service Owner, plus the Mainframe Authority for anything touching the CBS. Security can block. Without dual approval, no customer traffic moves — recovery is a controlled ceremony, not an accident of automation. That ceremony is recorded as immutable evidence."> 
+    <h2>Recovery classes: priced, not assumed</h2>
+    <table class="data-table">
+      <thead>
+        <tr><th>Class</th><th>RTO</th><th>RPO</th><th>Scope</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="risk-name">RC0 — authority/evidence</td><td>15 min</td><td>Zero permanent loss</td><td>Commands, outcomes, consent, audit receipts</td></tr>
+        <tr><td class="risk-name">RC1 — customer-critical</td><td>30 min</td><td>5 min reconstructable</td><td>Auth, account serving, API layer</td></tr>
+        <tr><td class="risk-name">RC2 — replayable projections</td><td>4 h</td><td>Zero after replay</td><td>ODS projections to full convergence</td></tr>
+        <tr><td class="risk-name">RC3 — degradable derived</td><td>24 h</td><td>24 h</td><td>Statements, AI datasets</td></tr>
+      </tbody>
+    </table>
+    <p class="insight-takeaway">RC0 promotion is human-governed (L-013): Incident Commander + Service Owner + Mainframe Authority. AI and statements degrade independently (NFR-AR-070).</p>
+  </section>
+
+  <!-- Slide 9: Release discipline -->
+  <section class="slide" data-notes="Release discipline is written as normative controls, not aspirations. One immutable signed artifact is built once and promoted across four environments; configuration and secrets stay external. Production admission fails closed without provenance, SBOM, scan results, and dual approval for anything touching security, money, the CBS, contracts, or infrastructure. Compatibility: additive changes inside a major version; breaking changes get a parallel major and a deprecation window — at least twelve months for public and Open Banking APIs, at least six months for the CBS Gateway. Database changes expand, migrate, contract. Rollback is allowed only while state and contracts stay compatible; anything externally visible or irreversible goes roll-forward with approved compensation. Feature flags have owner, expiry, and a kill switch — and they never bypass fraud, consent, CBS authority, or audit. Every release leaves one canonical receipt, kept seven years in WORM storage.">
+    <h2>Release discipline — normative, not aspirational</h2>
+    <ul>
+      <li><strong>Build once, promote immutably</strong> — signed artifact across DEV → INTEGRATION → PRE-PROD → PROD; config external.</li>
+      <li><strong>Admission fails closed</strong> — missing provenance, SBOM, scan, or dual-approval (for security / money / CBS / contracts) stops the release.</li>
+      <li><strong>Compatibility windows</strong> — public &amp; Open Banking APIs ≥ 12 months parallel support; CBS Gateway ≥ 6 months; expand–migrate–contract for data.</li>
+      <li><strong>Rollback vs roll-forward</strong> — rollback only while state/contract-compatible; committed CBS transactions and durable events are never rolled back.</li>
+      <li><strong>Feature flags on a leash</strong> — owner, expiry, kill switch; never bypass fraud, consent, CBS authority, or audit.</li>
+      <li><strong>Evidence</strong> — one canonical release receipt per release; 7 years WORM.</li>
+    </ul>
+  </section>
+
+  <!-- Slide 10: Sizing & cost -->
+  <section class="slide" data-notes="The mandatory operational cost model, priced on 2026-08-27. Scale basis: a hundred thousand users year one, a million year three, five percent peak concurrency. That yields nodes: 8/14 application compute, 6/12 ODS, 6/12 event bus, 8/16 object archive and evidence, 6/12 hot observability — 34 nodes year one, 66 year three. Cost bands: infrastructure TCO is 2.42M dollars base year one, 5.20M dollars base year three — low-to-high roughly 1.5 to 4.2 and 3.2 to 9.1. Staffing is tracked separately. The AI inference budget is explicit: fifteen point seven-seven billion input tokens in year one — enough for honest advice at scale, at roughly six thousand dollars a year in the base case with at least ninety percent on the cost-efficient route. Every number is a low-base-high band with a twenty percent contingency. Phase 0 validates hardware quotes, ODS licenses, and cloud contracted rates — this is an architecture estimate, explicitly not purchasing authority. ODS licensing is the biggest uncertainty, one of the reasons the vendor decision stays open.">
+    <h2>Sizing &amp; operational cost</h2>
+    <table class="data-table">
+      <thead>
+        <tr><th>Measure</th><th class="num">Year 1</th><th class="num">Year 3</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Registered digital users</td><td class="num">100,000</td><td class="num">1,000,000</td></tr>
+        <tr><td>Peak concurrent sessions (5%)</td><td class="num">5,000</td><td class="num">50,000</td></tr>
+        <tr><td>Total physical nodes (app 8/14 · ODS 6/12 · bus 6/12 · evidence 8/16 · observability 6/12)</td><td class="num">34</td><td class="num">66</td></tr>
+        <tr><td>Infrastructure TCO (low / base / high, USD M/yr, +20% contingency)</td><td class="num">1.48 / 2.42 / 4.24</td><td class="num">3.22 / 5.20 / 9.11</td></tr>
+        <tr><td>+ Operational staffing (base)</td><td class="num">3.6 total</td><td class="num">7.0 total</td></tr>
+        <tr><td>AI inference (base, low is 90%+ cost-efficient route)</td><td class="num">0.006</td><td class="num">0.060</td></tr>
+      </tbody>
+    </table>
+    <p class="insight-takeaway">Bands, not point numbers. Phase 0 validates quotes, licenses, contracted rates (L-009). Not purchasing authority.</p>
+  </section>
+
+  <!-- Slide 11: Delivery plan -->
+  <section class="slide" data-notes="The delivery plan is a P75 plan, not a P50 hope. Fifty-six work packages, three-point estimates. Expected effort around six thousand person-days at the fifty-fifth percentile; the funded envelope is the P75 of six thousand two hundred and seventeen, plus a separately governed ten percent reserve — six thousand eight hundred and thirty-nine, roughly three hundred and eleven person-months. Staffing: forty-six average, fifty-five peak FTE, using three of the five COBOL specialists. Phases overlap deliberately: Phase 0 validation while Foundations builds thin slices; capability build while integration hardening starts; cutover around Week 48, hypercare to Week 52. That lands the P75 inside the one-year mandate with the P50 at forty-six weeks P90 at sixty as bounded sensitivity. External dependency scenarios are explicit: on-time fifty-two, moderate sixty, major sixty-eight to seventy-six weeks — approval and procurement delays modelled as elapsed time, not hidden padding. And one honest line in the estimates: agentic engineering enablement — the bootstrap work of AI coding agents — is budgeted as real work, one hundred forty person-days most likely, running Weeks one to ten. AI productivity uplift in the funded baseline is zero by assumption. That is unusual honesty in a 2026 estimate.">
+    <h2>Delivery plan: P75, not P50-hopium</h2>
+    <div class="stat-grid cols-2" style="margin-top: 4px;">
+      <div class="stat"><div class="stat-num">6,839</div><div class="stat-label">P75 funding envelope (person-days) = 311 person-months</div></div>
+      <div class="stat"><div class="stat-num">46 / 55</div><div class="stat-label">avg / peak FTE · 3 of 5 COBOL specialists</div></div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-step"><div class="timeline-step-week">Wk 1–4</div><div class="timeline-step-title">P0 Validate</div><div class="timeline-step-detail">Authorities, vendors, estimates</div></div>
+      <div class="timeline-step"><div class="timeline-step-week">Wk 3–14</div><div class="timeline-step-title">P1 Thin slices</div><div class="timeline-step-detail">Account + Transfer end-to-end</div></div>
+      <div class="timeline-step"><div class="timeline-step-week">Wk 9–32</div><div class="timeline-step-title">P2 Build</div><div class="timeline-step-detail">Journeys, data, security, platform</div></div>
+      <div class="timeline-step"><div class="timeline-step-week">Wk 24–42</div><div class="timeline-step-title">P3 Hardening</div><div class="timeline-step-detail">Performance, resilience, migration</div></div>
+      <div class="timeline-step"><div class="timeline-step-week">Wk 38–48</div><div class="timeline-step-title">P4 Pilot/cert</div><div class="timeline-step-detail">Readiness gates</div></div>
+      <div class="timeline-step current"><div class="timeline-step-week">Wk 47–52</div><div class="timeline-step-title">P5 Cutover</div><div class="timeline-step-detail">Cutover Wk 48 + hypercare</div></div>
+    </div>
+    <p class="insight-takeaway">External delays modelled as scenarios (52 / 60 / 68–76 wks). Agentic bootstrap budgeted as real work; zero AI uplift assumed (L-011).</p>
+  </section>
+
+  <!-- Slide 12: Risks & limitations -->
+  <section class="slide" data-notes="Honest edges remain — they are named, not hidden. Fifteen limitations, twenty-one risks, all High risks block production readiness until mitigated or formally accepted. Four I'll highlight. R-009: the five-person COBOL pool is a High risk on the critical path — mitigation is minimizing CBS change, reserving three of the five specialists, and thin-slicing early. L-005: ODS vendor not selected — Oracle, SQL Server, Db2 are the approved shortlist; evaluation evidence decides in Phase 0; the architecture is portable across all three by design. L-013: RC0 recovery is human-governed — deliberate, because financial-authority DR should not be fully automatic. R-016: legacy CBS protocol limits weaken modern controls — the Gateway, canonical contracts, the PROCESSING state and reconciliation are the mitigation. And from the whole register: unaccepted High risks R-1 through R-6, R-9, R-10, R-11, R-12, R-13, R-16, R-19 block production readiness. That's the mechanism that keeps risk honest.">
+    <h2>Risks &amp; limitations — named, not hidden</h2>
+    <table class="data-table">
+      <thead>
+        <tr><th style="width:16%;">Item</th><th style="width:44%;">What it is</th><th style="width:40%;">Boundary / mitigation</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="risk-name">R-009 (High)</td><td>Five-person COBOL pool constrains critical path.</td><td>Minimize CBS change; reserve 3 of 5; thin-slice early; escalate capacity.</td></tr>
+        <tr><td class="risk-name">L-005</td><td>ODS vendor unselected (Oracle / SQL Server / Db2).</td><td>Phase-0 evidence decides; portable canonical model keeps the design portable.</td></tr>
+        <tr><td class="risk-name">L-013</td><td>RC0 recovery promotion is human-governed.</td><td>Deliberate: financial-authority DR must not be fully automatic.</td></tr>
+        <tr><td class="risk-name">R-016 (High)</td><td>Legacy CBS protocol/encryption/unknown-outcome limits.</td><td>Gateway, canonical contracts, PROCESSING state, reconciliation evidence.</td></tr>
+      </tbody>
+    </table>
+    <p class="insight-takeaway">15 limitations · 21 risks. Unaccepted High risks block production readiness with owner + expiry (R-001..R-006, R-009..R-013, R-016, R-019).</p>
+  </section>
+
+  <!-- Slide 13: Traceability & evidence -->
+  <section class="slide" data-notes="This is the slide most HLDs skip, and the one the course rewards: traceability. Eighty-nine requirements — nineteen functional, seventy non-functional — each maps to an HLD section, a decision ticket, and a diagram. Four appendices provide that evidence: A traceability, B the fourteen-contract field catalog, C sizing and TCO derivation, D the delivery estimate. Twenty stable assumption IDs point at their sources, and when an assumption becomes a requirement the IDs cross-reference. Twelve open issues remain — ten needing Phase-0 evidence; two resolved at HLD level. The register deliberately preserves stable identifiers, because a validation failure must become a visible decision — not a silent rewrite of an approved contract. That's the audit spine of the document itself.">
+    <h2>Traceability &amp; evidence</h2>
+    <div class="stat-grid" style="margin-top: 4px;">
+      <div class="stat"><div class="stat-num">89</div><div class="stat-label">requirements (19 FN + 70 NFR) w/ section + decision + diagram</div></div>
+      <div class="stat"><div class="stat-num">4</div><div class="stat-label">appendices — traceability / contracts / sizing / estimate</div></div>
+      <div class="stat"><div class="stat-num">20</div><div class="stat-label">stable assumption IDs, sourced &amp; cross-referenced</div></div>
+      <div class="stat"><div class="stat-num">12</div><div class="stat-label">open issues — 10 Phase-0 validations, 2 resolved in HLD</div></div>
+      <div class="bottom-line">Stable identifiers mean a validation failure becomes a visible decision, not a quiet rewrite.</div>
+    </div>
+  </section>
+
+  <!-- Slide 14: Closing message -->
+  <section class="slide" data-notes="Three sentences to close. The mainframe was never the obstacle; treated as the authoritative ledger it already is, it became the foundation — and the whole architecture crystallized from that acceptance. The honest boundary beats the clever feature, every time: the Advisor Context boundary made the AI simpler, the ODS's non-authority made reads reliable, the PROCESSING state made timeouts survivable. And final: constraints aren't the problem — they're the design. The one-year MVP, the five COBOL developers, the five-nines target, the regional GDPR rule — each one narrowed the option space until only this architecture remained. That's what a final HLD should show: not that every question is answered, but that every answered question stays answered under pressure. Thank you — questions welcome.">
+    <div class="insight-headline">The mainframe isn't the obstacle. <em>It's the foundation.</em></div>
+    <ul>
+      <li><strong>Honest boundary &gt; clever feature</strong> — Advisor Context, ODS non-authority, PROCESSING.</li>
+      <li><strong>Constraints are the design</strong> — 1-yr MVP, 5 COBOL devs, 99.999%, regional GDPR.</li>
+      <li><strong>A final HLD</strong> — not every question answered; every answered question stable under pressure.</li>
+    </ul>
+  </section>
+
+  <!-- Slide 15: Q&A -->
+  <section class="slide qa-slide centered" data-notes="Thank you.">
+    <h1>Thank you.</h1>
+    <p class="subtitle">Questions welcome — the architecture crystallizes once you stress it.</p>
+    <div class="qa-rules">
+      <strong>Rule 1:</strong> WAF → API Gateway → IAM/BFF is the only public front door.<br>
+      <strong>Rule 2:</strong> The CBS Transaction Gateway is the only path to the mainframe.<br>
+      <strong>Rule 3:</strong> The AI Advisor reads only through the Advisor Context boundary.<br>
+      <strong>Rule 4 (final):</strong> Unknown outcomes become PROCESSING — never fabricated.
+    </div>
+  </section>
+
+</main>
+
+<aside class="notes" id="notes">
+  <div class="notes-header">Speaker notes</div>
+  <div class="notes-content" id="notes-content"></div>
+</aside>
+
+<div class="hud" aria-hidden="true">
+  <span class="counter" id="counter">1 / 15</span>
+  <span class="hint">
+    <kbd>←</kbd> <kbd>→</kbd> navigate ·
+    <kbd>N</kbd> notes ·
+    <kbd>F</kbd> fullscreen
+  </span>
+</div>
+
+<script>
+  (function () {
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const total = slides.length;
+    const notes = document.getElementById('notes');
+    const notesContent = document.getElementById('notes-content');
+    const counter = document.getElementById('counter');
+    let current = 0;
+    let notesVisible = false;
+
+    function show(i) {
+      i = Math.max(0, Math.min(i, total - 1));
+      slides[current].classList.remove('active');
+      current = i;
+      slides[current].classList.add('active');
+      counter.textContent = (current + 1) + ' / ' + total;
+      notesContent.textContent = slides[current].dataset.notes || '';
+    }
+
+    function next() { show(Math.min(current + 1, total - 1)); }
+    function prev() { show(Math.max(current - 1, 0)); }
+    function toggleNotes() {
+      notesVisible = !notesVisible;
+      notes.classList.toggle('visible', notesVisible);
+    }
+    function toggleFullscreen() {
+      const deck = document.getElementById('deck');
+      if (!document.fullscreenElement) {
+        (deck.requestFullscreen || document.documentElement.requestFullscreen).call(deck)?.catch(() => {
+          document.documentElement.requestFullscreen?.();
+        });
+      } else {
+        document.exitFullscreen?.();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+      else if (e.key === 'Home') { e.preventDefault(); show(0); }
+      else if (e.key === 'End') { e.preventDefault(); show(total - 1); }
+      else if (e.key === 'n' || e.key === 'N') { e.preventDefault(); toggleNotes(); }
+      else if (e.key === 'f' || e.key === 'F') { e.preventDefault(); toggleFullscreen(); }
+      else if (/^[1-9]$/.test(e.key)) {
+        const idx = parseInt(e.key, 10) - 1;
+        if (idx < total) { e.preventDefault(); show(idx); }
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('a, button, kbd, .hud, .notes')) return;
+      if (e.clientX < window.innerWidth / 3) prev();
+      else if (e.clientX > (2 * window.innerWidth) / 3) next();
+    });
+
+    // Deep link: #N opens slide N (1-based)
+    const initial = Math.max(0, Math.min((parseInt(location.hash.slice(1), 10) || 1) - 1, total - 1));
+    show(initial);
+  })();
+</script>
+
+</body>
+</html>
