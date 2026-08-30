@@ -107,8 +107,8 @@ ODS: Microsoft SQL Server Enterprise Edition with enterprise HA/DR configuration
 **Good fit when:**
 
 - The bank wants technology alignment with its existing IBM ecosystem.
-- Existing DB2/mainframe teams can support the operational model.
-- The ODS receives data from DB2 and ADABAS through controlled replication/CDC pipelines.
+- Existing Db2/mainframe teams can support the operational model.
+- The ODS receives data from Db2 and ADABAS through controlled replication/CDC pipelines.
 - The bank values IBM vendor alignment and mainframe-adjacent support.
 
 **Architecture fit:**

@@ -11,7 +11,7 @@ The architecture separates four concerns:
 3. Financial commands reach the CBS only through the CBS Transaction Gateway.
 4. Read-heavy journeys use a reconciled Enterprise RDBMS ODS populated by canonical CDC events.
 
-The regional cloud hosts the public edge, elastic channel services, and the AI Financial Advisor. The AI Advisor receives only purpose-limited data through the Advisor Context Service. It has no direct network or application route to the ODS, DB2, ADABAS, or the CBS.
+The regional cloud hosts the public edge, elastic channel services, and the AI Financial Advisor. The AI Advisor receives only purpose-limited data through the Advisor Context Service. It has no direct network or application route to the ODS, Db2, ADABAS, or the CBS.
 
 ## 3.1.2 High-Level Solution View
 
@@ -34,7 +34,7 @@ Authoritative source: `docs/diagrams/07-c4-container.mmd`.
 | Transfer Service | On-premises Digital Core | Transfer state machine, idempotency, fraud and CBS orchestration | Fraud Engine and CBS Gateway |
 | Real-Time Fraud Engine | On-premises Digital Core | Binary APPROVE or DECLINE decision | Governed fraud policy/model |
 | CBS Transaction Gateway | Mainframe integration zone | Canonical anti-corruption boundary | CBS |
-| CDC and Canonical Mapper | Mainframe integration zone | Canonical ACCOUNT, BALANCE and TRANSACTION changes | DB2/ADABAS logs |
+| CDC and Canonical Mapper | Mainframe integration zone | Canonical ACCOUNT, BALANCE and TRANSACTION changes | Db2/ADABAS logs |
 | Event Bus | On-premises data platform | Durable at-least-once event delivery | Producer outboxes |
 | ODS Projection Service | On-premises data platform | Account-scoped ordered projection and quarantine | Event Bus |
 | Enterprise RDBMS ODS | On-premises data platform | Non-authoritative read projection | CBS-derived events |
@@ -98,7 +98,7 @@ The observability model follows eight end-to-end journeys rather than isolated s
 
 - A mobile app, web app, or TPP MUST NOT call the API Gateway without passing through the WAF/DDoS boundary.
 - A TPP MUST NOT call the Consent Service or a domain service directly.
-- A digital service MUST NOT call the CBS, DB2, or ADABAS except through the approved gateway or CDC boundary.
+- A digital service MUST NOT call the CBS, Db2, or ADABAS except through the approved gateway or CDC boundary.
 - The ODS MUST NOT authorize a balance-changing transaction.
 - The AI Advisor MUST NOT query the ODS or legacy stores directly.
 - Offline fraud analytics MUST NOT sit on the synchronous transfer path.

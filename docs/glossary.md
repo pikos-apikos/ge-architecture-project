@@ -3,7 +3,7 @@
 | Term | Meaning |
 |---|---|
 | ADABAS | Legacy database used for customer information in the current NeoBank estate. |
-| Advisor Context API | On-premises data-minimization boundary between the cloud AI Financial Advisor and the ODS. Checks consent scope, returns only authorized minimized customer context, and records the data-minimization decision in the audit log (D-008). |
+| Advisor Context Service | On-premises data-minimization boundary between the cloud AI Financial Advisor and governed projections. Checks consent and purpose scope, returns only authorized minimized customer context, applies bank product-eligibility rules, and records the data-minimization decision in the audit log (D-008). |
 | AI Financial Advisor | Cloud-allowed digital service that provides financial guidance based on authorized customer data. |
 | API Gateway | Managed entry point for public APIs, responsible for routing, throttling, request validation, and policy enforcement. |
 | AIS | Account Information Service under Open Banking. |
@@ -12,7 +12,7 @@
 | CBS Transaction Gateway | Controlled integration boundary between new digital services and the legacy CBS transaction interface. |
 | CDC | Change Data Capture. A technique for detecting and propagating database changes to downstream systems. |
 | CQRS | Command Query Responsibility Segregation. A design style that separates write operations from read operations. |
-| DB2 | Legacy transaction database used by the current CBS estate. |
+| Db2 | Legacy transaction database used by the current CBS estate. |
 | Digital Core | New on-premises service platform hosting regulated, CBS-adjacent, and latency-sensitive workloads. |
 | Digital Edge | Cloud-facing platform exposing digital banking APIs and customer-facing integration. |
 | DDoS | Distributed Denial of Service. A type of attack that attempts to overwhelm public systems. |

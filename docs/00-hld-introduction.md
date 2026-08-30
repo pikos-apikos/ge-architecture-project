@@ -8,7 +8,7 @@ NeoBank Digital Leap defines the Year-1 MVP architecture for a publicly traded r
 
 The design uses a hybrid Strangler Fig architecture. Money movement remains strongly controlled through the CBS Transaction Gateway. Scalable read journeys use a reconciled on-premises Enterprise RDBMS ODS populated by canonical CDC events. The regional cloud provides the protected public edge, elastic channel services, and the AI Financial Advisor. Regulatory, identity, data, network, and evidence boundaries remain explicit across cloud, on-premises, and mainframe zones.
 
-The MVP covers account information and balances, internal and external transfers, real-time and offline fraud modes, reconciled monthly statements, Open Banking AIS/PIS, and an AI financial advisor that can recommend eligible bank products. Bank rules decide eligibility; the AI ranks and explains. The AI has no direct access to the CBS, DB2, ADABAS, or ODS.
+The MVP covers account information and balances, internal and external transfers, real-time and offline fraud modes, reconciled monthly statements, Open Banking AIS/PIS, and an AI financial advisor that can recommend eligible bank products. Bank rules decide eligibility; the AI ranks and explains. The AI has no direct access to the CBS, Db2, ADABAS, or ODS.
 
 The principal quality targets are 99.999% availability for the customer-critical aggregate, no loss of accepted financial commands or mandatory evidence, immediate read-your-writes for completed digital transfers, up to 24 hours of visible staleness only for the external activity allowed by the project brief, support for 100,000 users in Year 1 and one million in Year 3, regional GDPR processing, and measurable technical and business operations.
 

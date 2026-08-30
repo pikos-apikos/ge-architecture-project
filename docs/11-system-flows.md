@@ -33,6 +33,10 @@ The Transfer Service persists every transition, calls the Fraud Engine for a bin
 
 Execution and settlement are independent axes. `executionStatus=COMPLETED` means the CBS committed. For an external transfer, `settlementStatus=PENDING` means beneficiary receipt is not yet confirmed.
 
+### Asynchronous offline fraud follow-up
+
+Offline Fraud Analytics consumes a governed historical dataset only after transfer execution. It MUST NOT participate in the synchronous transfer path. If it flags an executed transfer, the system creates a controlled investigation case and notifies the customer according to the approved response policy. An automatic reversal is prohibited. A human decision and a governed CBS or interbank compensation path are required before any recovery action.
+
 ## 3.3.4 Open Banking AIS and PIS
 
 Diagram: `docs/diagrams/09-open-banking-flow.mmd`.

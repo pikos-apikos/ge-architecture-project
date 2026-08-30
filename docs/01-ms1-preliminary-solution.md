@@ -127,9 +127,9 @@ The channels must not bypass the WAF and must not point directly to the API Gate
 | Offline Fraud Analytics / Batch Risk Scoring | Performs deeper fraud analysis using larger historical datasets and longer processing windows. Produces risk findings, rules, and model feedback for the real-time fraud engine. |
 | Income / Expense Report Service | Generates monthly income/expense reports from categorized transaction data. |
 | Open Banking Consent Service | Manages customer consent and access boundaries for third-party providers. |
-| Advisor Context API | Data-minimization boundary for the cloud AI Financial Advisor (D-008). Checks consent scope with the Consent Service, reads only authorized projections from the ODS, and records data-minimization decisions in the audit log. The AI advisor never reads the ODS directly. |
+| Advisor Context Service | Data-minimization boundary for the cloud AI Financial Advisor (D-008). Checks consent scope with the Consent Service, reads only authorized projections from the ODS, and records data-minimization decisions in the audit log. The AI advisor never reads the ODS directly. |
 | CBS Transaction Gateway | Single controlled interface for executing CBS transactions. Handles idempotency, validation, throttling, and audit. |
-| DB2 Adapter | Ingests transactional data from DB2 into the event bus/read models. |
+| Db2 Adapter | Ingests transactional data from Db2 into the event bus/read models. |
 | ADABAS Adapter | Ingests customer data from ADABAS into the event bus/read models. |
 | Durable Event Bus / Streaming | Reliable event backbone for data propagation, read model updates, audit, and analytics. |
 | Read Models / Operational Data Stores | Query-optimized data stores for digital services. Implemented on an enterprise RDBMS ODS candidate platform: Oracle, SQL Server, or Db2. |
@@ -141,7 +141,7 @@ The channels must not bypass the WAF and must not point directly to the API Gate
 | Component | Responsibility |
 |---|---|
 | COBOL CBS on z/OS / IBM iSeries | Authoritative execution of financial transactions. |
-| DB2 Transactions DB | System of record for transactions and ledger-related data. |
+| Db2 Transactions DB | System of record for transactions and ledger-related data. |
 | ADABAS Customer DB | System of record for customer information. |
 
 ---
@@ -162,15 +162,15 @@ The customer submits a bank transfer request. The request enters through WAF and
 
 ### 6.3 Data Ingestion and Read Model Flow
 
-DB2 and ADABAS adapters ingest legacy data changes into the durable event bus. Projection workers update the read models and operational data stores. Downstream services use the read models for account information, customer profile data, reports, Open Banking reads, and AI advisor context generation.
+Db2 and ADABAS adapters ingest legacy data changes into the durable event bus. Projection workers update the read models and operational data stores. Downstream services use the read models for account information, customer profile data, reports, Open Banking reads, and AI advisor context generation.
 
 **Design decision:** Data ingestion should be durable, replayable where possible, and monitored for lag. Read models must be rebuilt from source data or event history if corruption occurs.
 
 ### 6.4 AI Financial Advisor Flow
 
-The AI advisor runs in the regional cloud. It does not directly access CBS, DB2, ADABAS, or the ODS. It requests minimized customer context from the on-premises Advisor Context API, which checks consent scope with the Consent Service, reads only authorized projections from the ODS, and returns an AI-safe, regionally compliant context.
+The AI advisor runs in the regional cloud. It does not directly access CBS, Db2, ADABAS, or the ODS. It requests minimized customer context from the on-premises Advisor Context Service, which checks consent scope with the Consent Service, reads only authorized projections from the ODS, and returns an AI-safe, regionally compliant context.
 
-**Design decision:** The AI advisor may run in the cloud, but it only receives minimized, authorized, regionally compliant customer data through the Advisor Context API (D-008). The Advisor Context API — not the AI service — writes the data-minimization audit record.
+**Design decision:** The AI advisor may run in the cloud, but it only receives minimized, authorized, regionally compliant customer data through the Advisor Context Service (D-008). The Advisor Context Service — not the AI service — writes the data-minimization audit record.
 
 ---
 
@@ -178,14 +178,14 @@ The AI advisor runs in the regional cloud. It does not directly access CBS, DB2,
 
 | Data / Operation | System of Record | Serving Model |
 |---|---|---|
-| Ledger transaction execution | CBS / DB2 | CBS Transaction Gateway |
-| Account balance display | DB2 via replicated read model | Account Information Service |
+| Ledger transaction execution | CBS / Db2 | CBS Transaction Gateway |
+| Account balance display | Db2 via replicated read model | Account Information Service |
 | Customer profile | ADABAS via replicated read model | Customer Read Model |
 | Bank transfer command | CBS | Transfer Service + CBS Transaction Gateway |
 | Fraud real-time decision | Fraud Engine | Transfer Service |
 | Fraud offline analysis | Fraud Analytics Dataset | Offline Fraud Analytics / Batch Risk Scoring |
 | Monthly income/expense report | Derived from transaction data | Report Read Model |
-| AI advice context | Minimized authorized customer view | Advisor Context API |
+| AI advice context | Minimized authorized customer view | Advisor Context Service |
 | Consent | Consent Service | Consent Store |
 | Audit trail | Audit / Compliance Store | Append-only audit queries |
 
@@ -204,7 +204,7 @@ The AI advisor runs in the regional cloud. It does not directly access CBS, DB2,
 - Monthly income and expense reports.
 - Open Banking REST API and consent management.
 - AI financial advisor running in the regional cloud.
-- Legacy data ingestion from DB2 and ADABAS.
+- Legacy data ingestion from Db2 and ADABAS.
 - On-premises ODS/read models.
 - Audit, monitoring, logging, and alerting.
 
@@ -226,7 +226,7 @@ The AI advisor runs in the regional cloud. It does not directly access CBS, DB2,
 | A-001 | CBS remains the system of record for financial transactions during MVP. |
 | A-002 | The bank can deploy a new on-premises digital platform close to CBS. |
 | A-003 | The cloud region is legally acceptable for selected digital services and AI advisor workloads. |
-| A-004 | DB2 and ADABAS data can be ingested through adapters, CDC, batch replication, or controlled export mechanisms. |
+| A-004 | Db2 and ADABAS data can be ingested through adapters, CDC, batch replication, or controlled export mechanisms. |
 | A-005 | Some account information can be stale up to 24 hours for incoming transactions from other banks or payments not made through the app. |
 | A-006 | The bank already has enterprise database operational standards for Oracle, SQL Server, or Db2. |
 | A-007 | The MVP can avoid major COBOL changes by introducing a CBS Transaction Gateway and adapter layer. |
@@ -270,4 +270,3 @@ The AI advisor runs in the regional cloud. It does not directly access CBS, DB2,
 - Define message schemas and API contracts at high level.
 - Define sizing assumptions and operational cost model.
 - Expand risks and mitigations.
-

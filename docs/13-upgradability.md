@@ -9,9 +9,7 @@ The authoritative visual sources are:
 
 ## Final release, upgrade, and Secure SDLC matrix — approved
 
-**DECISION OWNER: HUMAN**
-
-This matrix compiles the approved decisions. The ticket MUST remain open until the user approves the complete model.
+The following matrix defines the approved release, upgrade, and Secure SDLC controls for the Final HLD.
 
 ### Environment and data controls
 
@@ -127,11 +125,4 @@ The HLD MUST preserve the controls above and MUST validate:
 - regulatory or scheme requirements that extend public API support periods.
 
 If a selected tool or organizational process cannot satisfy an approved control, the gap MUST become a production-readiness risk. Validation MUST NOT silently weaken this matrix.
-
-**Human decision recorded for validation posture:** “Συμφωνώ” in response to mandatory controls with explicit validation items.
-
-**FINAL HUMAN GATE:** Approve, reject, defer, or request a change to this complete release, upgrade, and Secure SDLC model.
-
----
-
 

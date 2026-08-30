@@ -22,7 +22,7 @@ Typical external actors and systems:
 - Third Party Providers using the Open Banking API.
 - Bank operations and support teams monitoring the digital platform.
 - The legacy Core Banking System running on mainframe technology.
-- Existing banking data stores such as DB2 and ADABAS.
+- Existing banking data stores such as Db2 and ADABAS.
 - External payment networks or interbank transfer systems.
 - Identity provider and authentication infrastructure.
 - Regulatory and audit stakeholders.

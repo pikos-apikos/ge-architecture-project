@@ -4,7 +4,7 @@ flowchart LR
   GW --> EDGE["IAM, BFF and Consent"]
   EDGE --> CORE["On-prem Digital Core"]
   CORE --> CBSGW["CBS Transaction Gateway"]
-  CBSGW --> CBS["CBS on z/OS<br/>DB2 and ADABAS"]
+  CBSGW --> CBS["CBS on z/OS<br/>Db2 and ADABAS"]
   CBS --> CDC["Mainframe CDC"]
   CDC --> BUS["Event Bus"]
   BUS --> ODS["Enterprise RDBMS ODS"]

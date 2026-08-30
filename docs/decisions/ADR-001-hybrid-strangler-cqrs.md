@@ -46,5 +46,5 @@ Use a **hybrid Strangler Fig modernization architecture** combined with **CQRS-s
 - ODS/read models are projections, not transaction authorities.
 - Customer-facing account screens must show freshness metadata where relevant.
 - All transfer requests must be idempotent and auditable.
-- No digital channel may call CBS, DB2, or ADABAS directly.
+- No digital channel may call CBS, Db2, or ADABAS directly.
 

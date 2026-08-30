@@ -8,7 +8,7 @@ This section is normative for detailed design and implementation. The CBS remain
 |---|---|---|
 | Transfer → Fraud → CBS | Success only after CBS commit and stable transaction ID. Fraud approval precedes CBS submission. | Fraud timeout uses one initial call plus three retries, then `NOT_SUBMITTED`. Unknown CBS outcome remains `PROCESSING` until reconciled. External settlement is a separate status axis. |
 | Completed transfer → account view | CBS response supplies transaction ID and confirmed available/current balances; ODS later converges. | Apply a read-your-writes overlay until the matching projection version appears. The Digital Core never calculates a replacement balance. |
-| DB2/ADABAS → CDC/Event Bus | Source log is authoritative. Delivery is at least once and monotonically ordered per account. | Stable event ID, source position, transaction reference and aggregate version enable replay and deduplication. Global ordering is unnecessary. |
+| Db2/ADABAS → CDC/Event Bus | Source log is authoritative. Delivery is at least once and monotonically ordered per account. | Stable event ID, source position, transaction reference and aggregate version enable replay and deduplication. Global ordering is unnecessary. |
 | CDC → ODS projection | ODS is non-authoritative. Freshness SLO is p95 ≤ 5 s and p99 ≤ 30 s. | Bounded retry, then account-scoped quarantine. Other accounts continue. Beyond 60 s, show `Data temporarily delayed` and `Last updated`. |
 | Quarantined account | CBS remains authoritative; last complete ODS view remains readable. | Hold later events for that account, block balance-dependent writes before Fraud/CBS, and resume only after ordered replay and successful comparison. |
 | Account-data cache | ODS projection version governs version-aware cache-aside; TTL ≤ 30 s. | ODS events invalidate/update. Cache failure falls back to ODS, never CBS. Quarantine and freshness state take precedence. |
@@ -41,7 +41,7 @@ Every zone crossing is default-deny, explicitly authorized, encrypted and audita
 | Z4 | Hybrid Interconnect / DMZ | Private-link/VPN termination, NGFW and reverse proxy |
 | Z5 | Digital Core Services | Account, Transfer, Consent, Report, Fraud, Advisor Context, CBS Gateway and adapters |
 | Z6 | Regulated Data & Integration | ODS, Event Bus and Audit Store with least-privilege data-plane access |
-| Z7 | Mainframe Zone | CBS, DB2 and ADABAS; isolated authority identities |
+| Z7 | Mainframe Zone | CBS, Db2 and ADABAS; isolated authority identities |
 | Z8 | Security & Management Plane | PAM, KMS/HSM, monitoring and admin endpoints under separate identities |
 
 ### Zone-crossing rules
@@ -49,10 +49,10 @@ Every zone crossing is default-deny, explicitly authorized, encrypted and audita
 - Z1 reaches internal services only through Z2 and the managed ingress chain.
 - Z2→Z3 re-encrypts traffic and validates customer OIDC/MFA or TPP OAuth+mTLS.
 - Z3→Z4 and Z4→Z5 require workload identity, mTLS, short-lived audience/scope tokens, allowlists and correlation evidence.
-- AI can call only the Advisor Context API. It has no direct route to ODS, Event Bus or CBS.
+- AI can call only the Advisor Context Service. It has no direct route to ODS, Event Bus or CBS.
 - Z5→Z6 uses dedicated operation-scoped identities for read, publish, consume or append-only audit.
 - Only the CBS Gateway can execute canonical money-moving commands in Z7; raw legacy codes remain inside the gateway/operations boundary.
-- DB2/ADABAS CDC reaches Z6 only through isolated adapters and canonical mapping with source-position evidence.
+- Db2/ADABAS CDC reaches Z6 only through isolated adapters and canonical mapping with source-position evidence.
 - Z8 administration requires a managed route, dedicated privileged identity, phishing-resistant MFA, JIT PAM, session recording and automatic expiry.
 - Cloud workloads cannot bypass Z4; the DMZ cannot access Z6/Z7 directly; ordinary customer, corporate and application networks provide no administrative route.
 
